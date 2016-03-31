@@ -1,0 +1,43 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: hoang
+ * Date: 21/03/2016
+ * Time: 09:26
+ */
+
+class Ebook extends AppModel {
+
+    public $belongsTo = array(
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'user_id'
+        ),
+        'Category' => array(
+            'className' => 'Category',
+            'foreignKey' => 'categories_id'
+        )
+    );
+
+
+    public $validate = array(
+        'title' => array(
+            'required' => array(
+                'rule' => 'notBlank',
+                'message' => 'Title không đưuọc trống!'
+            )
+        ),
+        'des' => array(
+            'required' => array(
+                'rule' => 'notBlank',
+                'message' => 'Title không đưuọc trống!'
+            )
+        ),
+        'author' => array(
+            'required' => array(
+                'rule' => 'notBlank',
+                'message' => 'Title không đưuọc trống!'
+            )
+        )
+    );
+}
