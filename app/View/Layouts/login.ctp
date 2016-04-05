@@ -25,7 +25,7 @@
     <?php
     echo $this->Html->meta('icon');
 
-    echo $this->Html->css(array('normalize', 'foundation.min', 'app', 'custom', 'dropzone'));
+    echo $this->Html->css(array('normalize', 'foundation.min', 'custom', 'dropzone'));
 
     echo $this->Html->script(array('vendor/jquery', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.dropdown', 'foundation/foundation.tab', 'app', 'dropzone'));
 

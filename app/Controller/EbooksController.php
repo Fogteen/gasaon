@@ -97,12 +97,10 @@ class EbooksController extends AppController
                 //Nếu định dạng file không phải pdf thì convert
                 if (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('doc','docx','dot'))) {
                     $this->callapi($pdf,$storeFolder,$message,"Word2Pdf");
-                    unlink($pdf);
                     $pdf = WWW_ROOT.$storeFolder.$ds.$file_name.'.pdf';
                 }
                 elseif (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('ppt','pptx','pps','ppsx'))) {
                     $this->callapi($pdf,$storeFolder,$message,"PowerPoint2Pdf");
-                    unlink($pdf);
                     $pdf = WWW_ROOT.$storeFolder.$ds.$file_name.'.pdf';
                 }
                 //tạo file xem trước với dữ liệu 5 trang
@@ -110,7 +108,7 @@ class EbooksController extends AppController
                 $pdf = $pdf.'[0]';
                 //tạo hình ảnh xem trước cho file
                 exec("convert $pdf -background white -alpha off -resize 200 " .WWW_ROOT.$storeFolder.$ds.'thumb_'."$file_name.jpg");
-                $data[$i-1]['name'] = pathinfo($files[$i], PATHINFO_FILENAME).'.pdf';
+                $data[$i-1]['name'] = $files[$i];
                 $data[$i-1]['path'] = WWW_ROOT.$storeFolder.$ds;
                 $data[$i-1]['pic'] = 'thumb_'.$file_name.'.jpg';
                 $data[$i-1]['id'] = $this->Auth->user('id');
@@ -128,7 +126,19 @@ class EbooksController extends AppController
         }
         elseif ($this->request->is(array('post', 'put'))) {
             $this->Ebook->id = $id;
+            $olddata = $this->Ebook->read(null,$id);
+            if($this->request->data['Ebook']['picture']['name']!== "")
+            $this->request->data['Ebook']['picture']['name'] = 'thumb_'.$this->request->data['Ebook']['picture']['name'];
             if ($this->Ebook->save($this->request->data)) {
+                if(file_exists(WWW_ROOT."files/".$olddata['Ebook']['user_id']."/".$olddata['Ebook']['picture']) && $this->request->data['Ebook']['picture']['name']!== "")
+                unlink(WWW_ROOT."files/".$olddata['Ebook']['user_id']."/".$olddata['Ebook']['picture']);
+                $folder = new Folder(WWW_ROOT."files/ebook/picture/".$id);
+                $file = new File(WWW_ROOT."files/ebook/picture/".$id."/thumb_".$this->request->data['Ebook']['picture']['name']);
+                if ($file->exists()) {
+                    $dir = new Folder(WWW_ROOT.'files/'.$olddata['Ebook']['user_id'], true);
+                    $file->copy($dir->path . DS .$this->request->data['Ebook']['picture']['name'] );
+                }
+                $folder->delete();
                 $this->Flash->success(__('The ebook has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             } else {

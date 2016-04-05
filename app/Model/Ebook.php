@@ -19,6 +19,16 @@ class Ebook extends AppModel {
         )
     );
 
+    public $actsAs = array(
+        'Upload.Upload' => array(
+            'picture' => array(
+                'thumbnailSizes' => array(
+                    'thumb' => '200x259'
+                ),
+            )
+        )
+    );
+
 
     public $validate = array(
         'title' => array(

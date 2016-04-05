@@ -25,7 +25,7 @@
     <?php
     echo $this->Html->meta('icon');
 
-    echo $this->Html->css(array('normalize', 'foundation.min', 'app', 'custom', 'form'));
+    echo $this->Html->css(array('normalize', 'foundation.min', 'custom', 'form', 'dropzone'));
 
 
     echo $this->fetch('meta');

@@ -55,10 +55,6 @@ class User extends AppModel {
                 'rule' => 'notBlank',
                 'message' => 'Password không được trống'
             )
-        ),
-        'picture' => array(
-            'rule' => array('isValidExtension', array('jpg', 'png', 'gif'), false),
-            'message' => 'File does not have a jpg, png, or gif extension'
         )
     );
 

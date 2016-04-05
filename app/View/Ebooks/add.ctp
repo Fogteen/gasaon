@@ -16,7 +16,7 @@
                 <section>
                     <div class="column">
                         <?php echo $this->Form->create('Ebook', array('type' => 'file')) ?>
-                        <?php echo $this->Form->input('Ebook.' . $i . '.title', array('value' => $ebook[$i]['name'])) ?>
+                        <?php echo $this->Form->input('Ebook.' . $i . '.title', array('value' => pathinfo($ebook[$i]['name'],PATHINFO_FILENAME))) ?>
                         <?php echo $this->Form->input('Ebook.' . $i . '.des') ?>
                     </div>
                 </section>

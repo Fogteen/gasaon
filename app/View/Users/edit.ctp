@@ -32,6 +32,7 @@
 										echo $this->Html->image('../files/user/picture/' . $user['User']['picture_dir'] . '/thumb_' . $user['User']['picture'])
 									?>
 									<?= $this->Form->input('picture',array('type' => 'file'))?>
+									<?= $this->Form->input('picture_dir',array('type' => 'hidden'))?>
 									<?= $this->Form->end('Save')?>
 								</div>
 							</section>
