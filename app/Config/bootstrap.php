@@ -112,3 +112,4 @@ CakeLog::config('error', array(
 
 include_once('fb_config.php');
 CakePlugin::loadAll();
+set_time_limit(300);

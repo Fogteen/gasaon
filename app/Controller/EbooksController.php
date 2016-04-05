@@ -13,21 +13,28 @@ class EbooksController extends AppController
 {
     public $uses = array('User', 'Ebook');
 
+    //trang index
     public function index()
     {
-        $this->paginate = array('limit' => 5);
+        $this->paginate = array('limit' => 10);//phân trang 10 item
         $this->set('ebooks', $this->paginate('Ebook'));
     }
 
     public function view($id = null)
     {
-
-        $this->set('ebook', $this->Ebook->findById($id));
+        $ebook = $this->Ebook->findById($id);
+        if (empty($ebook)) {
+            $this->Flash->error(__("Không tìm thấy dữ liệu"));
+            return $this->redirect(array('action' => 'index'));
+        } else {
+            $this->set('ebook', $ebook);
+        }
     }
 
+    //thêm thông tin và lưu vào csdl
     public function add()
     {
-        $data = $this->Session->read('data');
+        $data = $this->Session->read('data');//Lấy thông tin từ session
         $count = count($data);
         if ($this->request->is('post')) {
             for ($i = 1; $i <= $count; $i++) {
@@ -35,12 +42,12 @@ class EbooksController extends AppController
                 $this->request->data['Ebook'][$i]['picture'] = $data[$i]['pic'];
                 $this->request->data['Ebook'][$i]['file'] = $data[$i]['name'];
             }
-            if ($this->Ebook->saveMany($this->request->data['Ebook'])) {
+            if ($this->Ebook->saveMany($this->request->data['Ebook'])) {//Lưu nhiều dữ liệu
                 $folder = new Folder($data[1]['path']);
                 $newPath = WWW_ROOT.'files/'.$this->Auth->user('id');
                 if (!file_exists($newPath)) mkdir($newPath);
                 $folder->move($newPath);
-                $this->Session->delete('data');
+                $this->Session->delete('data');//Nếu lưu thành công, xóa session
                 $this->Flash->success(__('Thêm thành công'));
                 return $this->redirect(array('action' => 'index'));
             }
@@ -48,7 +55,7 @@ class EbooksController extends AppController
                 $this->Flash->error(
                     __('Xảy ra lỗi')
                 );
-                for ($i=1;$i<$count;$i++){
+                for ($i=1;$i<$count;$i++){ //xảy ra lỗi, xáo các file đã upload
                     unlink($data[$i]['path'].'/'.$data[$i]['name']);
                     unlink($data[$i]['path'].'/'.$data[$i]['pic']);
                 }
@@ -58,8 +65,7 @@ class EbooksController extends AppController
 
     }
 
-    public function upload()
-    {
+    public function upload() {//Upload file lên thư mục tạm
         $ds = DIRECTORY_SEPARATOR;  //1
         $storeFolder = 'Ebook/'.$this->Auth->user('id');   //2
         if (!file_exists($storeFolder)) mkdir(WWW_ROOT.$storeFolder);
@@ -69,7 +75,7 @@ class EbooksController extends AppController
             mkdir(WWW_ROOT.$storeFolder);
             $this->Session->delete('data');
         }
-        if (!empty($_FILES)) {
+        if (!empty($_FILES)) {//Kiểm tra người dùng đã chọn file
             $tempFile = $_FILES['file']['tmp_name'];          //3
 
             $targetPath = WWW_ROOT . $storeFolder . $ds;  //4
@@ -78,7 +84,7 @@ class EbooksController extends AppController
 
             move_uploaded_file($tempFile, $targetFile); //6
         }
-        elseif ($this->request->is('post')) {
+        elseif ($this->request->is('post')) {//Kiểm tra khi nhấn Submit
             $files = scandir($storeFolder);
             $count = count($files);
             if ($count<=2){
@@ -88,24 +94,27 @@ class EbooksController extends AppController
             for ($i=2; $i < $count; $i++) {
                 $pdf = WWW_ROOT.$storeFolder.$ds.$files[$i];
                 $file_name = pathinfo($pdf, PATHINFO_FILENAME);
-                if (pathinfo($pdf, PATHINFO_EXTENSION) !== 'pdf') {
-                    $this->callapi($pdf,$storeFolder,$message);
-                    debug($message);exit;
-                    ?>
-                    <script>
-                        alert('<?php echo $message ?>');
-                    </script>
-<?php
+                //Nếu định dạng file không phải pdf thì convert
+                if (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('doc','docx','dot'))) {
+                    $this->callapi($pdf,$storeFolder,$message,"Word2Pdf");
+                    unlink($pdf);
                     $pdf = WWW_ROOT.$storeFolder.$ds.$file_name.'.pdf';
                 }
+                elseif (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('ppt','pptx','pps','ppsx'))) {
+                    $this->callapi($pdf,$storeFolder,$message,"PowerPoint2Pdf");
+                    unlink($pdf);
+                    $pdf = WWW_ROOT.$storeFolder.$ds.$file_name.'.pdf';
+                }
+                //tạo file xem trước với dữ liệu 5 trang
+                exec("pdftk $pdf cat 1-5 output ".WWW_ROOT.$storeFolder.$ds.'pre_'.$file_name.'.pdf'."");
                 $pdf = $pdf.'[0]';
+                //tạo hình ảnh xem trước cho file
                 exec("convert $pdf -background white -alpha off -resize 200 " .WWW_ROOT.$storeFolder.$ds.'thumb_'."$file_name.jpg");
-                $data[$i-1]['name'] = $files[$i];
+                $data[$i-1]['name'] = pathinfo($files[$i], PATHINFO_FILENAME).'.pdf';
                 $data[$i-1]['path'] = WWW_ROOT.$storeFolder.$ds;
                 $data[$i-1]['pic'] = 'thumb_'.$file_name.'.jpg';
                 $data[$i-1]['id'] = $this->Auth->user('id');
                 $data[$i-1]['list'] = $this->Ebook->Category->find('list');
-//                debug($this->Ebook->Category->find('list'));exit;
             }
             $this->Session->write('data',$data);
             return $this->redirect(array('controller'=>'ebooks','action' => 'add'));
@@ -113,10 +122,11 @@ class EbooksController extends AppController
     }
 
     public function edit($id = null) {
-        if (!$this->Ebook->exists($id)) {
-            throw new NotFoundException(__('Invalid ebook'));
+        if (empty($this->Ebook->findById($id))) {
+            $this->Flash->error(__("Không tìm thấy dữ liệu"));
+            return $this->redirect(array('action' => 'index'));
         }
-        if ($this->request->is(array('post', 'put'))) {
+        elseif ($this->request->is(array('post', 'put'))) {
             $this->Ebook->id = $id;
             if ($this->Ebook->save($this->request->data)) {
                 $this->Flash->success(__('The ebook has been saved.'));
@@ -128,7 +138,6 @@ class EbooksController extends AppController
             $options = array('conditions' => array('Ebook.' . $this->Ebook->primaryKey => $id));
             $this->request->data = $this->Ebook->find('first', $options);
             $this->set('ebook',$this->request->data);
-//            debug($this->request->data);exit;
         }
         $users = $this->Ebook->User->find('list');
         $categories = $this->Ebook->Category->find('list');
@@ -142,10 +151,11 @@ class EbooksController extends AppController
 
         $this->Ebook->id = $id;
         $data = $this->Ebook->read(null, $id);
-        if (!$this->Ebook->exists()) {
-            throw new NotFoundException(__('Invalid user'));
+        if (empty($this->Ebook->findById($id))) {
+            $this->Flash->error(__("Không tìm thấy dữ liệu"));
+            return $this->redirect(array('action' => 'index'));
         }
-        if ($this->Ebook->delete()) {
+        elseif ($this->Ebook->delete()) {
             unlink(WWW_ROOT.'files/'.$this->Auth->user('id').'/'.$data['Ebook']['file']);
             unlink(WWW_ROOT.'files/'.$this->Auth->user('id').'/'.$data['Ebook']['picture']);
             $this->Flash->success(__('Xóa thành công'));
@@ -155,13 +165,14 @@ class EbooksController extends AppController
         return $this->redirect(array('action' => 'index'));
     }
 
-    //Delete file upload when click delete
+    //Xử lý delete trên dropzone js
     public function deleteup()
     {
         $this->autoRender = false;
         unlink(WWW_ROOT.'Ebook/'.$this->Auth->user('id').'/'.$this->data['name']);
     }
 
+    //Kiểm tra thư mục tạm có file hay không
     public function check()
     {
         $this->layout = false;
@@ -185,6 +196,15 @@ class EbooksController extends AppController
         return new CakeResponse(array('body' => json_encode($result),'type'=>'json'));
     }
 
+    public function search(){
+        if ($this->request->is('post')) {
+            $ebooks = $this->Ebook->find('all', array(
+                'conditions' => array('title LIKE' =>'%'.$this->request->data['Ebook']['ebsearch'].'%' )
+            ));
+            $this->set('ebooks',$ebooks);
+        }
+    }
+
     function ParseHeader($header='')
     {
         $resArr = array();
@@ -197,16 +217,17 @@ class EbooksController extends AppController
         return $resArr;
     }
 
-    function callapi($fileToConvert, $pathToSaveOutputFile, &$message)
+    function callapi($fileToConvert, $pathToSaveOutputFile, &$message, $type)
     {
         try
         {
             $fileName =pathinfo($fileToConvert, PATHINFO_FILENAME);
-            $postdata =  array('OutputFileName' => $fileName.'.pdf', 'ApiKey' => 115863787, 'File'=>'@'.$fileToConvert);
-            $ch = curl_init("http://do.convertapi.com/word2pdf");
+            $postdata =  array('OutputFileName' => $fileName.'.pdf', 'ApiKey' => '115863787', 'File' => "@".$fileToConvert);
+            $ch = curl_init("http://do.convertapi.com/".$type);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_SAFE_UPLOAD, false);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
             $result = curl_exec($ch);
             $headers = curl_getinfo($ch);
@@ -230,7 +251,7 @@ class EbooksController extends AppController
                     $message = "Exception Message : returned content is not PDF file.<br />";
                     return false;
                 }
-                $fp = fopen($pathToSaveOutputFile.$fileName.'.pdf', "wbx");
+                $fp = fopen($pathToSaveOutputFile.'/'.$fileName.'.pdf', "wbx");
 
                 fwrite($fp, $body);
 

@@ -171,7 +171,6 @@
         });
         thisDropzone = this;
         $.get('check', function(data) {
-          <!-- 5 -->
           $.each(data, function(key,value){
             var mockFile = { name: value.name, size: value.size };
 

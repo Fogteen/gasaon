@@ -1,6 +1,6 @@
 <div class="row bindex">
     <div class="large-6 columns">
-        <h3>Kho sách (<?php echo count($ebooks) ?>)</h3>
+        <h3>Tìm kiếm (<?php echo count($ebooks) ?>)</h3>
     </div>
     <div class="large-6 columns">
         <div class="row">

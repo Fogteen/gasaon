@@ -1,1 +1,5 @@
-<iframe src="https://docs.google.com/viewer?url=www.pdf995.com/samples/pdf.pdf&embedded=true" style="width:680px; height:860px;" frameborder="0"></iframe>
+<object data="<?php echo $this->webroot.'files/'.$ebook['Ebook']['user_id'] . '/pre_' . $ebook['Ebook']['file'] ?>" type="application/pdf" width="80%" height="800px">
+
+    <p>It appears you don't have a PDF plugin for this browser.</p>
+
+</object>
