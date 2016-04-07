@@ -15,6 +15,10 @@ class User extends AppModel {
         'Ebook' => array(
             'className' => 'Ebook',
             'foreignKey' => 'user_id'
+        ),
+        'Request' => array(
+            'className' => 'Request',
+            'foreignKey' => 'user_id'
         )
     );
 

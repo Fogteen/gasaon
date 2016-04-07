@@ -163,7 +163,7 @@
     </div>
 </div>
 <?php echo $this->Js->writeBuffer(); // By default scripts are cached, and we must explicitly print out the cache ?>
-<?php echo $this->Html->script(array('vendor/jquery.min', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'app')); ?>
+<?php echo $this->Html->script(array('vendor/jquery.min', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'app', 'dropzone')); ?>
 <script>
     $(document).foundation();
 </script>

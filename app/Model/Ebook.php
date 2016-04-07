@@ -18,6 +18,12 @@ class Ebook extends AppModel {
             'foreignKey' => 'categories_id'
         )
     );
+    public $hasMany = array(
+        'Request' => array(
+            'className' => 'Request',
+            'foreignKey' => 'ebook_id'
+        )
+    );
 
     public $actsAs = array(
         'Upload.Upload' => array(

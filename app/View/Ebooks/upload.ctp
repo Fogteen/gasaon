@@ -8,7 +8,7 @@
 
         <?php
         echo $this->Form->create(array('url' => array('controller' => 'ebooks', 'action' => 'upload'), 'class' => 'dropzone',
-            'id' => 'my-dropzone'));
+            'id' => 'my-dropzone', 'charset'=>'utf-8'));
         ?>
         <div class="fallback">
             <input name="file" type="file" multiple=""/>

@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php echo $this->Html->charset(); ?>
+    <?php echo $this->Html->charset("utf-8"); ?>
     <title>
         <?php echo $this->fetch('title'); ?>
     </title>
@@ -83,7 +83,6 @@
                     </ul>
                 </section>
             </nav>
-
         </div>
     </div>
 

@@ -23,11 +23,18 @@ class EbooksController extends AppController
     public function view($id = null)
     {
         $ebook = $this->Ebook->findById($id);
+        $request = $this->Ebook->Request->find('first',array(
+            'conditions' => array(
+                'Request.user_id' => $this->Auth->user('id'),
+                'Request.ebook_id' => $id
+            )
+        ));
         if (empty($ebook)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
             return $this->redirect(array('action' => 'index'));
         } else {
             $this->set('ebook', $ebook);
+            $this->set('request', $request);
         }
     }
 
@@ -80,7 +87,7 @@ class EbooksController extends AppController
 
             $targetPath = WWW_ROOT . $storeFolder . $ds;  //4
 
-            $targetFile = $targetPath . $_FILES['file']['name'];  //5
+            $targetFile = $targetPath .$_FILES['file']['name'];  //5
 
             move_uploaded_file($tempFile, $targetFile); //6
         }
@@ -167,6 +174,10 @@ class EbooksController extends AppController
         }
         elseif ($this->Ebook->delete()) {
             unlink(WWW_ROOT.'files/'.$this->Auth->user('id').'/'.$data['Ebook']['file']);
+            if (pathinfo($data['Ebook']['file'], PATHINFO_EXTENSION)!= 'pdf'){
+                unlink(WWW_ROOT.'files/'.$this->Auth->user('id').'/'.pathinfo($data['Ebook']['file'], PATHINFO_FILENAME).'.pdf');
+            }
+            unlink(WWW_ROOT.'files/'.$this->Auth->user('id').'/pre_'.pathinfo($data['Ebook']['file'], PATHINFO_FILENAME).'.pdf');
             unlink(WWW_ROOT.'files/'.$this->Auth->user('id').'/'.$data['Ebook']['picture']);
             $this->Flash->success(__('Xóa thành công'));
             return $this->redirect(array('action' => 'index'));
@@ -278,6 +289,42 @@ class EbooksController extends AppController
         {
             $message = "Exception Message :".$e.Message."</br>";
             return false;
+        }
+    }
+
+    public function request(){
+        $this->layout = false;
+        $this->autoRender = false;
+        $ebook_id = $this->request->data['ebook_id'];
+        $user_id = $this->request->data['user_id'];
+        $this->Ebook->Request->create();
+        $this->Ebook->Request->save(array(
+            'ebook_id' => $ebook_id,
+            'user_id' => $user_id
+        ));
+    }
+
+    public function download($id = null){
+        $this->layout = false;
+        $this->autoRender = false;
+        $data = $this->Ebook->find('first',array(
+            'conditions' => array(
+            'Ebook.id' => base64_decode($id)
+            )
+        ));
+        if (!empty($data)) {
+            $this->response->file(
+                WWW_ROOT . 'files/' . $data['Ebook']['user_id'] . '/' . $data['Ebook']['file'],
+                array(
+                    'download' => true,
+                    'name' => $data['Ebook']['file']
+                )
+            );
+            return $this->response;
+        }
+        else {
+            $this->Flash->error("Xảy ra lỗi");
+            return $this->redirect(array('action'=>'view',$id));
         }
     }
 }
