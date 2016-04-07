@@ -412,3 +412,7 @@ nav .button:active {
 ul.ebview li:hover {
     opacity: 0.7;
 }
+
+div.row.item:hover {
+    background-color: lightblue;
+}

@@ -17,7 +17,9 @@ class EbooksController extends AppController
     public function index()
     {
         $this->paginate = array('limit' => 10);//phân trang 10 item
-        $this->set('ebooks', $this->paginate('Ebook'));
+        $this->set('ebooks', $this->paginate('Ebook',array(
+                'Ebook.user_id' => $this->Auth->user('id')
+            )));
     }
 
     public function view($id = null)
@@ -173,12 +175,12 @@ class EbooksController extends AppController
             return $this->redirect(array('action' => 'index'));
         }
         elseif ($this->Ebook->delete()) {
-            unlink(WWW_ROOT.'files/'.$this->Auth->user('id').'/'.$data['Ebook']['file']);
+            unlink(WWW_ROOT.'files/'.$data['Ebook']['user_id'].'/'.$data['Ebook']['file']);
             if (pathinfo($data['Ebook']['file'], PATHINFO_EXTENSION)!= 'pdf'){
-                unlink(WWW_ROOT.'files/'.$this->Auth->user('id').'/'.pathinfo($data['Ebook']['file'], PATHINFO_FILENAME).'.pdf');
+                unlink(WWW_ROOT.'files/'.$data['Ebook']['user_id'].'/'.pathinfo($data['Ebook']['file'], PATHINFO_FILENAME).'.pdf');
             }
-            unlink(WWW_ROOT.'files/'.$this->Auth->user('id').'/pre_'.pathinfo($data['Ebook']['file'], PATHINFO_FILENAME).'.pdf');
-            unlink(WWW_ROOT.'files/'.$this->Auth->user('id').'/'.$data['Ebook']['picture']);
+            unlink(WWW_ROOT.'files/'.$data['Ebook']['user_id'].'/pre_'.pathinfo($data['Ebook']['file'], PATHINFO_FILENAME).'.pdf');
+            unlink(WWW_ROOT.'files/'.$data['Ebook']['user_id'].'/'.$data['Ebook']['picture']);
             $this->Flash->success(__('Xóa thành công'));
             return $this->redirect(array('action' => 'index'));
         }
