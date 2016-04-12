@@ -77,7 +77,6 @@ class EbooksController extends AppController
     public function upload() {//Upload file lên thư mục tạm
         $ds = DIRECTORY_SEPARATOR;  //1
         $storeFolder = 'Ebook/'.$this->Auth->user('id');   //2
-        debug(scandir($storeFolder));
         if (!file_exists($storeFolder)) mkdir(WWW_ROOT.$storeFolder);
         if ($this->Session->check('data')) {
             $folder = new Folder($storeFolder);
@@ -106,7 +105,7 @@ class EbooksController extends AppController
                 $file_name = pathinfo($pdf, PATHINFO_FILENAME);
                 //Nếu định dạng file không phải pdf thì convert
                 if (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('doc','docx','dot'))) {
-                    $this->callapi($pdf,$storeFolder,$message,"Word2Pdf");
+                    debug($this->callapi($pdf,$storeFolder,$message,"Word2Pdf"));exit;
                     $pdf = WWW_ROOT.$storeFolder.$ds.$file_name.'.pdf';
                 }
                 elseif (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('ppt','pptx','pps','ppsx'))) {
