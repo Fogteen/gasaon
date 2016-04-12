@@ -77,6 +77,7 @@ class EbooksController extends AppController
     public function upload() {//Upload file lên thư mục tạm
         $ds = DIRECTORY_SEPARATOR;  //1
         $storeFolder = 'Ebook/'.$this->Auth->user('id');   //2
+        debug(WWW_ROOT);
         if (!file_exists($storeFolder)) mkdir(WWW_ROOT.$storeFolder);
         if ($this->Session->check('data')) {
             $folder = new Folder($storeFolder);
