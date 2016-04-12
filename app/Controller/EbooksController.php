@@ -304,6 +304,15 @@ class EbooksController extends AppController
             'ebook_id' => $ebook_id,
             'user_id' => $user_id
         ));
+        $book = $this->Ebook->read(null,$ebook_id);
+        $user = $this->Ebook->User->read(null,$user_id);
+        $this->Ebook->User->Nofication->create();
+        $this->Ebook->User->Nofication->save(array(
+            'user_id' => $book['Ebook']['user_id'],
+            'ebook_id' => $ebook_id,
+            'request_id' => $this->Ebook->Request->id,
+            'content' => 'Bạn nhận được một yêu cầu từ '. $user['User']['first_name'] . ' về cuốn sách ' . $book['Ebook']['title'] . ' của bạn.'
+        ));
     }
 
     public function download($id = null){

@@ -56,6 +56,15 @@ class AppController extends Controller {
         if (empty($this->Auth->user('id'))) $this->layout='nologin';
         else $this->layout='login';
         $this->set('account',$this->User->findById($this->Auth->user('id')));
+        $this->set('nofi',$this->User->Nofication->find('all',array(
+            'conditions' => array(
+                'Nofication.user_id' => $this->Auth->user('id'),
+                'OR' => array(
+                    array('Nofication.status' => 0),
+                    array('Nofication.status' => 2)
+                )
+            )
+        )));
         $this->Auth->allow('index', 'view', 'add', 'upload', 'delete', 'deleteup');
     }
 }

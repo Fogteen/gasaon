@@ -1,3 +1,21 @@
+<div id="fb-root"></div>
+<script>
+    $(document).ready(function() {
+        $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+            FB.init({
+                appId: '{1044940168912905}',
+                version: 'v2.5' // or v2.0, v2.1, v2.2, v2.3
+            });
+        });
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1044940168912905";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    });
+    </script>
 <div class="row view">
     <div class="large-9 columns">
         <object
@@ -20,6 +38,8 @@
                 $this->Html->link($ebook['User']['first_name'], array('controller' => 'users', 'action' => 'view', $ebook['Ebook']['user_id'])) ?></span>
         <hr>
         <span> Views: xxx</span>
+        <hr>
+        <div class="fb-share-button" data-href="localhost/gasaon/ebooks/view/118" data-layout="button_count"></div>
         <hr>
         <h5> Description</h5>
         <span><?php echo $ebook['Ebook']['des'] ?></span><br>
@@ -59,6 +79,7 @@
                 data: {ebook_id:<?php echo $ebook['Ebook']['id']?>, user_id:<?php echo $account['User']['id']?>},
                 success: function (string) {
                     alert("Đã gửi yêu cầu!")
+                    $('#btnrequest').html('Requesting');
                 },
                 error: function () {
                     alert('Có lỗi xảy ra');

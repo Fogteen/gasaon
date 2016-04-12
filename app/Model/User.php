@@ -19,6 +19,10 @@ class User extends AppModel {
         'Request' => array(
             'className' => 'Request',
             'foreignKey' => 'user_id'
+        ),
+        'Nofication' => array(
+            'className' => 'Nofication',
+            'foreignKey' => 'user_id'
         )
     );
 

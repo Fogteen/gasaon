@@ -33,6 +33,11 @@
     echo $this->fetch('css');
     echo $this->fetch('script');
     ?>
+    <meta property="og:url"           content="http://localhost/gasaon/ebooks/view/118" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
 </head>
 <body>
 <div id="container">
@@ -63,7 +68,7 @@
                         </li>
                     </ul>
                     <ul class="right">
-                        <li><a href="#">Upload</a></li>
+                        <li><?= $this->Html->link(__('Upload'), array('controller' => 'ebooks', 'action' => 'upload')) ?></li>
                         <li class="account"><a data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">
                                 <?php
                                 if (strpos($account['User']['picture'], "graph.facebook.com") !== false)
@@ -75,14 +80,23 @@
                         </li>
                     </ul>
                     <ul id="drop1" class="tiny f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
-                        <li><?= $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'view', $account['User']['id'])) ?></li>
+                        <li><?= $this->Html->link(__('Nofication('.count($nofi).')'), array('controller' => 'users', 'action' => 'nofi'),array('data-reveal-id' => 'nofication', 'id' => 'nofi')) ?></li>
                         <br>
-                        <li><a href="#">Store</a></li>
+                        <li><?= $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'edit', $account['User']['id'])) ?></li>
+                        <br>
+                        <li><?= $this->Html->link(__('Store'), array('controller' => 'ebooks', 'action' => 'index')) ?></li>
                         <br>
                         <li><?= $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout')) ?></li>
                     </ul>
                 </section>
             </nav>
+        </div>
+        <div id="nofication" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true"
+             role="dialog">
+            <div class="form">
+            </div>
+            <!-- /form -->
+            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
         </div>
     </div>
 
@@ -112,6 +126,39 @@
 </div>
 <script>
     $(document).foundation();
+    $(document).ready(function () {
+        $('#nofi').click(function () {
+            $.ajax({
+                url: '<?php echo BASE_PATH?>users/nofi',
+                type: 'POST',
+                cache: false,
+                success: function (data) {
+                    console.log(data);
+                    $.each(data, function(key,value){
+                        $('div.form').append('<p class='+key+'>'+value.Nofication.content+'<br></p>');
+                        $('p.'+key).append('<button class=yes'+key+'>Có</button><button class=no'+key+'>Không</button><hr>');
+                        $('button.yes'+key).click(function () {
+                            $.ajax({
+                                url: '<?php echo BASE_PATH?>users/nofiup',
+                                type: 'POST',
+                                cache: false,
+                                data: {status:value.Nofication.status+1 ,id: value.Nofication.id,request_id:value.Nofication.request_id,ebook_id:value.Nofication.ebook_id},
+                                success: function () {
+                                    $('p.'+key).remove();
+                                },
+                                error: function () {
+                                    alert('Có lỗi xảy ra');
+                                }
+                            });
+                        });
+                    });
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra');
+                }
+            });
+        });
+    });
 </script>
 </body>
 </html>

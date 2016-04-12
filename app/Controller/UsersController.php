@@ -49,7 +49,6 @@ class UsersController extends AppController
     {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                $this->Session->write('user', $this->Auth->user('email'));
                 return $this->redirect(array('action' => 'index'));
             }
             $this->Flash->error(__('Username hoặc password không đúng'));
@@ -221,6 +220,50 @@ class UsersController extends AppController
         }
 
         return parent::isAuthorized($user);
+    }
+
+    public function nofi() {
+        $this->autoRender = false;
+        $this->layout = false;
+        $data = $this->User->Nofication->find('all', array(
+            'conditions' => array(
+                'Nofication.user_id' => $this->Auth->user('id'),
+                'OR' => array(
+                    array('Nofication.status' => 0),
+                    array('Nofication.status' => 2)
+                )
+            )
+        ));
+        return new CakeResponse(array('body' => json_encode($data),'type'=>'json'));
+    }
+
+    public function nofiup() {
+        $this->autoRender = false;
+        $this->layout = false;
+        $id = $this->request->data['id'];
+        $status = $this->request->data['status'];
+        $request_id = $this->request->data['request_id'];
+        $ebook_id = $this->request->data['ebook_id'];
+        $this->User->Nofication->updateAll(
+            array('Nofication.status' => $status),
+            array('Nofication.id' => $id)
+        );
+        $this->User->Request->updateAll(
+            array('Request.status' => 3),
+            array('Request.id' => $request_id)
+        );
+        $request = $this->User->Request->read(null,$request_id);
+        if($status != 21) {
+            $this->User->Nofication->create();
+            $this->User->Nofication->save(array(
+                'user_id' => $request['Request']['user_id'],
+                'ebook_id' => $ebook_id,
+                'request_id' => $request_id,
+                'content' => 'Yêu cầu về cuốn sách ' . $request['Ebook']['title'] . ' của bạn đã được chấp nhận',
+                'status' => 2
+            ));
+        }
+        return;
     }
 }
 
