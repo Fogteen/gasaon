@@ -103,7 +103,6 @@ class EbooksController extends AppController
             for ($i=2; $i < $count; $i++) {
                 $pdf = WWW_ROOT.$storeFolder.$ds.$files[$i];
                 $file_name = pathinfo($pdf, PATHINFO_FILENAME);
-                debug(pathinfo($pdf, PATHINFO_EXTENSION));exit;
                 //Nếu định dạng file không phải pdf thì convert
                 if (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('doc','docx','dot'))) {
                     $this->callapi($pdf,$storeFolder,$message,"Word2Pdf");
