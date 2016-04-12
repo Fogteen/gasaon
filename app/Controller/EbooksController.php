@@ -105,7 +105,6 @@ class EbooksController extends AppController
                 $file_name = pathinfo($pdf, PATHINFO_FILENAME);
                 //Nếu định dạng file không phải pdf thì convert
                 if (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('doc','docx','dot'))) {
-                    debug("go doc");exit;
                     $this->callapi($pdf,$storeFolder,$message,"Word2Pdf");
                     $pdf = WWW_ROOT.$storeFolder.$ds.$file_name.'.pdf';
                 }
@@ -247,7 +246,7 @@ class EbooksController extends AppController
         {
             $fileName =pathinfo($fileToConvert, PATHINFO_FILENAME);
             $postdata =  array('OutputFileName' => $fileName.'.pdf', 'ApiKey' => '115863787', 'File' => "@".$fileToConvert);
-            $ch = curl_init("http://do.convertapi.com/".$type);
+            $ch = curl_init("https://do.convertapi.com/".$type);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
