@@ -7910,3 +7910,41 @@ Request URL: /gasaon/files/7/thumb_230762264-Tim-Hi%E1%BB%83u-Cong-Ngh%E1%BB%87-
 Stack Trace:
 #0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2016-04-12 06:52:35 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+Request URL: /gasaon/ebooks/view/118
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\DboSource.php(461): PDOStatement->execute(Array)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\Database\Mysql.php(224): DboSource->_execute('SHOW TABLES FRO...')
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(1161): Mysql->listSources()
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(3653): Model->setSource('users')
+#4 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(827): Model->getDataSource()
+#5 D:\xampp\htdocs\gasaon\app\Controller\AppController.php(58): Model->__call('findById', Array)
+#6 D:\xampp\htdocs\gasaon\app\Controller\AppController.php(58): User->findById('2')
+#7 [internal function]: AppController->beforeFilter(Object(CakeEvent))
+#8 D:\xampp\htdocs\gasaon\lib\Cake\Event\CakeEventManager.php(243): call_user_func(Array, Object(CakeEvent))
+#9 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(677): CakeEventManager->dispatch(Object(CakeEvent))
+#10 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(189): Controller->startupProcess()
+#11 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(EbooksController), Object(CakeRequest))
+#12 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2016-04-12 06:52:37 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-04-12 08:37:33 Error: [MissingViewException] View file "Users\login.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Users\\login.ctp',
+)
+Request URL: /gasaon/users/login
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(470): View->_getViewFileName(NULL)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
