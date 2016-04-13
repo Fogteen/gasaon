@@ -33,7 +33,7 @@
     echo $this->fetch('css');
     echo $this->fetch('script');
     ?>
-    <meta property="og:url"           content="http://localhost/gasaon/ebooks/view/118" />
+    <meta property="og:url"           content="http://localhost/gasaon/ebooks/view/" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Your Website Title" />
     <meta property="og:description"   content="Your description" />

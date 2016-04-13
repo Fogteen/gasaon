@@ -39,7 +39,7 @@
         <hr>
         <span> Views: xxx</span>
         <hr>
-        <div class="fb-share-button" data-href="localhost/gasaon/ebooks/view/118" data-layout="button_count"></div>
+        <div class="fb-share-button" data-href="<?php echo $ebook['Ebook']['id']?>" data-layout="button_count"></div>
         <hr>
         <h5> Description</h5>
         <span><?php echo $ebook['Ebook']['des'] ?></span><br>

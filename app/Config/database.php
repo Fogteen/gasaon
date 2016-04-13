@@ -64,33 +64,34 @@
  * flags =>
  * A key/value array of driver specific connection options.
  */
-class DATABASE_CONFIG {
+class DATABASE_CONFIG
+{
 
-    function __construct() {
+    public $default;
 
-        $url = parse_url(getenv('CLEARDB_DATABASE_URL'));
+    public $test = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'login' => 'user',
+        'password' => 'password',
+        'database' => 'test_database_name',
+        'prefix' => '',
+        //'encoding' => 'utf8',
+    );
 
+    public function __construct()
+    {
+        $DATABASE_URL = parse_url($_ENV['DATABASE_URL']);
         $this->default = array(
             'datasource' => 'Database/Mysql',
             'persistent' => false,
-            'host' => $url['host'],
-            'login' => $url['user'],
-            'password' => $url['pass'],
-            'database' => substr($url['path'],1),
-            //'prefix' => '',
+            'host' => $DATABASE_URL['host'],
+            'login' => $DATABASE_URL['user'],
+            'password' => $DATABASE_URL['pass'],
+            'database' => substr($DATABASE_URL['path'], 1),
+            'prefix' => '',
             'encoding' => 'utf8',
         );
-
-        $this->test = array(
-            'datasource' => 'Database/Mysql',
-            'persistent' => false,
-            'host' => 'localhost',
-            'login' => 'user',
-            'password' => 'password',
-            'database' => 'test_database_name',
-            'prefix' => '',
-            //'encoding' => 'utf8',
-        );
-
     }
 }
