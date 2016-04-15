@@ -37,6 +37,11 @@
                     $ebook['Ebook']['created']) . " by " .
                 $this->Html->link($ebook['User']['first_name'], array('controller' => 'users', 'action' => 'view', $ebook['Ebook']['user_id'])) ?></span>
         <hr>
+        <input type="range" value="<?php echo $ebook['Ebook']['rating']?>" step="1" id="backing">
+        <div class="rateit" data-rateit-backingfld="#backing" data-rateit-resetable="false"  data-rateit-ispreset="true"
+             data-rateit-min="0" data-rateit-max="10">
+        </div>(<?php echo count($allrate)?> lượt)
+        <hr>
         <span> Views: xxx</span>
         <hr>
         <div class="fb-share-button" data-href="<?php echo $ebook['Ebook']['id']?>" data-layout="button_count"></div>
@@ -78,7 +83,7 @@
                 cache: false,
                 data: {ebook_id:<?php echo $ebook['Ebook']['id']?>, user_id:<?php echo $account['User']['id']?>},
                 success: function (string) {
-                    alert("Đã gửi yêu cầu!")
+                    toastr.success("Đã gửi yêu cầu!")
                     $('#btnrequest').html('Requesting');
                 },
                 error: function () {
@@ -87,17 +92,22 @@
             });
         });
 
-        $('#btndownload').click(function () {
+        var rating = <?php echo $ebook['Ebook']['rating']?>;
+        var count = <?php if (empty($allrate)) echo 0; else echo count($allrate) ?>;
+        $('.rateit').rateit('readonly', <?php if (empty($rate)) echo 'false'; else echo 'true' ?>);
+        $('.rateit').bind('rated', function(){
+            var value = $('.rateit').rateit('value');
+            console.log(value);
             $.ajax({
-                url: '../download',
+                url: '../rate',
                 type: 'POST',
-                cache: false,
-                data: {ebook_id:<?php echo $ebook['Ebook']['id']?>},
+                data: {rate:value, user_id:<?php echo $account['User']['id']?>,
+                    ebook_id:<?php echo $ebook['Ebook']['id']?>, rating:parseFloat((rating*count + value)/(count+1))},
                 success: function (string) {
-                    alert("Tải thành công!")
+                    toastr.success("Bình chọn thành công!");
                 },
                 error: function () {
-                    alert('Có lỗi xảy ra');
+                    toastr.error("Có lỗi xảy ra!")
                 }
             });
         });

@@ -7948,3 +7948,204 @@ Stack Trace:
 #3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
 #4 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #5 {main}
+2016-04-13 04:33:02 Error: [MissingHelperException] Helper class AuthHelper could not be found.
+Exception Attributes: array (
+  'class' => 'AuthHelper',
+  'plugin' => false,
+)
+Request URL: /gasaon/users
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Auth')
+#1 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(858): HelperCollection->__isset('Auth')
+#2 D:\xampp\htdocs\gasaon\app\View\Layouts\login.ctp(165): View->__get('Auth')
+#3 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(971): include('D:\\xampp\\htdocs...')
+#4 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(933): View->_evaluate('D:\\xampp\\htdocs...', Array)
+#5 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(546): View->_render('D:\\xampp\\htdocs...')
+#6 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(481): View->renderLayout('', 'login')
+#7 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#8 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#9 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#10 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2016-04-13 04:33:12 Error: [MissingHelperException] Helper class AuthHelper could not be found.
+Exception Attributes: array (
+  'class' => 'AuthHelper',
+  'plugin' => false,
+)
+Request URL: /gasaon/users
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Auth')
+#1 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(858): HelperCollection->__isset('Auth')
+#2 D:\xampp\htdocs\gasaon\app\View\Layouts\login.ctp(165): View->__get('Auth')
+#3 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(971): include('D:\\xampp\\htdocs...')
+#4 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(933): View->_evaluate('D:\\xampp\\htdocs...', Array)
+#5 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(546): View->_render('D:\\xampp\\htdocs...')
+#6 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(481): View->renderLayout('', 'login')
+#7 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#8 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#9 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#10 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2016-04-13 04:33:19 Error: [MissingHelperException] Helper class AuthHelper could not be found.
+Exception Attributes: array (
+  'class' => 'AuthHelper',
+  'plugin' => false,
+)
+Request URL: /gasaon/users/view/7
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Auth')
+#1 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(858): HelperCollection->__isset('Auth')
+#2 D:\xampp\htdocs\gasaon\app\View\Layouts\login.ctp(165): View->__get('Auth')
+#3 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(971): include('D:\\xampp\\htdocs...')
+#4 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(933): View->_evaluate('D:\\xampp\\htdocs...', Array)
+#5 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(546): View->_render('D:\\xampp\\htdocs...')
+#6 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(481): View->renderLayout('', 'login')
+#7 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#8 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#9 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#10 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2016-04-13 04:33:20 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/7/thumb_230762264-Tim-Hi%E1%BB%83u-Cong-Ngh%E1%BB%87-Jsp-Java-Server-Pages-Thi%E1%BA%BFt-K%E1%BA%BF-Va-Hi%E1%BB%87n-Th%E1%BB%B1c-Website-Qu%E1%BA%A3ng-Cao-Th%C6%B0%C6%A1ng-M%E1%BA%A1i-%C4%90i%E1%BB%87n-T%E1%BB%AD-Cho-Cong-Ty-Seen.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-04-13 04:33:48 Error: [MissingHelperException] Helper class AuthHelper could not be found.
+Exception Attributes: array (
+  'class' => 'AuthHelper',
+  'plugin' => false,
+)
+Request URL: /gasaon/ebooks/view/118
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Auth')
+#1 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(858): HelperCollection->__isset('Auth')
+#2 D:\xampp\htdocs\gasaon\app\View\Layouts\login.ctp(165): View->__get('Auth')
+#3 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(971): include('D:\\xampp\\htdocs...')
+#4 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(933): View->_evaluate('D:\\xampp\\htdocs...', Array)
+#5 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(546): View->_render('D:\\xampp\\htdocs...')
+#6 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(481): View->renderLayout('', 'login')
+#7 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#8 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#9 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(EbooksController), Object(CakeRequest))
+#10 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2016-04-13 05:44:41 Error: Fatal Error (4): syntax error, unexpected end of file in [D:\xampp\htdocs\gasaon\app\Controller\UsersController.php, line 285]
+2016-04-13 05:44:41 Error: [FatalErrorException] syntax error, unexpected end of file
+Request URL: /gasaon/users/logout
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Error\ErrorHandler.php(213): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 285)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 285, Array)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Core\App.php(970): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 285, Array)
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Core\App.php(943): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2016-04-13 05:44:49 Error: Fatal Error (4): syntax error, unexpected end of file in [D:\xampp\htdocs\gasaon\app\Controller\UsersController.php, line 285]
+2016-04-13 05:44:49 Error: [FatalErrorException] syntax error, unexpected end of file
+Request URL: /gasaon/users/logout
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Error\ErrorHandler.php(213): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 285)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 285, Array)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Core\App.php(970): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 285, Array)
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Core\App.php(943): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2016-04-13 05:45:46 Error: [MissingViewException] View file "Users\login.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Users\\login.ctp',
+)
+Request URL: /gasaon/users/login
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(470): View->_getViewFileName(NULL)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2016-04-13 05:45:58 Error: [MissingViewException] View file "Users\login.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Users\\login.ctp',
+)
+Request URL: /gasaon/users/login
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(470): View->_getViewFileName(NULL)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2016-04-15 03:59:46 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/css/delete.gif
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-04-15 03:59:46 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/css/star.gif
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-04-15 04:42:51 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/gasaon/ebooks/view
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-04-15 05:54:28 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'value' cannot be null
+Request URL: /gasaon/ebooks/rate
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\DboSource.php(461): PDOStatement->execute(Array)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\DboSource.php(427): DboSource->_execute('INSERT INTO `ga...', Array)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\DboSource.php(1019): DboSource->execute('INSERT INTO `ga...')
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(1933): DboSource->create(Object(Rating), Array, Array)
+#4 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(1751): Model->_doSave(Array, Array)
+#5 D:\xampp\htdocs\gasaon\app\Controller\EbooksController.php(377): Model->save(Array)
+#6 [internal function]: EbooksController->rate()
+#7 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(491): ReflectionMethod->invokeArgs(Object(EbooksController), Array)
+#8 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#9 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(EbooksController), Object(CakeRequest))
+#10 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2016-04-15 05:55:25 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'value' cannot be null
+Request URL: /gasaon/ebooks/rate
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\DboSource.php(461): PDOStatement->execute(Array)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\DboSource.php(427): DboSource->_execute('INSERT INTO `ga...', Array)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\DboSource.php(1019): DboSource->execute('INSERT INTO `ga...')
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(1933): DboSource->create(Object(Rating), Array, Array)
+#4 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(1751): Model->_doSave(Array, Array)
+#5 D:\xampp\htdocs\gasaon\app\Controller\EbooksController.php(377): Model->save(Array)
+#6 [internal function]: EbooksController->rate()
+#7 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(491): ReflectionMethod->invokeArgs(Object(EbooksController), Array)
+#8 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#9 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(EbooksController), Object(CakeRequest))
+#10 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2016-04-15 05:56:38 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'value' cannot be null
+Request URL: /gasaon/ebooks/rate
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\DboSource.php(461): PDOStatement->execute(Array)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\DboSource.php(427): DboSource->_execute('INSERT INTO `ga...', Array)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Model\Datasource\DboSource.php(1019): DboSource->execute('INSERT INTO `ga...')
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(1933): DboSource->create(Object(Rating), Array, Array)
+#4 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(1751): Model->_doSave(Array, Array)
+#5 D:\xampp\htdocs\gasaon\app\Controller\EbooksController.php(377): Model->save(Array)
+#6 [internal function]: EbooksController->rate()
+#7 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(491): ReflectionMethod->invokeArgs(Object(EbooksController), Array)
+#8 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#9 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(EbooksController), Object(CakeRequest))
+#10 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}

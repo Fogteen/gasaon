@@ -262,7 +262,17 @@ class UsersController extends AppController
                 'content' => 'Yêu cầu về cuốn sách ' . $request['Ebook']['title'] . ' của bạn đã được chấp nhận',
                 'status' => 2
             ));
+            $pusher = new Pusher('ea2f5e5013baa43a541f', 'bd3a393da392412204cf', '197077');
+
+            // trigger on _channel' an event called '_event' with this payload:
+
+            $data = array(
+                'user_id' => $request['Request']['user_id'],
+                'title' => $request['Ebook']['title'],
+            );
+            $pusher->trigger('request_channel', 'rei_event', $data);
         }
+
         return;
     }
 }

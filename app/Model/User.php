@@ -23,6 +23,10 @@ class User extends AppModel {
         'Nofication' => array(
             'className' => 'Nofication',
             'foreignKey' => 'user_id'
+        ),
+        'Rating' => array(
+            'className' => 'Rating',
+            'foreignKey' => 'user_id'
         )
     );
 

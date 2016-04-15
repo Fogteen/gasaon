@@ -25,14 +25,17 @@
     <?php
     echo $this->Html->meta('icon');
 
-    echo $this->Html->css(array('normalize', 'foundation.min', 'custom', 'dropzone'));
+    echo $this->Html->css(array('normalize', 'foundation.min', 'custom', 'dropzone', 'rateit'));
 
-    echo $this->Html->script(array('vendor/jquery', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.dropdown', 'foundation/foundation.tab', 'app', 'dropzone'));
+    echo $this->Html->script(array('vendor/jquery', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.dropdown', 'foundation/foundation.tab', 'app', 'dropzone','pusher.min', 'rateit.min'));
+
 
     echo $this->fetch('meta');
     echo $this->fetch('css');
     echo $this->fetch('script');
     ?>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <meta property="og:url"           content="http://localhost/gasaon/ebooks/view/" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Your Website Title" />
@@ -128,6 +131,7 @@
     $(document).foundation();
     $(document).ready(function () {
         $('#nofi').click(function () {
+            if ($('div.form').val != '') $('div.form').html('');
             $.ajax({
                 url: '<?php echo BASE_PATH?>users/nofi',
                 type: 'POST',
@@ -157,6 +161,19 @@
                     alert('Có lỗi xảy ra');
                 }
             });
+        });
+        var pusher = new Pusher('ea2f5e5013baa43a541f');
+        var myChannel = pusher.subscribe('request_channel');
+        var id = <?php echo $account['User']['id']?>;
+        myChannel.bind('send_event', function(data){
+            if (data.user_id == id) {
+                toastr.success(data.user_send+' vừa gửi cho bạn yêu cầu về cuốn sách '+data.title);
+            }
+        });
+        myChannel.bind('rei_event', function(data){
+            if (data.user_id == id) {
+                toastr.success('Yêu cầu về cuốn sách '+data.title+ ' đã được chấp nhận');
+            }
         });
     });
 </script>

@@ -31,12 +31,25 @@ class EbooksController extends AppController
                 'Request.ebook_id' => $id
             )
         ));
+        $rate = $this->Ebook->Rating->find('first', array(
+            'conditions' => array(
+                'Rating.user_id' => $this->Auth->user('id'),
+                'Rating.ebook_id' => $id
+            )
+        ));
+        $allrate = $this->Ebook->Rating->find('all', array(
+            'conditions' => array(
+                'Rating.ebook_id' => $id
+            )
+        ));
         if (empty($ebook)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
             return $this->redirect(array('action' => 'index'));
         } else {
             $this->set('ebook', $ebook);
             $this->set('request', $request);
+            $this->set('rate', $rate);
+            $this->set('allrate', $allrate);
         }
     }
 
@@ -313,6 +326,16 @@ class EbooksController extends AppController
             'request_id' => $this->Ebook->Request->id,
             'content' => 'Bạn nhận được một yêu cầu từ '. $user['User']['first_name'] . ' về cuốn sách ' . $book['Ebook']['title'] . ' của bạn.'
         ));
+        $pusher = new Pusher('ea2f5e5013baa43a541f', 'bd3a393da392412204cf', '197077');
+
+        // trigger on _channel' an event called '_event' with this payload:
+
+        $data = array(
+            'user_id' => $book['Ebook']['user_id'],
+            'title' => $book['Ebook']['title'],
+            'user_send' =>  $user['User']['first_name']
+        );
+        $pusher->trigger('request_channel', 'send_event', $data);
     }
 
     public function download($id = null){
@@ -337,5 +360,25 @@ class EbooksController extends AppController
             $this->Flash->error("Xảy ra lỗi");
             return $this->redirect(array('action'=>'view',$id));
         }
+    }
+
+    public function rate(){
+        $this->layout = false;
+        $this->autoRender = false;
+        $ebook_id = $this->request->data['ebook_id'];
+        $user_id = $this->request->data['user_id'];
+        $rate = $this->request->data['rate'];
+        $rating = $this->request->data['rating'];
+        $this->Ebook->Rating->create();
+        $this->Ebook->Rating->save(array(
+                'user_id' => $user_id,
+                'ebook_id' => $ebook_id,
+                'value' => $rate
+        ));
+        $this->Ebook->updateAll(
+            array('Ebook.rating' => $rating),
+            array('Ebook.id' => $ebook_id)
+        );
+        return;
     }
 }
