@@ -49,7 +49,7 @@ class UsersController extends AppController
     {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('controller' => 'homes'));
             }
             $this->Flash->error(__('Username hoặc password không đúng'));
         }
@@ -94,9 +94,9 @@ class UsersController extends AppController
                 if (!empty($result)) {
                     if ($this->Auth->login($result['User'])) { //Nếu có thì đăng nhập ngay
                         $this->Session->write('user', $this->Auth->user('email'));
-                        $this->redirect(array('action' => 'index'));
+                        $this->redirect(array('controller' => 'homes'));
                     } else {
-                        $this->redirect(array('action' => 'login'));
+                        $this->redirect(array('controller' => 'homes'));
                     }
                 } else { // Nếu chưa thì lấy thông tin lưu vào CSDL và đăng nhập
                     $data['email'] = $fb_data['email'];
@@ -108,16 +108,16 @@ class UsersController extends AppController
                     if ($this->User->save($data)) {
                         if ($this->Auth->login($data)) {
                             $this->Session->write('user', $this->Auth->user('email'));
-                            $this->redirect(array('action' => 'index'));
+                            $this->redirect(array('controller' => 'homes'));
                         } else {
-                            $this->redirect(array('action' => 'login'));
+                            $this->redirect(array('controller' => 'homes'));
                         }
                     } else {
-                        $this->redirect(array('action' => 'login'));
+                        $this->redirect(array('controller' => 'homes'));
                     }
                 }
             } else {
-                $this->redirect(array('action' => 'login'));
+                $this->redirect(array('controller' => 'homes'));
             }
         }
     }
@@ -127,7 +127,7 @@ class UsersController extends AppController
     public function logout()
     {
         $this->Session->destroy();//Hủy tất cả session
-        return $this->redirect($this->Auth->logout());
+        return $this->redirect(array('controller' => 'homes'));
     }
 
     //Trang index

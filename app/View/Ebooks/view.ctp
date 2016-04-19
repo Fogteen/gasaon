@@ -1,17 +1,11 @@
 <div id="fb-root"></div>
 <script>
     $(document).ready(function() {
-        $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
-            FB.init({
-                appId: '{1044940168912905}',
-                version: 'v2.5' // or v2.0, v2.1, v2.2, v2.3
-            });
-        });
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1044940168912905";
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=1044940168912905";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     });
@@ -73,6 +67,9 @@
         ?>
     </div>
 
+</div>
+<div class="row comment">
+    <div class="fb-comments" data-href="http://localhost/gasaon/ebooks/view/<?php echo $ebook['Ebook']['id']?>" data-width="700" data-numposts="5"></div>
 </div>
 <script>
     $(document).ready(function () {
