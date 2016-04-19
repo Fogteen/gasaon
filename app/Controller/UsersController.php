@@ -144,6 +144,23 @@ class UsersController extends AppController
             return $this->redirect(array('action' => 'index'));
         } else {
             $this->set('user', $this->User->findById($id));
+            $this->set('friend', $this->User->Friend1->find('all',array(
+                'conditions' => array(
+                    'OR' => array(
+                        array('Friend1.user_one_id' => $id),
+                        array('Friend1.user_two_id' => $id)
+                    ),
+                    'Friend1.status' => 1
+                )
+            )));
+            $this->set('status', $this->User->Friend1->find('first',array(
+                'conditions' => array(
+                    'OR' => array(
+                        array('Friend1.user_one_id' => $id, 'Friend1.user_two_id' => $this->Auth->user('id')),
+                        array('Friend1.user_two_id' => $id, 'Friend1.user_one_id' => $this->Auth->user('id'))
+                    )
+                )
+            )));
         }
     }
 
@@ -248,32 +265,95 @@ class UsersController extends AppController
             array('Nofication.status' => $status),
             array('Nofication.id' => $id)
         );
-        $this->User->Request->updateAll(
-            array('Request.status' => 3),
-            array('Request.id' => $request_id)
-        );
-        $request = $this->User->Request->read(null,$request_id);
-        if($status != 21) {
-            $this->User->Nofication->create();
-            $this->User->Nofication->save(array(
-                'user_id' => $request['Request']['user_id'],
-                'ebook_id' => $ebook_id,
-                'request_id' => $request_id,
-                'content' => 'Yêu cầu về cuốn sách ' . $request['Ebook']['title'] . ' của bạn đã được chấp nhận',
-                'status' => 2
-            ));
-            $pusher = new Pusher('ea2f5e5013baa43a541f', 'bd3a393da392412204cf', '197077');
-
-            // trigger on _channel' an event called '_event' with this payload:
-
-            $data = array(
-                'user_id' => $request['Request']['user_id'],
-                'title' => $request['Ebook']['title'],
+        if(empty($ebook_id)) {
+            $this->User->Friend1->updateAll(
+                array('Friend1.status' => 1),
+                array('Friend1.id' => $request_id)
             );
-            $pusher->trigger('request_channel', 'rei_event', $data);
+            $friend = $this->User->Friend1->read(null, $request_id);
+            $user = $this->User->read(null, $friend['Friend1']['user_two_id']);
+            if ($status != 21) {
+                $this->User->Nofication->create();
+                $this->User->Nofication->save(array(
+                    'user_id' => $friend['Friend1']['user_one_id'],
+                    'ebook_id' => $ebook_id,
+                    'request_id' => $request_id,
+                    'content' => $user['User']['first_name'] . ' đã chấp nhận yêu cầu kết bạn.',
+                    'status' => 2
+                ));
+
+                $pusher = new Pusher('ea2f5e5013baa43a541f', 'bd3a393da392412204cf', '197077');
+
+                // trigger on _channel' an event called '_event' with this payload:
+
+                $data = array(
+                    'user_id' => $friend['Friend1']['user_one_id'],
+                    'user_send' => $user['User']['first_name'],
+                );
+                $pusher->trigger('request_channel', 'rei_friend_event', $data);
+            }
+        }
+        else {
+            $this->User->Request->updateAll(
+                array('Request.status' => 3),
+                array('Request.id' => $request_id)
+            );
+            $request = $this->User->Request->read(null, $request_id);
+            if ($status != 21) {
+                $this->User->Nofication->create();
+                $this->User->Nofication->save(array(
+                    'user_id' => $request['Request']['user_id'],
+                    'ebook_id' => $ebook_id,
+                    'request_id' => $request_id,
+                    'content' => 'Yêu cầu về cuốn sách ' . $request['Ebook']['title'] . ' của bạn đã được chấp nhận',
+                    'status' => 2
+                ));
+
+
+                $pusher = new Pusher('ea2f5e5013baa43a541f', 'bd3a393da392412204cf', '197077');
+
+                // trigger on _channel' an event called '_event' with this payload:
+
+                $data = array(
+                    'user_id' => $request['Request']['user_id'],
+                    'title' => $request['Ebook']['title'],
+                );
+                $pusher->trigger('request_channel', 'rei_event', $data);
+            }
         }
 
         return;
+    }
+
+    public function addfriend(){
+        $this->layout = false;
+        $this->autoRender = false;
+        $user_one_id = $this->request->data['user_one_id'];
+        $user_two_id = $this->request->data['user_two_id'];
+        $user = $this->User->read(null,$user_one_id);
+        $this->User->Friend1->create();
+        $this->User->Friend1->save(array(
+            'user_one_id' => $this->Auth->user('id'),
+            'user_two_id' => $user_two_id,
+            'action_user' => $this->Auth->user('id'),
+            'status' => 0
+        ));
+        $this->User->Nofication->create();
+        $this->User->Nofication->save(array(
+            'user_id' => $user_two_id,
+            'ebook_id' => '',
+            'request_id' => $this->User->Friend1->id,
+            'content' => 'Bạn nhận được một yêu cầu kết bạn từ '. $user['User']['first_name']
+        ));
+        $pusher = new Pusher('ea2f5e5013baa43a541f', 'bd3a393da392412204cf', '197077');
+
+        // trigger on _channel' an event called '_event' with this payload:
+
+        $data = array(
+            'user_id' => $user_two_id,
+            'user_send' => $user['User']['first_name']
+        );
+        $pusher->trigger('request_channel', 'send_friend_event', $data);
     }
 }
 

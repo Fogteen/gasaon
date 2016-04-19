@@ -41,6 +41,7 @@
     <meta property="og:title"         content="Your Website Title" />
     <meta property="og:description"   content="Your description" />
     <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+    <meta property="fb:admins" content="{787320918045296}"/>
 </head>
 <body>
 <div id="container">
@@ -170,9 +171,19 @@
                 toastr.success(data.user_send+' vừa gửi cho bạn yêu cầu về cuốn sách '+data.title);
             }
         });
+        myChannel.bind('send_friend_event', function(data){
+            if (data.user_id == id) {
+                toastr.success(data.user_send+' vừa gửi yêu cầu kết bạn.');
+            }
+        });
         myChannel.bind('rei_event', function(data){
             if (data.user_id == id) {
                 toastr.success('Yêu cầu về cuốn sách '+data.title+ ' đã được chấp nhận');
+            }
+        });
+        myChannel.bind('rei_friend_event', function(data){
+            if (data.user_id == id) {
+                toastr.success(data.user_send+' đã chấp nhận yêu cầu kết bạn.');
             }
         });
     });

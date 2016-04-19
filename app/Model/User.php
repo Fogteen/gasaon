@@ -27,7 +27,15 @@ class User extends AppModel {
         'Rating' => array(
             'className' => 'Rating',
             'foreignKey' => 'user_id'
-        )
+        ),
+        'Friend1' => array(
+            'className' => 'Friend',
+            'foreignKey' => 'user_one_id'
+        ),
+        'Friend2' => array(
+            'className' => 'Friend',
+            'foreignKey' => 'user_two_id'
+        ),
     );
 
     public $actsAs = array(

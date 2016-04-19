@@ -13,14 +13,23 @@
                         ?>
                     </div>
                     <div class="small-8 large-8 columns">
-                        <h4><?= $user['User']['first_name'] . " " . $user['User']['last_name'] ?><br><span>President of XPTO</span>
-                        </h4>
+                        <h4><?= $user['User']['first_name'] . " " . $user['User']['last_name'] ?></h4>
+                        <?php
+                        if (empty($account) || $account['User']['id'] == $user['User']['id']) {
+                        }
+                        elseif (empty($status))
+                            echo $this->Form->button("Add Friend", array('id' => 'btnaddfr'));
+                        elseif ($status['Friend1']['status'] == 0 || $status['Friend1']['status'] == 2)
+                            echo $this->Form->button("Requesting", array('type' => 'disable'));
+                        elseif ($status['Friend1']['status'] == 1)
+                            echo $this->Form->button("Friend", array('type' => 'disable'));
+                        ?>
                     </div>
                     <div class="row" style="clear:both;">
                         <ul class="button-group even-2">
                             <li><a href="#" class="button"> Ebooks <span><?php echo count($user['Ebook']) ?> </span></a>
                             </li>
-                            <li><a href="#" class="button"> Friends <span>432 </span></a></li>
+                            <li><a href="#" class="button"> Friends <span><?php echo count($friend) ?></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -41,3 +50,23 @@
     </div>
 
 </section>
+
+<script>
+    $(document).ready(function () {
+        $('#btnaddfr').click(function () {
+            $.ajax({
+                url: '../addfriend',
+                type: 'POST',
+                cache: false,
+                data: {user_one_id:<?php echo $account['User']['id']?>,user_two_id:<?php echo $user['User']['id']?>},
+                success: function (string) {
+                    toastr.success("Đã gửi yêu cầu!")
+                    $('#btnaddfr').html('Requesting');
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra');
+                }
+            });
+        });
+    });
+</script>
