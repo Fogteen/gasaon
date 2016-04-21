@@ -111,6 +111,7 @@ CakeLog::config('error', array(
 ));
 
 include_once('fb_config.php');
+include_once('chat_config.php');
 CakePlugin::loadAll();
 require_once(ROOT . DS . 'vendor' . DS . 'autoload.php');
 set_time_limit(300);

@@ -4,25 +4,23 @@
             <div class="row">
                 <div class="profile-card">
                     <div class="small-4 large-4 columns">
-
                         <?php
                         if (strpos($user['User']['picture'], "graph.facebook.com") !== false)
                             echo $this->Html->image('https://' . $user['User']['picture']);
                         else
-                            echo $this->Html->image('../files/user/picture/' . $user['User']['picture_dir'] . '/thumb_' . $user['User']['picture'])
+                            echo $this->Html->image('../files/user/picture/' . $user['User']['picture_dir'] . '/' . $user['User']['picture'])
                         ?>
                     </div>
                     <div class="small-8 large-8 columns">
                         <h4><?= $user['User']['first_name'] . " " . $user['User']['last_name'] ?></h4>
                         <?php
                         if (empty($account) || $account['User']['id'] == $user['User']['id']) {
-                        }
-                        elseif (empty($status))
-                            echo $this->Form->button("Add Friend", array('id' => 'btnaddfr'));
+                        } elseif (empty($status))
+                            echo $this->Form->button("Add Friend", array('id' => 'btnaddfr', 'class' => 'friend'));
                         elseif ($status['Friend1']['status'] == 0 || $status['Friend1']['status'] == 2)
-                            echo $this->Form->button("Requesting", array('type' => 'disable'));
+                            echo $this->Form->button("Requesting", array('type' => 'disable', 'class' => 'friend warning'));
                         elseif ($status['Friend1']['status'] == 1)
-                            echo $this->Form->button("Friend", array('type' => 'disable'));
+                            echo $this->Form->button("Unfriend", array('id' => 'btnunfr', 'class' => 'friend alert'));
                         ?>
                     </div>
                     <div class="row" style="clear:both;">
@@ -37,7 +35,7 @@
         </div>
     </div>
     <div class="row">
-        <ul class="ebview small-block-grid-1 medium-block-grid-3 large-block-grid-5">
+        <ul class="ebview small-block-grid-2 medium-block-grid-3 large-block-grid-5">
             <?php foreach ($user['Ebook'] as $ebook) { ?>
                 <li>
                     <?php $image = $this->Html->image('../files/' . $ebook['user_id'] . '/' . $ebook['picture']);
@@ -58,13 +56,28 @@
                 url: '../addfriend',
                 type: 'POST',
                 cache: false,
-                data: {user_one_id:<?php echo $account['User']['id']?>,user_two_id:<?php echo $user['User']['id']?>},
+                data: {user_one_id:<?php echo $account['User']['id']?>, user_two_id:<?php echo $user['User']['id']?>},
                 success: function (string) {
                     toastr.success("Đã gửi yêu cầu!")
                     $('#btnaddfr').html('Requesting');
+                    $('#btnaddfr').prop('disabled', true);
                 },
                 error: function () {
-                    alert('Có lỗi xảy ra');
+                    toastr.error('Có lỗi xảy ra');
+                }
+            });
+        });
+        $('#btnunfr').click(function () {
+            $.ajax({
+                url: '../unfriend',
+                type: 'POST',
+                cache: false,
+                data: {id:<?php if(empty($status)) echo 0; else echo $status['Friend1']['id'] ?>},
+                success: function () {
+                    toastr.success("Đã hủy kết bạn!");
+                },
+                error: function () {
+                    toastr.error('Có lỗi xảy ra');
                 }
             });
         });

@@ -355,5 +355,67 @@ class UsersController extends AppController
         );
         $pusher->trigger('request_channel', 'send_friend_event', $data);
     }
+
+    public function unfriend(){
+        $this->layout = false;
+        $this->autoRender = false;
+        $id = $this->request->data['id'];
+        if ($id != 0)
+        $this->User->Friend1->delete($id);
+        return;
+    }
+
+    public function frlist() {
+        $this->layout = false;
+        $this->autoRender = false;
+        $friend = $this->User->Friend1->find('all',array(
+            'conditions' => array(
+                'OR' => array(
+                    array('Friend1.user_one_id' => $this->Auth->user('id')),
+                    array('Friend1.user_two_id' => $this->Auth->user('id'))
+                ),
+                'Friend1.status' => 1
+            )
+        ));
+        $i =0;
+        foreach ($friend as $fr) {
+            if ($fr['Friend1']['user_one_id'] == $this->Auth->user('id')) {
+                $user = $this->User->read(null, $fr['Friend1']['user_two_id']);
+            }
+            else {
+                $user = $this->User->read(null, $fr['Friend1']['user_one_id']);
+            }
+            $data[$user['User']['id']] = array($user['User']['id'] => array($user['User']['first_name'],'thumb_'.$user['User']['picture'],''));
+        }
+        return new CakeResponse(array('body' => json_encode($data),'type'=>'json'));
+    }
+
+    public function chatauth() {
+        $this->layout = false;
+        $this->autoRender = false;
+        $name = $this->Auth->user('first_name'); // chose the way to get this get,post session ...etc
+        $user_id = $this->Auth->user('id'); // chose the way to get this get,post session ...etc
+        $channel_name = $this->request->data('channel_name'); // never change
+        $socket_id = $this->request->data('socket_id'); // never change
+
+
+        $pusher = new Pusher(APP_KEY, APP_SECRET, APP_ID);
+        $presence_data = array('name' => $name);
+        echo $pusher->presence_auth($channel_name, $socket_id, $user_id, $presence_data);
+    }
+
+    public function chat() {
+        $this->layout = false;
+        $this->autoRender = false;
+        $pusher = new Pusher(APP_KEY, APP_SECRET, APP_ID);
+        if ($_POST['typing'] == "false"){
+            $pusher->trigger('presence-mychanel', 'send-event', array('message' => htmlspecialchars ( $_POST['msg']), 'from' => $_POST['from'], 'to' => str_replace('#', '', $_POST['to'])));
+        }
+        else if ($_POST['typing'] == "true")
+            $pusher->trigger('presence-mychanel', 'typing-event', array('message' => $_POST['typing'], 'from' => $_POST['from'], 'to' => str_replace('#', '', $_POST['to'])));
+        else{
+            $pusher->trigger('presence-mychanel', 'typing-event', array('message' => 'null', 'from' => $_POST['from'], 'to' => str_replace('#', '', $_POST['to'])));
+        }
+    }
 }
 
