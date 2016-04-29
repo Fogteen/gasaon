@@ -20,7 +20,7 @@
 }
 #pusherChat #membersContent a.off{opacity: 0.5; background/*\**/: #eee\9;}
 #pusherChat #membersContent a:hover{background: #00B4FF;color :#fff}
-#pusherChat #membersContent h2{font-size: 12px;line-height: 0;text-indent: 10px; }
+#pusherChat #membersContent h2{font-size: 12px;line-height: 1;text-indent: 10px;height: 10px }
 #pusherChat #membersContent .scroll{overflow-y :auto }
 #pusherChat #expand, #pusherChat .expand{ font-size: 15px; font-weight: bold;position: absolute; right: 10px; top: 0px;cursor: pointer;}
 #pusherChat #expand .open,#pusherChat .pusherChatBox .expand .open{display: none; }

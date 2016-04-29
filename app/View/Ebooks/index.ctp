@@ -24,8 +24,9 @@
                 </div>
                 <div class="small-9 large-8 columns">
                     <h5><?php echo $this->Html->link($ebook['Ebook']['title'], array('action' => 'view', $ebook['Ebook']['id'])) ?></h5>
-                    <h6><?php echo $ebook['Ebook']['author'] ?></h6>
+                    <h6>Tác giả: <?php echo $ebook['Ebook']['author'] ?></h6>
                     <h6>Thể loại: <?php echo $ebook['Category']['name'] ?></h6>
+                    <h6>Mô tả: <?php echo $ebook['Ebook']['des'] ?></h6>
                 </div>
                 <div class="small-9 large-2 columns">
                     <?php echo $this->Html->link('Edit', array('action' => 'edit', $ebook['Ebook']['id'])) ?>

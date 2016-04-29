@@ -12,7 +12,7 @@
                         ?>
                     </div>
                     <div class="small-8 large-8 columns">
-                        <h4><?= $user['User']['first_name'] . " " . $user['User']['last_name'] ?></h4>
+                        <h4><?= $user['User']['username'] ?></h4>
                         <?php
                         if (empty($account) || $account['User']['id'] == $user['User']['id']) {
                         } elseif (empty($status))

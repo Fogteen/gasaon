@@ -29,7 +29,21 @@ use Facebook\GraphSessionInfo;
 class UsersController extends AppController
 {
 
-    public $helpers = array('Html', 'Form', 'Paginator');
+    public $components = array(
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish',
+                    'fields' => array('username' => 'email')
+                )
+            ),
+            'authorize' => array('Controller'),
+            'loginAction' => array(
+                'controller' => 'users',
+                'action' => 'login',
+            )
+        )
+    );
 
     /*
      * Cho phép thực hiện các action khi chưa đăng nhập
@@ -84,7 +98,7 @@ class UsersController extends AppController
         $fb_data = array();
         if (isset($session)) {
             $_SESSION['token'] = $session->getToken(); //lấy token nếu chưa có
-            $request = new Facebook\FacebookRequest($session, 'GET', '/me?fields=first_name,last_name,email');
+            $request = new Facebook\FacebookRequest($session, 'GET', '/me?fields=username,last_name,email');
             $response = $request->execute();
             $graph = $response->getGraphObject(Facebook\GraphUser::className());
             $fb_data = $graph->asArray();
@@ -100,7 +114,7 @@ class UsersController extends AppController
                     }
                 } else { // Nếu chưa thì lấy thông tin lưu vào CSDL và đăng nhập
                     $data['email'] = $fb_data['email'];
-                    $data['first_name'] = $fb_data['first_name'];
+                    $data['username'] = $fb_data['username'];
                     $data['last_name'] = $fb_data['last_name'];
                     $data['social_id'] = $fb_data['id'];
                     $data['picture'] = 'graph.facebook.com/' . $id . '/picture?width=100';
@@ -278,7 +292,7 @@ class UsersController extends AppController
                     'user_id' => $friend['Friend1']['user_one_id'],
                     'ebook_id' => $ebook_id,
                     'request_id' => $request_id,
-                    'content' => $user['User']['first_name'] . ' đã chấp nhận yêu cầu kết bạn.',
+                    'content' => $user['User']['username'] . ' đã chấp nhận yêu cầu kết bạn.',
                     'status' => 2
                 ));
 
@@ -288,7 +302,7 @@ class UsersController extends AppController
 
                 $data = array(
                     'user_id' => $friend['Friend1']['user_one_id'],
-                    'user_send' => $user['User']['first_name'],
+                    'user_send' => $user['User']['username'],
                 );
                 $pusher->trigger('request_channel', 'rei_friend_event', $data);
             }
@@ -343,7 +357,7 @@ class UsersController extends AppController
             'user_id' => $user_two_id,
             'ebook_id' => '',
             'request_id' => $this->User->Friend1->id,
-            'content' => 'Bạn nhận được một yêu cầu kết bạn từ '. $user['User']['first_name']
+            'content' => 'Bạn nhận được một yêu cầu kết bạn từ '. $user['User']['username']
         ));
         $pusher = new Pusher('ea2f5e5013baa43a541f', 'bd3a393da392412204cf', '197077');
 
@@ -351,7 +365,7 @@ class UsersController extends AppController
 
         $data = array(
             'user_id' => $user_two_id,
-            'user_send' => $user['User']['first_name']
+            'user_send' => $user['User']['username']
         );
         $pusher->trigger('request_channel', 'send_friend_event', $data);
     }
@@ -385,7 +399,7 @@ class UsersController extends AppController
             else {
                 $user = $this->User->read(null, $fr['Friend1']['user_one_id']);
             }
-            $data[$user['User']['id']] = array($user['User']['id'] => array($user['User']['first_name'],'thumb_'.$user['User']['picture'],''));
+            $data[$user['User']['id']] = array($user['User']['id'] => array($user['User']['username'],'thumb_'.$user['User']['picture'],''));
         }
         return new CakeResponse(array('body' => json_encode($data),'type'=>'json'));
     }
@@ -393,7 +407,7 @@ class UsersController extends AppController
     public function chatauth() {
         $this->layout = false;
         $this->autoRender = false;
-        $name = $this->Auth->user('first_name'); // chose the way to get this get,post session ...etc
+        $name = $this->Auth->user('username'); // chose the way to get this get,post session ...etc
         $user_id = $this->Auth->user('id'); // chose the way to get this get,post session ...etc
         $channel_name = $this->request->data('channel_name'); // never change
         $socket_id = $this->request->data('socket_id'); // never change

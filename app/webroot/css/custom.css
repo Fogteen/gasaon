@@ -13,12 +13,12 @@ div#header {
 }
 div#content {
     width: 100%;
-    margin-top: 40px;
 }
 div.des{
     text-align: center;
     width: 100%;
     background-color: #a0d3e8;
+    margin-top: 80px;
 }
 
 div.upload {
@@ -30,7 +30,6 @@ div.upload {
     background-size: cover;
     background-attachment: fixed;
     padding: 175px 0;
-    margin-bottom: 30px;
 }
 
 .jumbo h1{
@@ -67,7 +66,6 @@ div.upload {
 }
 
 .active{
-    text-decoration: underline;
     font-weight: bold !important;
 }
 
@@ -241,8 +239,10 @@ li.tab-title.active {
 .secondary-tabs .tabs-content {
     border: 1px solid #999;
     border-top: none; }
-.secondary-tabs .tabs-content h3 {
-    margin-left: 2.7rem; }
+.secondary-tabs .tabs-content .title {
+    text-align: center;
+    text-decoration:none;
+}
 .secondary-tabs .tabs-content h5 {
     color: #e74c3c;
     margin-left: 2.7rem; }
@@ -254,6 +254,7 @@ li.tab-title.active {
 
 /*Hero*/
 .hero {
+    margin-top: 40px;
     background-size: cover;
     background-image: linear-gradient(to bottom right, #002f4b, #dc4225);
 }

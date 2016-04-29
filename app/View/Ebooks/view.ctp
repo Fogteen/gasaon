@@ -29,7 +29,7 @@
         <span><?php echo $this->Time->format(
                     'F j, Y',
                     $ebook['Ebook']['created']) . " by " .
-                $this->Html->link($ebook['User']['first_name'], array('controller' => 'users', 'action' => 'view', $ebook['Ebook']['user_id'])) ?></span>
+                $this->Html->link($ebook['User']['username'], array('controller' => 'users', 'action' => 'view', $ebook['Ebook']['user_id'])) ?></span>
         <hr>
         <input type="range" value="<?php echo $ebook['Ebook']['rating']?>" step="1" id="backing">
         <div class="rateit" data-rateit-backingfld="#backing" data-rateit-resetable="false"  data-rateit-ispreset="true"

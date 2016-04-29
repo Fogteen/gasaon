@@ -33,18 +33,11 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     public $uses = array('User','Ebook');
+    public $helpers = array('Html', 'Form', 'Paginator');
     public $components = array(
         'Flash',
         'Session',
-        'Auth' => array(
-            'authenticate' => array(
-                'Form' => array(
-                    'passwordHasher' => 'Blowfish',
-                    'fields' => array('username' => 'email')
-                )
-            ),
-            'authorize' => array('Controller') // Added this line
-        )
+        'Auth'
     );
 
     public function isAuthorized($user) {
@@ -53,7 +46,8 @@ class AppController extends Controller {
     }
 
     public function beforeFilter() {
-        if (empty($this->Auth->user('id'))) $this->layout='nologin';
+        if ($this->params['controller'] == 'admins') $this->layout='admin';
+        else if (empty($this->Auth->user('id'))) $this->layout='nologin';
         else $this->layout='login';
         $this->set('account',$this->User->findById($this->Auth->user('id')));
         $this->set('nofi',$this->User->Nofication->find('all',array(
@@ -65,6 +59,6 @@ class AppController extends Controller {
                 )
             )
         )));
-        $this->Auth->allow('index', 'view', 'add', 'upload', 'delete', 'deleteup');
+        $this->Auth->allow('index', 'view', 'upload', 'delete', 'deleteup');
     }
 }

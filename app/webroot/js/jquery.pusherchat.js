@@ -8,46 +8,46 @@
  *
  *
  *          $.fn.pusherChat({
-                'pusherKey': // required : open an account on http://pusher.com/ to get one
-                'authPath':'server/pusher_auth.php', // required : path to authentication scripts more info at http://pusher.com/docs/authenticating_users
-            'friendsList' : null, // required : path to friends list json
-            // json ex :
-            /*
-                {
-                    "133": ["Elvis","assets/elvis.jpg","http://html5-ninja.com"],
-                    "244": ["Kurt Cobain","assets/cobain.jpg","http://html5-ninja.com"],
-                }
-            'serverPath' : null, // required : path to server
-            'profilePage' : false, // link to friend profile page setup fom json  ex : ["Kurt Cobain","assets/cobain.jpg","path/to/profile"]
-            'debug' : false // enable the pusher debug mode  - don't use this in production
-            });
+ 'pusherKey': // required : open an account on http://pusher.com/ to get one
+ 'authPath':'server/pusher_auth.php', // required : path to authentication scripts more info at http://pusher.com/docs/authenticating_users
+ 'friendsList' : null, // required : path to friends list json
+ // json ex :
+ /*
+ {
+ "133": ["Elvis","assets/elvis.jpg","http://html5-ninja.com"],
+ "244": ["Kurt Cobain","assets/cobain.jpg","http://html5-ninja.com"],
+ }
+ 'serverPath' : null, // required : path to server
+ 'profilePage' : false, // link to friend profile page setup fom json  ex : ["Kurt Cobain","assets/cobain.jpg","path/to/profile"]
+ 'debug' : false // enable the pusher debug mode  - don't use this in production
+ });
 
-*/
-$(document).ready(function (){
+ */
+$(document).ready(function () {
 
-    $.fn.pusherChat = function(options ) {
+    $.fn.pusherChat = function (options) {
         //options
-        var settings = $.extend( {
+        var settings = $.extend({
             'pusherKey': null,   // required : open an account on http://pusher.com/ to get one
-            'authPath' : null , // required : path to authentication scripts more info at http://pusher.com/docs/authenticating_users
-            'friendsList' : null, // required : path to friends list json
+            'authPath': null, // required : path to authentication scripts more info at http://pusher.com/docs/authenticating_users
+            'friendsList': null, // required : path to friends list json
             // json ex :
             /*
-                {
-                    "133": ["Elvis","assets/elvis.jpg","http://html5-ninja.com"],
-                    "244": ["Kurt Cobain","assets/cobain.jpg","http://html5-ninja.com"],
-                }
-         */
-            'serverPath' : null, // required : path to server
-            'profilePage' : false, // link to friend profile page setup fom json  ex : ["Kurt Cobain","assets/cobain.jpg","path/to/profile"]
-            'onFriendConnect' : undefined, // event : trigger whene friend connect & return his ID
-            'onFriendLogOut' : undefined, // event : trigger whene friend log out & return his ID
-            'onSubscription' : undefined, // return  members object
-            'debug' : true // enable the pusher debug mode  - don't use this in production
+             {
+             "133": ["Elvis","assets/elvis.jpg","http://html5-ninja.com"],
+             "244": ["Kurt Cobain","assets/cobain.jpg","http://html5-ninja.com"],
+             }
+             */
+            'serverPath': null, // required : path to server
+            'profilePage': false, // link to friend profile page setup fom json  ex : ["Kurt Cobain","assets/cobain.jpg","path/to/profile"]
+            'onFriendConnect': undefined, // event : trigger whene friend connect & return his ID
+            'onFriendLogOut': undefined, // event : trigger whene friend log out & return his ID
+            'onSubscription': undefined, // return  members object
+            'debug': true // enable the pusher debug mode  - don't use this in production
         }, options);
 
-        if (settings.debug){
-            Pusher.log = function(message) {
+        if (settings.debug) {
+            Pusher.log = function (message) {
                 if (window.console && window.console.log) window.console.log(message);
             };
             WEB_SOCKET_DEBUG = true;
@@ -64,73 +64,75 @@ $(document).ready(function (){
         var presenceChannel = pusher.subscribe('presence-mychanel');
 
         // subscription succeeded
-        presenceChannel.bind('pusher:subscription_succeeded', function(){
+        presenceChannel.bind('pusher:subscription_succeeded', function () {
             memberUpdate();
         });
         // trigger friend connection
-        presenceChannel.bind('pusher:member_added', function() {
+        presenceChannel.bind('pusher:member_added', function () {
             memberUpdate();
         });
         // trigger friend logout
-        presenceChannel.bind('pusher:member_removed', function() {
+        presenceChannel.bind('pusher:member_removed', function () {
             memberUpdate();
         });
 
 
         if (settings.onSubscription !== undefined) {
-            presenceChannel.bind('pusher:subscription_succeeded', function(members){
+            presenceChannel.bind('pusher:subscription_succeeded', function (members) {
                 settings.onSubscription(members);
             })
         }
 
         if (settings.onFriendConnect !== undefined) {
-            presenceChannel.bind('pusher:member_added', function(member) {
+            presenceChannel.bind('pusher:member_added', function (member) {
                 settings.onFriendConnect(member);
             });
         }
 
         if (settings.onFriendLogOut !== undefined) {
-            presenceChannel.bind('pusher:member_removed', function(member) {
+            presenceChannel.bind('pusher:member_removed', function (member) {
                 settings.onFriendLogOut(member);
             });
         }
         /*-----------------------------------------------------------*
          * Bind the 'send-event' & update the chat box message log
          *-----------------------------------------------------------*/
-        presenceChannel.bind('send-event', function(data) {
-            if(presenceChannel.members.me.id == data.to && data.from != presenceChannel.members.me.id){
-                var obj = $('a[href=#'+data.from+']');
+        presenceChannel.bind('send-event', function (data) {
+            var dt;
+            if (presenceChannel.members.me.id == data.to && data.from != presenceChannel.members.me.id) {
+                var obj = $('a[href=#' + data.from + ']');
                 createChatBox(obj);
-                var img = $('#id_'+data.from).find('h2').find('.imgFriend').attr('src');
-                $('#id_'+data.from+' .msgTxt').append('<img src="'+img+'" class="nick"> '+ data.message+'<hr>');
-                $('#id_'+data.from).addClass('recive').removeClass('writing');
-                $('#id_'+data.from+' .logMsg').scrollTop($('#id_'+data.from+' .logMsg')[0].scrollHeight);
-                if ($('title').text().search('New message - ')==-1)
+                var img = $('#id_' + data.from).find('h2').find('.imgFriend').attr('src');
+                $('#id_' + data.from + ' .msgTxt').append('<img src="' + img + '" class="nick"> ' + data.message + '<hr>');
+                $('#id_' + data.from).addClass('recive').removeClass('writing');
+                $('#id_' + data.from + ' .logMsg').scrollTop($('#id_' + data.from + ' .logMsg')[0].scrollHeight);
+                if ($('title').text().search('New message - ') == -1)
                     $('title').prepend('New message - ');
-                    $.playSound('/gasaon/img/../sounds/new');
+                $.playSound('/gasaon/img/../sounds/new');
             }
-            if (presenceChannel.members.me.id == data.from){
+            if (presenceChannel.members.me.id == data.from) {
                 var myimg = $('li.account img').attr('src');
-                $('#id_'+data.to+' .msgTxt').append('<p class="you">'+ data.message+'  <img src="'+myimg+'" class="nick"></p><hr>');
-                $('#id_'+data.to+' .logMsg').scrollTop($('#id_'+data.to+' .logMsg')[0].scrollHeight);
+                $('#id_' + data.to + ' .msgTxt').append('<p class="you">' + data.message + '  <img src="' + myimg + '" class="nick"></p><hr>');
+                $('#id_' + data.to + ' .logMsg').scrollTop($('#id_' + data.to + ' .logMsg')[0].scrollHeight);
             }
+
         });
 
         /*-----------------------------------------------------------*
          * detect when a friend is typing a message
          *-----------------------------------------------------------*/
-        presenceChannel.bind('typing-event', function(data) {
-            if(presenceChannel.members.me.id == data.to && data.from != presenceChannel.members.me.id && data.message=='true' ){
-                $('#id_'+data.from).addClass('writing');
+        presenceChannel.bind('typing-event', function (data) {
+            if (presenceChannel.members.me.id == data.to && data.from != presenceChannel.members.me.id && data.message == 'true') {
+                $('#id_' + data.from).addClass('writing');
             }
-            else   if(presenceChannel.members.me.id == data.to && data.from != presenceChannel.members.me.id && data.message=='null' ){
-                $('#id_'+data.from).removeClass('writing');
+            else if (presenceChannel.members.me.id == data.to && data.from != presenceChannel.members.me.id && data.message == 'null') {
+                $('#id_' + data.from).removeClass('writing');
             }
         });
 
         // trigger whene user stop typing
-        $(document).on('focusout','.pusherChatBox textarea',function(){
-            if($(this).next().next().next().val()=='true'){
+        $(document).on('focusout', '.pusherChatBox textarea', function () {
+            if ($(this).next().next().next().val() == 'true') {
                 var from = $(this).parents('form');
                 $(this).next().next().next().val('null');
                 $.post(settings.serverPath, from.serialize());
@@ -141,13 +143,13 @@ $(document).ready(function (){
         /*-----------------------------------------------------------*
          * slide up & down friends list & chat boxes
          *-----------------------------------------------------------*/
-        $(document).on('click','#pusherChat #expand,.pusherChatBox .expand',function(){
+        $(document).on('click', '#pusherChat #expand,.pusherChatBox .expand', function () {
             var obj = $(this);
-            obj.parent().find('.scroll,.slider').slideToggle('1', function() {
-                if ($(this).is(':visible')){
+            obj.parent().find('.scroll,.slider').slideToggle('1', function () {
+                if ($(this).is(':visible')) {
                     obj.find('.close').show();
                     obj.find('.open').hide();
-                }else {
+                } else {
                     obj.find('.close').hide();
                     obj.find('.open').show();
                 }
@@ -156,25 +158,25 @@ $(document).ready(function (){
         });
 
         // close chat box
-        $(document).on('click','#pusherChat .closeBox',function(){
+        $(document).on('click', '#pusherChat .closeBox', function () {
             $(this).parents('.pusherChatBox').hide();
             updateBoxPosition();
             return false;
         });
 
         // trigger click on friend & create chat box
-        $(document).on('click','#pusherChat #members-list a',function(){
-            var obj=$(this);
+        $(document).on('click', '#pusherChat #members-list a', function () {
+            var obj = $(this);
             createChatBox(obj);
             return false;
         });
 
         // some action whene click on chat box
-        $(document).on('click','.pusherChatBox',function(){
+        $(document).on('click', '.pusherChatBox', function () {
             var newMessage = false;
             $(this).removeClass('recive');
-            $('.pusherChatBox').each(function(){
-                if ($(this).hasClass('recive')){
+            $('.pusherChatBox').each(function () {
+                if ($(this).hasClass('recive')) {
                     newMessage = true;
                     return false;
                 }
@@ -186,9 +188,10 @@ $(document).ready(function (){
         /*-----------------------------------------------------------*
          * memberUpdate() place & update friends list on client page
          *-----------------------------------------------------------*/
-        function memberUpdate(){
-            var offlineUser = onlineUser ='';
+        function memberUpdate() {
+            var offlineUser = onlineUser = '';
             var chatBoxOnline;
+            var countusser =0;
             $.ajax({
                 url: settings.friendsList,
                 type: 'POST',
@@ -200,6 +203,7 @@ $(document).ready(function (){
                             if (user) {
                                 onlineUser += '<a href="#' + user_id + '" class="nick on" ><img src="/gasaon/img/../files/user/picture/' + user_id + '/' + val[user_id][1] + '"/> <span>' + val[user_id][0] + '</span></a>';
                                 chatBoxOnline = 'on';
+                                countusser++;
                             } else {
                                 offlineUser += '<a href="#' + user_id + '" class="nick off"><img src="/gasaon/img/../files/user/picture/' + user_id + '/' + val[user_id][1] + '"/> <span>' + val[user_id][0] + '</span></a>';
                                 chatBoxOnline = 'off';
@@ -207,49 +211,51 @@ $(document).ready(function (){
                         }
                         $('#id_' + user_id).removeClass('off').removeClass('on').addClass(chatBoxOnline);
                     });
-                $('#pusherChat #members-list').append(onlineUser+offlineUser);
-            }
-        });
+                    $('#pusherChat #members-list').append(onlineUser + offlineUser);
+                    if (presenceChannel.members.count > 0) {
+                        $("#count").html(countusser);
+                    }
+                }
 
+            });
             $('#pusherChat #members-list').html('');
-            if(presenceChannel.members.count>0){
-                $("#count").html(presenceChannel.members.count - 1);
-            }
+
         }
+
 
         /*-----------------------------------------------------------*
          * create a chat box from the html template
          *-----------------------------------------------------------*/
-        function createChatBox(obj){
+        function createChatBox(obj) {
             var name = obj.find('span').html();
             var img = obj.find('img').attr('src');
             var id = obj.attr('href').replace('#', 'id_');
-            var off = clone ='';
-            if (obj.hasClass('off')) off='off';
+            var off = clone = '';
+            if (obj.hasClass('off')) off = 'off';
 
-            if (!$('#'+id).html()){
+            if (!$('#' + id).html()) {
                 $('#templateChatBox .pusherChatBox h2 .userName').html(name);
-                $('#templateChatBox .pusherChatBox h2 img').attr('src',img);
-                $('.chatBoxslide').prepend($('#templateChatBox .pusherChatBox').clone().attr('id',id));
+                $('#templateChatBox .pusherChatBox h2 img').attr('src', img);
+                $('.chatBoxslide').prepend($('#templateChatBox .pusherChatBox').clone().attr('id', id));
             }
-            else if (!$('#'+id).is(':visible') ){
-                clone = $('#'+id).clone();
-                $('#'+id).remove();
-                if(!$('.chatBoxslide .pusherChatBox:visible:first').html())
+            else if (!$('#' + id).is(':visible')) {
+                clone = $('#' + id).clone();
+                $('#' + id).remove();
+                if (!$('.chatBoxslide .pusherChatBox:visible:first').html())
                     $('.chatBoxslide').prepend(clone.show());
                 else
                     $(clone.show()).insertBefore('.chatBoxslide .pusherChatBox:visible:first');
             }
-            if (settings.profilePage){
-                $.getJSON(settings.friendsList, function(data) {
+            if (settings.profilePage) {
+                $.getJSON(settings.friendsList, function (data) {
                     var profileUrl = data[obj.attr('href').replace('#', '')][2];
-                    $('#'+id+' h2 a').attr('href',profileUrl);
+                    $('#' + id + ' h2 a').attr('href', profileUrl);
                 });
             }
-            $('#'+id+' textarea').focus();
-            $('#'+id+' .from').val(presenceChannel.members.me.id);
-            $('#'+id+' .to').val(obj.attr('href'));
-            $('#'+id).addClass(off);
+            $('#' + id + ' textarea').focus();
+            $('#' + id + ' .from').val(presenceChannel.members.me.id);
+            $('#' + id + ' .to').val(obj.attr('href'));
+            $('#' + id).addClass(off);
             updateBoxPosition();
             return false
         }
@@ -257,21 +263,21 @@ $(document).ready(function (){
         /*-----------------------------------------------------------*
          * reorganize the chat box position on adding or removing
          *-----------------------------------------------------------*/
-        function updateBoxPosition(){
-            var right=0;
+        function updateBoxPosition() {
+            var right = 0;
             var slideLeft = false;
-            $('.chatBoxslide .pusherChatBox:visible').each(function(){
+            $('.chatBoxslide .pusherChatBox:visible').each(function () {
                 $(this).css({
-                    'right':right
+                    'right': right
                 });
 
-                right += $(this).width()+20;
+                right += $(this).width() + 20;
 
                 $('.chatBoxslide').css({
-                    'width':right
+                    'width': right
                 });
 
-                if ($(this).offset().left- 20<0){
+                if ($(this).offset().left - 20 < 0) {
                     $(this).addClass('overFlow');
                     slideLeft = true;
                 }
@@ -280,21 +286,21 @@ $(document).ready(function (){
 
 
             });
-            if(slideLeft) $('#slideLeft').show();
+            if (slideLeft) $('#slideLeft').show();
             else $('#slideLeft').hide();
 
-            if($('.overFlowHide').html()) $('#slideRight').show();
+            if ($('.overFlowHide').html()) $('#slideRight').show();
             else $('#slideRight').hide();
         }
 
 
-        $(document).on('click','#slideLeft',function(){
+        $(document).on('click', '#slideLeft', function () {
             $('.chatBoxslide .pusherChatBox:visible:first').addClass('overFlowHide');
             $('.chatBoxslide .pusherChatBox.overFlow').removeClass('overFlow');
             updateBoxPosition();
         });
 
-        $(document).on('click','#slideRight',function(){
+        $(document).on('click', '#slideRight', function () {
             $('.chatBoxslide .pusherChatBox.overFlowHide:last').removeClass('overFlowHide');
             updateBoxPosition();
         });
@@ -302,15 +308,15 @@ $(document).ready(function (){
         /*-----------------------------------------------------------*
          * send message & typing event to server
          *-----------------------------------------------------------*/
-        $(document).on('keypress','.pusherChatBox textarea',function(event) {
+        $(document).on('keypress', '.pusherChatBox textarea', function (event) {
             var from = $(this).parents('form');
-            if ( event.which == 13 ) {
+            if (event.which == 13) {
                 $(this).next().next().next().val('false');
                 $.post(settings.serverPath, from.serialize());
                 event.preventDefault();
                 $(this).val('');
                 $(this).focus();
-            }else if (!$(this).val() || ($(this).next().next().next().val()=='null' && $(this).val())){
+            } else if (!$(this).val() || ($(this).next().next().next().val() == 'null' && $(this).val())) {
                 $(this).next().next().next().val('true');
                 $.post(settings.serverPath, from.serialize());
             }
@@ -321,20 +327,20 @@ $(document).ready(function (){
          * some css tricks
          *-----------------------------------------------------------*/
         $('#pusherChat .scroll').css({
-            'max-height':$(window).height()-50
+            'max-height': $(window).height() - 50
         })
 
         $('#pusherChat .chatBoxWrap').css({
-            'width':$(window).width() -  $('#membersContent').width()-30
+            'width': $(window).width() - $('#membersContent').width() - 30
         })
 
-        $(window).resize(function(){
+        $(window).resize(function () {
             $('#pusherChat .scroll').css({
-                'max-height':$(window).height()-50
+                'max-height': $(window).height() - 50
             });
 
             $('#pusherChat .chatBoxWrap').css({
-                'width':$(window).width() -  $('#membersContent').width() -30
+                'width': $(window).width() - $('#membersContent').width() - 30
             })
             updateBoxPosition();
         });

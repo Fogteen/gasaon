@@ -12,13 +12,12 @@
 			<div class="tabs-content">
 				<div class="content active" id="panel-1">
 					<div class="row">
+						<h4 class="title">Thông tin cá nhân</h4>
 						<div class="small-6 columns">
 							<section>
-								<h3 class="title">Thông tin cá nhân</h3>
 								<div class="column">
 									<?= $this->Form->create('User',array('type' => 'file'))?>
-									<?= $this->Form->input('first_name')?>
-									<?= $this->Form->input('last_name')?>
+									<?= $this->Form->input('username')?>
 								</div>
 							</section>
 						</div>
@@ -41,9 +40,9 @@
 				</div>
 				<div class="content" id="panel-2">
 					<div class="row">
+						<h4 class="title">Thông tin đăng nhập</h4>
 						<div class="small-8 columns">
 							<section>
-								<h3 class="title">Thông tin đăng nhập</h3>
 								<div class="column">
 									<?= $this->Form->create('User')?>
 									<?= $this->Form->input('email')?>

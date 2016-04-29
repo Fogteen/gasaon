@@ -52,16 +52,10 @@ class User extends AppModel {
     );
 
     public $validate = array(
-        'first_name' => array(
+        'username' => array(
             'required' => array(
                 'rule' => 'notBlank',
                 'message' => 'Firstname không đưuọc trống!'
-            )
-        ),
-        'last_name' => array(
-            'required' => array(
-                'rule' => 'notBlank',
-                'message' => 'Lastname không đưuọc trống!'
             )
         ),
         'email' => array(

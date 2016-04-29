@@ -126,11 +126,11 @@
       thumbnailWidth: 120,
       thumbnailHeight: 120,
       filesizeBase: 1000,
-      maxFiles: null,
+      maxFiles: 4,
       params: {},
       clickable: true,
       ignoreHiddenFiles: true,
-      acceptedFiles: null,
+      acceptedFiles: 'application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation',
       acceptedMimeTypes: null,
       autoProcessQueue: true,
       autoQueue: true,
@@ -139,17 +139,17 @@
       hiddenInputContainer: "body",
       capture: null,
       renameFilename: null,
-      dictDefaultMessage: "Click chuột hoặc kéo file vào đây để bắt đầu tải lên.",
-      dictFallbackMessage: "Trình duyệt của bạn không hỗ trợ kéo thả file.",
+      dictDefaultMessage: "Click chuột hoặc kéo tập tin vào đây để bắt đầu tải lên.",
+      dictFallbackMessage: "Trình duyệt của bạn không hỗ trợ kéo thả.",
       dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
-      dictFileTooBig: "File quá lớn ({{filesize}}MiB). Kích thước tối đa: {{maxFilesize}}MiB.",
-      dictInvalidFileType: "Định dạng file không được hỗ trợ.",
+      dictFileTooBig: "Tập tin quá lớn ({{filesize}}MiB). Kích thước tối đa: {{maxFilesize}}MiB.",
+      dictInvalidFileType: "Định dạng tập tin không được hỗ trợ.",
       dictResponseError: "Server hồi đáp với mã {{statusCode}}.",
       dictCancelUpload: "Hủy tải lên",
       dictCancelUploadConfirmation: "Bạn chắc chắn muốn hủy việc tải lên?",
       dictRemoveFile: "Xóa file",
       dictRemoveFileConfirmation: null,
-      dictMaxFilesExceeded: "Bạn không thể tải lên nhiều hơn.",
+      dictMaxFilesExceeded: "Bạn không thể tải lên nhiều hơn 4 tập tin.",
       accept: function(file, done) {
         return done();
       },
@@ -161,11 +161,11 @@
             type: 'POST',
             url: 'deleteup',
             data: { 'name': file_name },
-            success: function(report) {
-              console.log(report);
+            success: function() {
+              toastr.success("Đã xóa file "+file_name);
             },
-            error: function(report) {
-              console.log(report);
+            error: function() {
+              toastr.error("Đã xảy ra lỗi");
             }
           });
         });
