@@ -1,5 +1,5 @@
 <?php
-echo $this->Html->script(array('jquery.min','jquery.ui.min','bootstrap.min','plugins/moment.min','plugins/icheck.min','plugins/jquery.nicescroll','plugins/chart.min','plugins/jquery.validate.min','plugins/jquery.datatables.min','plugins/datatables.bootstrap.min','main' ));
+echo $this->Html->script(array('jquery.min','jquery.ui.min','bootstrap.min','plugins/moment.min','plugins/icheck.min','plugins/jquery.nicescroll','plugins/chart.min','plugins/jquery.validate.min','plugins/jquery.datatables.min','plugins/datatables.bootstrap.min','dropzone','main' ));
 ?>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!-- start: Javascript -->

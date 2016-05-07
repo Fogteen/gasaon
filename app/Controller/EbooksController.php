@@ -407,4 +407,21 @@ class EbooksController extends AppController
         );
         return;
     }
+
+    public function isAuthorized($user)
+    {
+        // Chỉ cho phép edit ebooks của chính mình
+        if (in_array($this->action, array('edit'))) {
+            $book = $this->Ebook->find('first',(int)$this->request->params['pass'][0]);
+            $userId = $book['Ebook']['user_id'];
+            if ($userId == $this->Auth->user('id')) {
+                return true;
+            } else {
+                $this->Flash->error(__('Bạn không có quyền truy cập'));
+                return $this->redirect(array('action' => 'index'));
+            }
+        }
+
+        return parent::isAuthorized($user);
+    }
 }

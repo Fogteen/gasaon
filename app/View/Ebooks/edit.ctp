@@ -1,6 +1,6 @@
-<div class="row collapse">
+<div class="row add">
     <div class="large-12 columns">
-        <h1><?php echo $ebook['Ebook']['title'] ?></h1>
+        <h2><?php echo $ebook['Ebook']['title'] ?></h2>
         <div class="row">
             <div class="small-4 large-2 columns">
                 <?php echo $this->Form->create('Ebook', array('type' => 'file')) ?>

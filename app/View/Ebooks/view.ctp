@@ -69,6 +69,7 @@
 
 </div>
 <div class="row comment">
+    <h3>Bình luận</h3>
     <div class="fb-comments" data-href="http://localhost/gasaon/ebooks/view/<?php echo $ebook['Ebook']['id']?>" data-width="700" data-numposts="5"></div>
 </div>
 <script>

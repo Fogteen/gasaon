@@ -194,24 +194,24 @@ class UsersController extends AppController
 
     public function edit($id = null)
     {
-
-        if (empty($this->User->findById($id))) {
+        $user = $this->User->findById($id);
+        if (empty($user)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
             return $this->redirect(array('action' => 'index'));
         }
         elseif ($this->request->is('post') || $this->request->is('put')) {
             $this->User->id = $id;
-            if($this->User->save($this->request->data))
-                $this->request->data['User']['picture']['remove'] = null;
             if ($this->User->save($this->request->data)) {
+                unlink(WWW_ROOT.'files/user/picture/'.$user['User']['picture_dir'].'/'.$user['User']['picture']);
+                unlink(WWW_ROOT.'files/user/picture/'.$user['User']['picture_dir'].'/thumb_'.$user['User']['picture']);
                 $this->Flash->success(__('Cập nhật thành công'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'listuser'));
             }
             $this->Flash->error(
                 __('Đã xảy ra lỗi')
             );
         } else {
-            $this->request->data = $this->User->findById($id);
+            $this->request->data = $user;
             unset($this->request->data['User']['password']);
             $this->set('user', $this->request->data);
         }
@@ -238,7 +238,6 @@ class UsersController extends AppController
 
     public function isAuthorized($user)
     {
-
         // Chỉ cho phép edit tài khoản của chính mình
         if (in_array($this->action, array('edit'))) {
             $userId = (int)$this->request->params['pass'][0];

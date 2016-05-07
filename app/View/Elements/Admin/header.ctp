@@ -71,8 +71,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="topnav.html">Thêm sách mới</a></li>
-                        <li><a href="boxed.html">Tất cả sách</a></li>
+                        <li><?php echo $this->Html->link('Thêm sách', array('action'=>'upload')) ?></li>
+                        <li><?php echo $this->Html->link('Tất cả sách', array('action'=>'listbook')) ?></li>
                     </ul>
                 </li>
                 <li class="ripple">
@@ -81,7 +81,7 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><?php echo $this->Html->link('Thêm thành viên', array('action'=>'add')) ?></li>
+                        <li><?php echo $this->Html->link('Thêm thành viên', array('action'=>'adduser')) ?></li>
                         <li><?php echo $this->Html->link('Danh sách thành viên', array('action'=>'listuser')) ?></li>
                     </ul>
                 </li>

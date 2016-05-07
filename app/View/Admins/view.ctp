@@ -1,44 +1,70 @@
-<div class="admins view">
-<h2><?php echo __('Admin'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($admin['Admin']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Username'); ?></dt>
-		<dd>
-			<?php echo h($admin['Admin']['username']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Password'); ?></dt>
-		<dd>
-			<?php echo h($admin['Admin']['password']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Image'); ?></dt>
-		<dd>
-			<?php echo h($admin['Admin']['image']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Created'); ?></dt>
-		<dd>
-			<?php echo h($admin['Admin']['created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Modified'); ?></dt>
-		<dd>
-			<?php echo h($admin['Admin']['modified']); ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Admin'), array('action' => 'edit', $admin['Admin']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Admin'), array('action' => 'delete', $admin['Admin']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $admin['Admin']['id']))); ?> </li>
-		<li><?php echo $this->Html->link(__('List Admins'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Admin'), array('action' => 'add')); ?> </li>
-	</ul>
+<!-- start: Content -->
+<div id="content">
+    <div class="panel box-shadow-none content-header">
+        <div class="panel-body">
+            <div class="col-md-12">
+                <h3 class="animated fadeInLeft">Quản lý thành viên</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 top-20 padding-0">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading"><h3>Thông tin thành viên</h3></div>
+                <div class="panel-body">
+                    <div class="admins view">
+                        <table>
+                            <tr>
+                                <td class="bg-info col-md-3" style="text-align: right;color: white"><?php echo __('Tên tài khoản'); ?></td>
+                                <td>
+                                    <?php echo h($admin['User']['username']); ?>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bg-info col-md-3" style="text-align: right;color: white"><?php echo __('Email'); ?></td>
+                                <td>
+                                    <?php echo h($admin['User']['email']); ?>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bg-info col-md-3" style="text-align: right;color: white"><?php echo __('Hình đại diện'); ?></td>
+                                <td>
+                                    <?php
+                                    if (strpos($admin['User']['picture'], "graph.facebook.com") !== false)
+                                        echo $this->Html->image('https://' . $admin['User']['picture']);
+                                    else
+                                        echo $this->Html->image('../files/user/picture/' . $admin['User']['picture_dir'] . '/thumb_' . $admin['User']['picture']);
+                                    ?>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bg-info col-md-3" style="text-align: right;color: white"><?php echo __('Loại tài khoản'); ?></td>
+                                <td>
+                                    <?php echo h($admin['User']['role']==1?'Admin':'User'); ?>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bg-info col-md-3" style="text-align: right;color: white"><?php echo __('Ngày tạo'); ?></td>
+                                <td>
+                                    <?php echo h($admin['User']['created']); ?>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bg-info col-md-3" style="text-align: right;color: white"><?php echo __('Chỉnh sửa lần cuối'); ?></td>
+                                <td>
+                                    <?php echo h($admin['User']['modified']); ?>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

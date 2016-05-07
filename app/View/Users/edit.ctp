@@ -18,6 +18,7 @@
 								<div class="column">
 									<?= $this->Form->create('User',array('type' => 'file'))?>
 									<?= $this->Form->input('username')?>
+									<?= $this->Form->input('email')?>
 								</div>
 							</section>
 						</div>
@@ -45,8 +46,8 @@
 							<section>
 								<div class="column">
 									<?= $this->Form->create('User')?>
-									<?= $this->Form->input('email')?>
 									<?= $this->Form->input('password')?>
+									<?= $this->Form->input('repassword', array('type'=>'password'))?>
 									<?= $this->Form->end('Save')?>
 								</div>
 							</section>

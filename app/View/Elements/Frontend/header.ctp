@@ -8,7 +8,7 @@
     <?php
     echo $this->Html->meta('icon');
 
-    echo $this->Html->css(array('normalize','cake','foundation.min', 'custom', 'dropzone', 'rateit', 'chat-style',));
+    echo $this->Html->css(array('normalize','cake','foundation.min','foundation-icons/foundation-icons', 'custom', 'dropzone', 'rateit', 'chat-style'));
 
     echo $this->Html->script(array('vendor/jquery', 'jquery.pusherchat', 'jquery.playSound', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.dropdown', 'foundation/foundation.tab', 'app', 'dropzone', 'pusher.min', 'rateit.min'));
 

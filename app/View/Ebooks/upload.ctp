@@ -14,7 +14,7 @@
             <input name="file" type="file" multiple=""/>
         </div>
         <?php
-        echo $this->Form->button('Submit', array('class' => 'success button'));
+        echo $this->Form->button('Xác nhận', array('class' => 'success button'));
         echo $this->Form->end();
         ?>
     </div>

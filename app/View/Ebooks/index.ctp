@@ -29,14 +29,41 @@
                     <h6>Mô tả: <?php echo $ebook['Ebook']['des'] ?></h6>
                 </div>
                 <div class="small-9 large-2 columns">
-                    <?php echo $this->Html->link('Edit', array('action' => 'edit', $ebook['Ebook']['id'])) ?>
-                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $ebook['Ebook']['id']), array('confirm' => __('Are you sure you want to delete?'))); ?>
+                    <?php echo $this->Html->link('', array('action' => 'edit', $ebook['Ebook']['id']), array('class'=>'button success tiny fi-wrench', 'title'=>'Chỉnh sửa')) ?>
+                    <?php echo $this->Form->postLink('', array('action' => 'delete', $ebook['Ebook']['id']), array('confirm' => __('Bạn chắc chắn muốn xóa?'), 'class'=> 'button alert tiny fi-trash', 'title'=>'Xóa')); ?>
                     <h6>
-                        <small> Publish about <?php echo $this->Time->timeAgoInWords(
+                        <?php $str_search = array (
+                            "hours",
+                            "days",
+                            "weeks",
+                            "months",
+                            "years",
+                            "hour",
+                            "day",
+                            "week",
+                            "month",
+                            "year",
+                            "ago",
+                        );
+                        $str_replace = array (
+                            "giờ",
+                            "ngày",
+                            "tuần",
+                            "tháng",
+                            "năm",
+                            "giờ",
+                            "ngày",
+                            "tuần",
+                            "tháng",
+                            "năm",
+                            "trước",
+                        );
+                        ?>
+                        <small> Tải lên từ <?php echo str_replace( $str_search, $str_replace,$this->Time->timeAgoInWords(
                                 $ebook['Ebook']['created'],
                                 array('format' => 'F jS, Y',
                                     'end' => '+1 year',
-                                    'accuracy' => array('minute' => 'minute'))) ?></small>
+                                    'accuracy' => array('minute' => 'minute')))) ?></small>
                     </h6>
                 </div>
             </div>

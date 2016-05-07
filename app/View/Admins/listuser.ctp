@@ -38,9 +38,9 @@
                                 </td>
                                 <td><?php echo $user['User']['role']==0? 'User' : 'Admin'; ?></td>
                                 <td>
-                                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
-                                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?>
-                                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $user['User']['id']))); ?>
+                                    <?php echo $this->Html->link('', array('action' => 'view', $user['User']['id']), array('class' => 'fa-eye fa btn btn-success','title' => 'Xem')); ?>
+                                    <?php echo $this->Html->link('', array('action' => 'edit', $user['User']['id']), array('class' => 'fa-pencil fa btn btn-info','title' => 'Chỉnh sửa')); ?>
+                                    <?php echo $this->Form->postLink('', array('action' => 'delete', $user['User']['id']), array('confirm' => __('Bạn chắc chắn muốn xóa người dùng #%s?', $user['User']['id']),'class' => 'fa-trash fa btn btn-danger', 'title' => 'Xóa')); ?>
                                 </td>
                             </tr>
                             <?php } ?>

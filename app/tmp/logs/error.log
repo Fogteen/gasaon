@@ -17171,3 +17171,431 @@ Stack Trace:
 #12 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
 #13 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #14 {main}
+2016-05-05 03:08:04 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-05 03:09:43 Error: [MissingActionException] Action AdminsController::view() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'view',
+)
+Request URL: /gasaon/admins/view/6
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 03:47:43 Error: [MissingActionException] Action AdminsController::edit() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'edit',
+)
+Request URL: /gasaon/admins/edit/7
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:02:37 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/user/picture/6/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-05 04:19:53 Error: [MissingActionException] Action AdminsController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'img',
+)
+Request URL: /gasaon/admins/img/avatar.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:22:06 Error: [MissingActionException] Action AdminsController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'img',
+)
+Request URL: /gasaon/admins/img/avatar.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:22:18 Error: [MissingActionException] Action AdminsController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'img',
+)
+Request URL: /gasaon/admins/img/avatar.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:22:31 Error: [MissingActionException] Action AdminsController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'img',
+)
+Request URL: /gasaon/admins/img/avatar.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:22:42 Error: [MissingActionException] Action AdminsController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'img',
+)
+Request URL: /gasaon/admins/img/avatar.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:24:04 Error: [MissingActionException] Action AdminsController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'img',
+)
+Request URL: /gasaon/admins/img/avatar.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:25:34 Error: [MissingActionException] Action AdminsController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'img',
+)
+Request URL: /gasaon/admins/img/avatar.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:25:54 Error: Model User, Field picture: Unable to move the uploaded file to D:\xampp\htdocs\gasaon\app\webroot\files\user\picture\6\alone_boy.jpg
+2016-05-05 04:25:55 Error: [UploadException] Unable to upload file
+Request URL: /gasaon/admins/edit/6
+Stack Trace:
+#0 [internal function]: UploadBehavior->afterSave(Object(User), false, Array)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Utility\ObjectCollection.php(128): call_user_func_array(Array, Array)
+#2 [internal function]: ObjectCollection->trigger(Object(CakeEvent))
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Event\CakeEventManager.php(243): call_user_func(Array, Object(CakeEvent))
+#4 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(1961): CakeEventManager->dispatch(Object(CakeEvent))
+#5 D:\xampp\htdocs\gasaon\lib\Cake\Model\Model.php(1751): Model->_doSave(Array, Array)
+#6 D:\xampp\htdocs\gasaon\app\Controller\AdminsController.php(105): Model->save(Array)
+#7 [internal function]: AdminsController->edit('6')
+#8 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(491): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#9 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#10 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#11 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2016-05-05 04:26:45 Error: [MissingActionException] Action AdminsController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'img',
+)
+Request URL: /gasaon/admins/img/avatar.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:30:42 Error: [MissingActionException] Action AdminsController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'img',
+)
+Request URL: /gasaon/admins/img/avatar.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:41:12 Error: [MissingActionException] Action AdminsController::boxed.html() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'boxed.html',
+)
+Request URL: /gasaon/admins/boxed.html
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:42:36 Error: [MissingActionException] Action AdminsController::boxed.html() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'boxed.html',
+)
+Request URL: /gasaon/admins/boxed.html
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:51:52 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/7/thumbthumb_36-90-1-PB.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-05 04:51:52 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/7/thumbthumb_4_TranHoangMinh_11T1.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+
+2016-05-05 04:51:52 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/2/thumbthumb_GtrinhOOP.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-05 04:51:52 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/2/thumbthumb_36-90-1-PB.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-05 04:51:52 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/2/thumbthumb_itf.png
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-05 04:54:23 Error: [MissingActionException] Action AdminsController::addbook() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'addbook',
+)
+Request URL: /gasaon/admins/addbook
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 04:56:08 Error: [MissingControllerException] Controller class EbookController could not be found.
+Exception Attributes: array (
+  'class' => 'EbookController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/ebook/upload
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-05 04:57:48 Error: [MissingActionException] Action AdminsController::upload() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'upload',
+)
+Request URL: /gasaon/admins/upload
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 05:00:21 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 05:01:05 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 05:02:42 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 05:04:21 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 05:04:30 Error: [MissingViewException] View file "Admins\addbook.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Admins\\addbook.ctp',
+)
+Request URL: /gasaon/admins/addbook
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(470): View->_getViewFileName(NULL)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2016-05-05 05:04:43 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 05:14:37 Error: [MissingActionException] Action AdminsController::add() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'add',
+)
+Request URL: /gasaon/admins/add
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 05:15:07 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 05:32:29 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 05:51:59 Error: [NotFoundException] Invalid user
+Request URL: /gasaon/admins/deletebook/126
+Stack Trace:
+#0 [internal function]: AdminsController->deletebook('126')
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(491): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2016-05-05 05:58:44 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-05 06:06:37 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-07 03:16:58 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-07 03:17:45 Error: [MissingActionException] Action AdminsController::check() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'check',
+)
+Request URL: /gasaon/admins/check
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-07 04:30:32 Error: Fatal Error (4): syntax error, unexpected ')' in [D:\xampp\htdocs\gasaon\app\View\Ebooks\index.ctp, line 38]
+2016-05-07 04:30:32 Error: [FatalErrorException] syntax error, unexpected ')'
+Request URL: /gasaon/ebooks
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Error\ErrorHandler.php(213): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 38)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 38, Array)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Core\App.php(970): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 38, Array)
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Core\App.php(943): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2016-05-07 04:30:36 Error: Fatal Error (4): syntax error, unexpected ')' in [D:\xampp\htdocs\gasaon\app\View\Ebooks\index.ctp, line 38]
+2016-05-07 04:30:36 Error: [FatalErrorException] syntax error, unexpected ')'
+Request URL: /gasaon/ebooks
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Error\ErrorHandler.php(213): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 38)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 38, Array)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Core\App.php(970): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'D:\\xampp\\htdocs...', 38, Array)
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Core\App.php(943): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}

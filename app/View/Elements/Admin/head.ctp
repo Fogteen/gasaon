@@ -7,7 +7,7 @@
         <?php echo $this->fetch('title'); ?>
     </title>
     <?php
-    echo $this->Html->css(array('bootstrap.min','plugins/font-awesome.min','plugins/simple-line-icons','plugins/animate.min','plugins/icheck/skins/flat/aero','plugins/datatables.bootstrap.min.css','style'));
+    echo $this->Html->css(array('bootstrap.min','plugins/font-awesome.min','plugins/simple-line-icons','plugins/animate.min','plugins/icheck/skins/flat/aero','plugins/datatables.bootstrap.min.css','dropzone','style'));
 
 ?>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">

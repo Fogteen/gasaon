@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row add">
     <div class="large-12 columns">
         <?php
         $ebook = $this->Session->read('data');

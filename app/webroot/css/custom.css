@@ -21,6 +21,13 @@ div.des{
     margin-top: 80px;
 }
 
+div.add {
+    width: 100%;
+    background-color: #a0d3e8;
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
 div.upload {
     margin: 50px auto;
 
@@ -139,8 +146,12 @@ ul, ol, dl {
 
 div.row.view {
     background-color: lightblue;
+    margin-top: 80px;
 }
 
+div.row.comment {
+    margin-top: 20px;
+}
 
 .footer {
     background-color: #292c2f;
