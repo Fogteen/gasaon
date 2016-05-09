@@ -51,7 +51,7 @@
                         </li>
                     </ul>
                     <ul class="right">
-                        <li><?= $this->Html->link(__('Upload'), array('controller' => 'ebooks', 'action' => 'upload'),array('class' => 'upload')) ?></li>
+                        <li><?= $this->Html->link(__(' Tải lên'), array('controller' => 'ebooks', 'action' => 'upload'),array('class' => 'upload button fi-upload')) ?></li>
                         <li class="account"><a data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">
                                 <?php
                                 if (strpos($account['User']['picture'], "graph.facebook.com") !== false)
@@ -63,13 +63,13 @@
                         </li>
                     </ul>
                     <ul id="drop1" class="tiny f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
-                        <li><?= $this->Html->link(__('Nofication(' . count($nofi) . ')'), array('controller' => 'users', 'action' => 'nofi'), array('data-reveal-id' => 'nofication', 'id' => 'nofi')) ?></li>
+                        <li><?= $this->Html->link(__('Thông báo(' . count($nofi) . ')'), array('controller' => 'users', 'action' => 'nofi'), array('data-reveal-id' => 'nofication', 'id' => 'nofi')) ?></li>
                         <br>
-                        <li><?= $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'edit', $account['User']['id'])) ?></li>
+                        <li><?= $this->Html->link(__('Tài khoản'), array('controller' => 'users', 'action' => 'edit', $account['User']['id'])) ?></li>
                         <br>
-                        <li><?= $this->Html->link(__('Store'), array('controller' => 'ebooks', 'action' => 'index')) ?></li>
+                        <li><?= $this->Html->link(__('Kho sách'), array('controller' => 'ebooks', 'action' => 'index')) ?></li>
                         <br>
-                        <li><?= $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout')) ?></li>
+                        <li><?= $this->Html->link(__('Đăng xuất'), array('controller' => 'users', 'action' => 'logout')) ?></li>
                     </ul>
                 </section>
             </nav>

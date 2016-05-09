@@ -4,6 +4,7 @@ html {
 body {
     width: 100%;
 }
+
 div#container {
     width: 100%;
 
@@ -58,12 +59,12 @@ div.upload {
 
 .top-bar-section ul li, .top-bar-section li:not(.has-form) a:not(.button){
     background: none;
-
+    text-decoration: none;
 }
 
 .top-bar-section li:not(.has-form) a:hover:not(.button){
     background: none;
-    text-decoration: underline;
+    text-decoration: none;
     color: #1a1a1a;
 
 }
@@ -153,6 +154,10 @@ div.row.comment {
     margin-top: 20px;
 }
 
+div.row.results {
+    margin-top: 40px;
+}
+
 .footer {
     background-color: #292c2f;
     text-align: center;
@@ -194,6 +199,7 @@ ul.f-dropdown li {
 /*Header edit*/
 .header {
     text-align: center;
+    margin-top: 40px;
     background: url("https://static.pexels.com/photos/6894/summer-photographer-pier-adventure-large.jpg") no-repeat center center;
     background-size: cover;
     padding: 4rem; }
@@ -342,6 +348,14 @@ li.tab-title.active {
     max-height: 150px;
     margin-left: 15px;
 }
+
+img.card {
+    border-radius: 10%;
+    border: 1px solid #69708C;
+    width: 150px;
+    height: 150px;
+}
+
 .profile-card .button-group {
     width: 101%;
 }
@@ -424,8 +438,16 @@ nav .button:active {
     background: #e78129;
 }
 
+ul.ebview {
+    text-align: center;
+    color: #0a86e9;
+}
 ul.ebview li:hover {
     opacity: 0.7;
+}
+
+div.row.item img {
+    border: 1px solid #69708C;
 }
 
 div.row.item:hover {

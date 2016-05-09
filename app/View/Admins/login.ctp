@@ -29,7 +29,7 @@
                 </label>
                 <?php
                 $options = array(
-                    'label' => 'Sign In',
+                    'label' => 'Đăng nhập',
                     'div' => false,
                     'class' => 'btn col-md-12'
                 );

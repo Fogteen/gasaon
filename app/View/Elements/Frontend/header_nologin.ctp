@@ -8,7 +8,8 @@
     <?php
     echo $this->Html->meta('icon');
 
-    echo $this->Html->css(array('normalize', 'foundation.min', 'custom', 'form'));
+    echo $this->Html->css(array('normalize', 'foundation.min', 'custom', 'form','rateit'));
+    echo $this->Html->script(array('vendor/jquery.min', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal','rateit.min','app'));
 
     echo $this->fetch('meta');
     echo $this->fetch('css');
@@ -69,7 +70,7 @@
                                 </div>
 
                                 <div class="field-wrap">
-                                    <?php echo $this->Form->input('password') ?>
+                                    <?php echo $this->Form->input('password', array('label'=>'Mật khẩu')) ?>
                                 </div>
 
                                 <p class="forgot"><a href="#">Quên mật khẩu?</a></p>
@@ -87,7 +88,7 @@
 
 
                                 <div class="field-wrap">
-                                    <?php echo $this->Form->input('username') ?>
+                                    <?php echo $this->Form->input('username',array('label'=>'Tên tài khoản')) ?>
                                 </div>
 
                                 <div class="field-wrap">
@@ -95,7 +96,7 @@
                                 </div>
 
                                 <div class="field-wrap">
-                                    <?php echo $this->Form->input('password') ?>
+                                    <?php echo $this->Form->input('password',array('label'=>'Mật khẩu')) ?>
                                 </div>
                                 <button type="submit" class="button button-block"/>
                                 Đăng ký</button>

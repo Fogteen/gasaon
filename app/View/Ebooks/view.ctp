@@ -20,7 +20,7 @@
                 echo $this->webroot . 'files/' . $ebook['Ebook']['user_id'] . '/' . pathinfo($ebook['Ebook']['file'], PATHINFO_FILENAME) . '.pdf' ?>"
             type="application/pdf" width="100%" height="800px">
 
-            <p>It appears you don't have a PDF plugin for this browser.</p>
+            <p>Trình duyệt của bạn không hỗ trợ xem tập tin PDF.</p>
 
         </object>
     </div>
@@ -31,37 +31,37 @@
                     $ebook['Ebook']['created']) . " by " .
                 $this->Html->link($ebook['User']['username'], array('controller' => 'users', 'action' => 'view', $ebook['Ebook']['user_id'])) ?></span>
         <hr>
+        <h5>Đánh giá:(<?php echo count($allrate)?> lượt)</h5>
         <input type="range" value="<?php echo $ebook['Ebook']['rating']?>" step="1" id="backing">
         <div class="rateit" data-rateit-backingfld="#backing" data-rateit-resetable="false"  data-rateit-ispreset="true"
              data-rateit-min="0" data-rateit-max="10">
-        </div>(<?php echo count($allrate)?> lượt)
+        </div>
         <hr>
-        <span> Views: xxx</span>
-        <hr>
+        <h5>Chia sẻ</h5>
         <div class="fb-share-button" data-href="<?php echo $ebook['Ebook']['id']?>" data-layout="button_count"></div>
         <hr>
-        <h5> Description</h5>
+        <h5> Mô tả</h5>
         <span><?php echo $ebook['Ebook']['des'] ?></span><br>
-        <span> Categories: <?php echo $ebook['Category']['name'] ?></span><br>
-        <span> Author: <?php echo $ebook['Ebook']['author'] ?></span><br>
+        <span> Thể loại: <?php echo $ebook['Category']['name'] ?></span><br>
+        <span> Tác giả: <?php echo $ebook['Ebook']['author'] ?></span><br>
         <hr>
         <?php
         if (empty($account)) {
         }
         elseif ($ebook['Ebook']['user_id'] !== $account['User']['id']){
             if (empty($request))
-                echo $this->Form->button("Request", array('id' => 'btnrequest'));
+                echo $this->Form->button(" Gửi yêu cầu", array('id' => 'btnrequest', 'class'=>'fi-mail'));
             elseif ($request['Request']['status'] != 3)
-                echo $this->Form->button("Requesting", array('type' => 'disable'));
+                echo $this->Form->button(" Đã gửi yêu cầu", array('type' => 'disable', 'class'=>'alert fi-info'));
             else {
                 echo $this->Form->create("", array('url' => array('action' => 'download', base64_encode($ebook['Ebook']['id']))));
-                echo $this->Form->button("Download");
+                echo $this->Form->button(" Tải xuống", array('class'=>'success fi-download'));
                 echo $this->Form->end();
             }
         }
         else {
             echo $this->Form->create("", array('url' => array('action' => 'download', base64_encode($ebook['Ebook']['id']))));
-            echo $this->Form->button("Download");
+            echo $this->Form->button(" Tải xuống", array('class'=>'success fi-download'));
             echo $this->Form->end();
         }
         ?>
@@ -81,8 +81,8 @@
                 cache: false,
                 data: {ebook_id:<?php echo $ebook['Ebook']['id']?>, user_id:<?php echo $account['User']['id']?>},
                 success: function (string) {
-                    toastr.success("Đã gửi yêu cầu!")
-                    $('#btnrequest').html('Requesting');
+                    toastr.success("Đã gửi yêu cầu!");
+                    $('#btnrequest').html(' Requesting');
                 },
                 error: function () {
                     alert('Có lỗi xảy ra');

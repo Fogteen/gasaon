@@ -65,7 +65,7 @@ class UsersController extends AppController
             if ($this->Auth->login()) {
                 return $this->redirect(array('controller' => 'homes'));
             }
-            $this->Flash->error(__('Username hoặc password không đúng'));
+            $this->Flash->error(__('Tài khoản hoặc mật khẩu không đúng'));
         }
     }
 
@@ -153,11 +153,12 @@ class UsersController extends AppController
 
     public function view($id = null)
     {
-        if (empty($this->User->findById($id))) {
+        $user = $this->User->findById($id);
+        if (empty($user)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
             return $this->redirect(array('action' => 'index'));
         } else {
-            $this->set('user', $this->User->findById($id));
+            $this->set('user', $user);
             $this->set('friend', $this->User->Friend1->find('all',array(
                 'conditions' => array(
                     'OR' => array(

@@ -9,7 +9,7 @@
                 <?php echo $this->Form->text('ebsearch'); ?>
             </div>
             <div class="small-12 large-4 columns">
-                <?php echo $this->Form->button('Tìm kiếm', array('class' => 'primary', 'type' => 'submit')) ?>
+                <?php echo $this->Form->button('Tìm kiếm', array('class' => 'tiny primary', 'type' => 'submit')) ?>
             </div>
             <?php echo $this->Form->end() ?>
         </div>
@@ -71,12 +71,6 @@
         <?php } ?>
     </div>
 </div>
-<p>
-    <?php
-    echo $this->Paginator->counter(array(
-        'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-    ));
-    ?>    </p>
 <div class="paging">
     <?php
     echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));

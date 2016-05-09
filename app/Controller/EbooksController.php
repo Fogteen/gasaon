@@ -412,7 +412,7 @@ class EbooksController extends AppController
     {
         // Chỉ cho phép edit ebooks của chính mình
         if (in_array($this->action, array('edit'))) {
-            $book = $this->Ebook->find('first',(int)$this->request->params['pass'][0]);
+            $book = $this->Ebook->findById((int)$this->request->params['pass'][0]);
             $userId = $book['Ebook']['user_id'];
             if ($userId == $this->Auth->user('id')) {
                 return true;

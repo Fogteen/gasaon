@@ -16,8 +16,6 @@
     </footer>
 </div>
 </div>
-<?php echo $this->Html->script(array('vendor/jquery.min', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'app')); ?>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
     $(document).foundation();
 </script>

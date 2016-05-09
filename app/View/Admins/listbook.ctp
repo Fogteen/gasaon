@@ -17,7 +17,6 @@
                             <thead>
                             <tr>
                                 <th>Tiêu đề</th>
-                                <th>Mô tả</th>
                                 <th>Hình bìa</th>
                                 <th>Tác giả</th>
                                 <th>Thể loại</th>
@@ -29,7 +28,6 @@
                             <?php foreach ($ls as $ebook){ ?>
                                 <tr>
                                     <td><?php echo $ebook['Ebook']['title'] ?></td>
-                                    <td><?php echo $ebook['Ebook']['des'] ?></td>
                                     <td>
                                         <?php echo $this->Html->image('../files/' . $ebook['Ebook']['user_id'] . '/' . $ebook['Ebook']['picture']) ?>
                                     </td>

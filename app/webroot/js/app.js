@@ -1,6 +1,7 @@
 /**
  * Created by hoang on 16/03/2016.
  */
+$(document).ready(function(){
 $('.form').find('input, textarea').on('keyup blur focus', function (e) {
 
     var $this = $(this),
@@ -43,4 +44,5 @@ $('.tab a').on('click', function (e) {
 
     $(target).fadeIn(600);
 
+});
 });

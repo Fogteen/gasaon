@@ -37,7 +37,9 @@ class AppController extends Controller {
     public $components = array(
         'Flash',
         'Session',
-        'Auth'
+        'Auth' => array(
+            'authorize' => array('Controller')
+        )
     );
 
     public function isAuthorized($user) {

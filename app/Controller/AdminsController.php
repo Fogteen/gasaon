@@ -344,4 +344,28 @@ class AdminsController extends AppController {
             return false;
         }
     }
+
+    //Kiểm tra thư mục tạm có file hay không
+    public function check()
+    {
+        $this->layout = false;
+        $this->autoRender = false;
+        $ds = DIRECTORY_SEPARATOR;  //1
+        $storeFolder = 'Ebook/' . $this->Auth->user('id');   //2
+        if (!file_exists($storeFolder)) mkdir(WWW_ROOT . $storeFolder);
+        $result  = array();
+
+        $files = scandir($storeFolder);                 //1
+        if ( false!==$files ) {
+            foreach ( $files as $file ) {
+                if ( '.'!=$file && '..'!=$file) {       //2
+                    $obj['name'] = $file;
+                    $obj['size'] = filesize($storeFolder.$ds.$file);
+                    $obj['id'] = $this->Auth->user('id');
+                    $result[] = $obj;
+                }
+            }
+        }
+        return new CakeResponse(array('body' => json_encode($result),'type'=>'json'));
+    }
 }
