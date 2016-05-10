@@ -37,21 +37,37 @@
                 </ul>
                 <section class="top-bar-section">
                     <ul class="left">
+                        <li class="has-dropdown">
+                            <a href="#">THỂ LOẠI</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Khoa Học</a></li>
+                                <li class=""><a href="#">Công Nghệ Thông Tin</a></li>
+                                <li><a href="#">Kinh Tế</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">THỂ LOẠI</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Khoa Học</a></li>
+                                <li class=""><a href="#">Công Nghệ Thông Tin</a></li>
+                                <li><a href="#">Kinh Tế</a></li>
+                            </ul>
+                        </li>
                         <li class="has-form">
                             <form>
                                 <div class="row collapse">
-                                    <div class="small-7 columns">
-                                        <input type="text">
+                                    <div class="small-9 columns">
+                                        <input type="text" style="height: 32px">
                                     </div>
-                                    <div class="small-5 columns">
-                                        <a href="#" class="alert button">Tìm kiếm</a>
+                                    <div class="small-3 columns">
+                                        <a href="#" class="alert button fi-magnifying-glass"></a>
                                     </div>
                                 </div>
                             </form>
                         </li>
                     </ul>
                     <ul class="right">
-                        <li><?= $this->Html->link(__(' Tải lên'), array('controller' => 'ebooks', 'action' => 'upload'),array('class' => 'upload button fi-upload')) ?></li>
+                        <li><?= $this->Html->link(__(' Tải lên'), array('controller' => 'ebooks', 'action' => 'upload'),array('class' => 'upload button success fi-upload')) ?></li>
                         <li class="account"><a data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">
                                 <?php
                                 if (strpos($account['User']['picture'], "graph.facebook.com") !== false)
@@ -73,6 +89,12 @@
                     </ul>
                 </section>
             </nav>
+            <ul class="breadcrumbs">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li class="unavailable"><a href="#">Gene Splicing</a></li>
+                <li class="current"><a href="#">Cloning</a></li>
+            </ul>
         </div>
         <div id="nofication" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true"
              role="dialog">
@@ -81,5 +103,6 @@
             <!-- /form -->
             <a class="close-reveal-modal" aria-label="Close">&#215;</a>
         </div>
+
     </div>
     <div id="content">

@@ -33,11 +33,15 @@ div.upload {
     margin: 50px auto;
 
 }
+div.row.full {
+    max-width: inherit;
+}
 .jumbo{
-    background-image: url(../img/jumbo_bg.jpg);
+    background-image: url(../img/home1.jpg);
     background-size: cover;
     background-attachment: fixed;
     padding: 175px 0;
+    max-height: 500px;
 }
 
 .jumbo h1{
@@ -71,6 +75,13 @@ div.upload {
 
 .top-bar-section ul li > a{
     color: #1a1a1a;
+}
+.top-bar-section .has-dropdown > a:after {
+    border-style: none;
+}
+
+.top-bar-section .left {
+    margin-left: 40px;
 }
 
 .active{

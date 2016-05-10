@@ -33,6 +33,15 @@
             </div>
         </div>
         <?php } ?>
-        <?php echo $this->Form->end('Save') ?>
+        <?php
+        $option1 = array(
+            'label'=>'Lưu thông tin',
+            'div'=> false,
+            'class' => 'button success',
+            'style' => 'float:right'
+        );
+        echo $this->Form->button('Đặt lại', array('type'=>'reset','style' => 'float:right;margin-left:5px'));
+        echo $this->Form->end($option1);
+         ?>
     </div>
 </div>

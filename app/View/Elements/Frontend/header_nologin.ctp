@@ -33,6 +33,22 @@
                 </ul>
                 <section class="top-bar-section">
                     <ul class="left">
+                        <li class="has-dropdown">
+                            <a href="#">THỂ LOẠI</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Khoa Học</a></li>
+                                <li class=""><a href="#">Công Nghệ Thông Tin</a></li>
+                                <li><a href="#">Kinh Tế</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">THỂ LOẠI</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Khoa Học</a></li>
+                                <li class=""><a href="#">Công Nghệ Thông Tin</a></li>
+                                <li><a href="#">Kinh Tế</a></li>
+                            </ul>
+                        </li>
                         <li class="has-form">
                             <form>
                                 <div class="row collapse">
@@ -40,14 +56,14 @@
                                         <input type="text">
                                     </div>
                                     <div class="small-5 columns">
-                                        <a href="#" class="alert button">Tìm kiếm</a>
+                                        <a href="#" class="alert button fi-page-search">Tìm kiếm</a>
                                     </div>
                                 </div>
                             </form>
                         </li>
                     </ul>
                     <ul class="right">
-                        <li><a href="#" data-reveal-id="login">Đăng nhập</a></li>
+                        <li><a href="#" class="button success" data-reveal-id="login">Đăng nhập</a></li>
                     </ul>
                 </section>
                 <div id="login" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true"
@@ -113,6 +129,13 @@
                     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                 </div>
             </nav>
-
+            <ul class="breadcrumbs">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li class="unavailable"><a href="#">Gene Splicing</a></li>
+                <li class="current"><a href="#">Cloning</a></li>
+            </ul>
         </div>
+
     </div>
+    <div id="content">

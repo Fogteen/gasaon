@@ -1,3 +1,4 @@
+</div>
 <div id="footer">
     <footer class="footer">
         <div class="row">
@@ -18,6 +19,12 @@
 </div>
 <script>
     $(document).foundation();
+    $(document).ready(function(){
+        $('#res').click(function(){
+            $('#login').foundation('reveal', 'open');
+            $('.tab a').click();
+        })
+    });
 </script>
 </body>
 </html>
