@@ -28,6 +28,7 @@ use Facebook\GraphSessionInfo;
 
 class UsersController extends AppController
 {
+    public $uses = array('User', "Message");
 
     public $components = array(
         'Auth' => array(
@@ -268,6 +269,15 @@ class UsersController extends AppController
         return new CakeResponse(array('body' => json_encode($data),'type'=>'json'));
     }
 
+    public function nofidel() {
+        $this->autoRender = false;
+        $this->layout = false;
+        $id = $this->request->data['id'];
+        if ($id != 0)
+            $this->User->Nofication->delete($id);
+        return;
+    }
+
     public function nofiup() {
         $this->autoRender = false;
         $this->layout = false;
@@ -422,8 +432,13 @@ class UsersController extends AppController
         $this->layout = false;
         $this->autoRender = false;
         $pusher = new Pusher(APP_KEY, APP_SECRET, APP_ID);
-        if ($_POST['typing'] == "false"){
+        if ($_POST['typing'] == "false" && $_POST['msg'] != ''){
             $pusher->trigger('presence-mychanel', 'send-event', array('message' => htmlspecialchars ( $_POST['msg']), 'from' => $_POST['from'], 'to' => str_replace('#', '', $_POST['to'])));
+            $this->Message->create();
+            $mess['to'] = str_replace('#', '', $_POST['to']);
+            $mess['from'] = $_POST['from'];
+            $mess['message'] = htmlspecialchars ( $_POST['msg']);
+            $this->Message->save($mess);
         }
         else if ($_POST['typing'] == "true")
             $pusher->trigger('presence-mychanel', 'typing-event', array('message' => $_POST['typing'], 'from' => $_POST['from'], 'to' => str_replace('#', '', $_POST['to'])));
@@ -431,5 +446,26 @@ class UsersController extends AppController
             $pusher->trigger('presence-mychanel', 'typing-event', array('message' => 'null', 'from' => $_POST['from'], 'to' => str_replace('#', '', $_POST['to'])));
         }
     }
+
+    public function getmess() {
+        $this->layout = false;
+        $this->autoRender = false;
+        $from = $this->request->data['from'];
+        $to = $this->request->data['to'];
+        $data = $this->Message->find('all', array(
+            'OR' => array(
+                array(
+                    'Message.to' => $to,
+                    'Message.from' => $from
+                ),
+                array(
+                    'Message.from' => $to,
+                    'Message.to' => $from
+                )
+            )
+        ));
+        return new CakeResponse(array('body' => json_encode($data),'type'=>'json'));
+    }
+
 }
 

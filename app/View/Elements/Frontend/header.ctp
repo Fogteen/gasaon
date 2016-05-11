@@ -89,13 +89,13 @@
                     </ul>
                 </section>
             </nav>
-            <ul class="breadcrumbs">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li class="unavailable"><a href="#">Gene Splicing</a></li>
-                <li class="current"><a href="#">Cloning</a></li>
-            </ul>
         </div>
+        <ul class="breadcrumbs">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li class="unavailable"><a href="#">Gene Splicing</a></li>
+            <li class="current"><a href="#">Cloning</a></li>
+        </ul>
         <div id="nofication" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true"
              role="dialog">
             <div class="form">

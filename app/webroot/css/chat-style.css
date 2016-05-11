@@ -36,8 +36,8 @@
 #pusherChat .pusherChatBox .state{position: absolute; left: 26px ; top :3px;z-index: 101}
 #pusherChat .pusherChatBox .state .quote,#pusherChat .pusherChatBox .state .pencil{display: none}
 #pusherChat .pusherChatBox .msgTxt{padding: 0 1px;font-size: 12px;line-height: normal}
-#pusherChat .pusherChatBox .msgTxt p{padding: 0;margin: 0;border-bottom: 1px solid #eee;float: right;}
-#pusherChat .pusherChatBox .msgTxt p.you{ font-size: 12px;color:#00B4FF;}
+#pusherChat .pusherChatBox .msgTxt p{padding: 0;margin: 0;border-bottom: 1px solid #eee;font-size: 13px;}
+#pusherChat .pusherChatBox .msgTxt p.you{ color:#00B4FF;float: right;}
 #pusherChat .pusherChatBox .msgTxt p.friend b{ color:#000}
 #pusherChat .pusherChatBox .msgTxt img.nick{ width: 25px}
 #pusherChat .pusherChatBox.off{background-color: #ccc;}

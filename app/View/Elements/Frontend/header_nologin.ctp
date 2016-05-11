@@ -129,13 +129,12 @@
                     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                 </div>
             </nav>
-            <ul class="breadcrumbs">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li class="unavailable"><a href="#">Gene Splicing</a></li>
-                <li class="current"><a href="#">Cloning</a></li>
-            </ul>
         </div>
-
+        <ul class="breadcrumbs">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li class="unavailable"><a href="#">Gene Splicing</a></li>
+            <li class="current"><a href="#">Cloning</a></li>
+        </ul>
     </div>
     <div id="content">

@@ -3,6 +3,9 @@ html {
 }
 body {
     width: 100%;
+    background-image: url(../img/bgfull1.jpg);
+    background-size: cover;
+
 }
 
 div#container {

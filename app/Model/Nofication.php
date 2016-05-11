@@ -23,6 +23,10 @@ class Nofication extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+        'Ebook' => array(
+            'className' => 'Ebook',
+            'foreignKey' => 'ebook_id'
         )
     );
 }

@@ -35,7 +35,7 @@ class User extends AppModel {
         'Friend2' => array(
             'className' => 'Friend',
             'foreignKey' => 'user_two_id'
-        ),
+        )
     );
 
     public $actsAs = array(

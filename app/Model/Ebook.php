@@ -25,7 +25,11 @@ class Ebook extends AppModel {
         ),
         'Rating' => array(
             'className' => 'Rating',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'ebook_id'
+        ),
+        'Nofication' => array(
+            'className' => 'Nofication',
+            'foreignKey' => 'ebook_id'
         )
     );
 

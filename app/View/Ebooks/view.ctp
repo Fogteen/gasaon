@@ -44,6 +44,8 @@
         <span><?php echo $ebook['Ebook']['des'] ?></span><br>
         <span> Thể loại: <?php echo $ebook['Category']['name'] ?></span><br>
         <span> Tác giả: <?php echo $ebook['Ebook']['author'] ?></span><br>
+        <span> Lượt xem: <?php echo $view ?></span><br>
+        <span> Lượt tải: <?php echo $down ?></span><br>
         <hr>
         <?php
         if (empty($account)) {
@@ -52,15 +54,15 @@
             if (empty($request))
                 echo $this->Form->button(" Gửi yêu cầu", array('id' => 'btnrequest', 'class'=>'fi-mail'));
             elseif ($request['Request']['status'] != 3)
-                echo $this->Form->button(" Đã gửi yêu cầu", array('type' => 'disable', 'class'=>'alert fi-info'));
+                echo $this->Form->button(" Hủy yêu cầu", array('id'=>'btncancle', 'type' => 'disable', 'class'=>'alert fi-info'));
             else {
-                echo $this->Form->create("", array('url' => array('action' => 'download', base64_encode($ebook['Ebook']['id']))));
+                echo $this->Form->create("", array('url' => array('controller'=> 'ebooks', 'action' => 'download', base64_encode($ebook['Ebook']['id']))));
                 echo $this->Form->button(" Tải xuống", array('class'=>'success fi-download'));
                 echo $this->Form->end();
             }
         }
         else {
-            echo $this->Form->create("", array('url' => array('action' => 'download', base64_encode($ebook['Ebook']['id']))));
+            echo $this->Form->create("", array('url' => array('controller'=> 'ebooks','action' => 'download', base64_encode($ebook['Ebook']['id']))));
             echo $this->Form->button(" Tải xuống", array('class'=>'success fi-download'));
             echo $this->Form->end();
         }
@@ -83,6 +85,22 @@
                 success: function (string) {
                     toastr.success("Đã gửi yêu cầu!");
                     $('#btnrequest').html(' Requesting');
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra');
+                }
+            });
+        });
+
+        $('#btncancle').click(function () {
+            $.ajax({
+                url: '../requestdel',
+                type: 'POST',
+                cache: false,
+                data: {ebook_id:<?php echo $ebook['Ebook']['id']?>, user_id:<?php echo $account['User']['id']?>},
+                success: function (string) {
+                    toastr.success("Đã hủy yêu cầu!");
+                    setTimeout("window.location.reload();", 2000);
                 },
                 error: function () {
                     alert('Có lỗi xảy ra');

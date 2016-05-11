@@ -11,13 +11,55 @@ App::uses('File', 'Utility');
 
 class EbooksController extends AppController
 {
-    public $uses = array('User', 'Ebook');
+    public $uses = array('User', 'Ebook', 'Viewer', 'Downloader');
 
+
+    //thêm lượt xem
+    function viewing($id = null) {
+        $online_session_id = $this->Session->id();
+
+        if (empty($online_session_id)) return ;
+
+        $viewer = $this->Viewer->find('first', array(
+            'conditions' => array(
+                'Viewer.book' => $id,
+                'Viewer.client' => $online_session_id
+            )));
+
+        if (empty($viewer) || $viewer == false) {
+            $viewer_new = $this->Viewer->create();
+            $viewer_new['client'] = $online_session_id;
+            $viewer_new['book'] = $id;
+            $this->Viewer->save($viewer_new);
+        }
+    }
+
+    //thêm lượt tải
+    function downloading($id = null) {
+        $dl_session_id = $this->Session->id();
+
+        if (empty($dl_session_id)) return ;
+
+        $downloader = $this->Downloader->find('first', array(
+            'conditions' => array(
+                'Downloader.book' => $id,
+                'Downloader.client' => $dl_session_id,
+                'Downloader.user' => $this->Auth->user('id')
+            )));
+
+        if (empty($downloader) || $downloader == false) {
+            $downloader_new = $this->Downloader->create();
+            $downloader_new['client'] = $dl_session_id;
+            $downloader_new['book'] = $id;
+            $downloader_new['user'] = $this->Auth->user('id');
+            $this->Downloader->save($downloader_new);
+        }
+    }
     //trang index
     public function index()
     {
-        $this->paginate = array('limit' => 10);//phân trang 10 item
-        $this->set('ebooks', $this->paginate('Ebook',array(
+        $this->paginate = array('limit' => 2);//phân trang 10 item
+        $this->set('ebooks', $this->paginate('Ebook', array(
                 'Ebook.user_id' => $this->Auth->user('id')
             )));
     }
@@ -25,6 +67,17 @@ class EbooksController extends AppController
     public function view($id = null)
     {
         $ebook = $this->Ebook->findById($id);
+        $this->viewing($id);
+        $view = $this->Viewer->find('count', array(
+            'conditions' => array(
+                'Viewer.book' => $id
+            )
+        ));
+        $down = $this->Downloader->find('count', array(
+            'conditions' => array(
+                'Downloader.book' => $id
+            )
+        ));
         $request = $this->Ebook->Request->find('first',array(
             'conditions' => array(
                 'Request.user_id' => $this->Auth->user('id'),
@@ -50,6 +103,8 @@ class EbooksController extends AppController
             $this->set('request', $request);
             $this->set('rate', $rate);
             $this->set('allrate', $allrate);
+            $this->set('view', $view);
+            $this->set('down', $down);
         }
     }
 
@@ -260,11 +315,10 @@ class EbooksController extends AppController
 
     public function search(){
         if ($this->request->is('post')) {
-            $ebooks = $this->Ebook->find('all', array(
-                'conditions' => array('title LIKE' =>'%'.$this->request->data['Ebook']['ebsearch'].'%' )
-            ));
-            $this->set('ebooks',$ebooks);
+            $this->Session->write('search', $this->request->data['Ebook']['ebsearch']);
         }
+        $this->paginate = array('limit' => 2);//phân trang 10 item
+        $this->set('ebooks', $this->paginate('Ebook',array('Ebook.title LIKE' =>'%'.$this->Session->read('search').'%' )));
     }
 
     function ParseHeader($header='')
@@ -333,6 +387,26 @@ class EbooksController extends AppController
         }
     }
 
+    public function requestdel(){
+        $this->layout = false;
+        $this->autoRender = false;
+        $user_id = $this->request->data['user_id'];
+        $ebook_id = $this->request->data['ebook_id'];
+        $rq = $this->Ebook->Request->find('first',array(
+            'conditions' => array(
+                'Request.user_id' => $user_id,
+                'Request.ebook_id' => $ebook_id
+            )
+        ));
+        if ($user_id != 0 && $ebook_id != 0) {
+            $this->Ebook->Request->delete($rq['Request']['id']);
+            $this->Ebook->Nofication->deleteAll(array(
+                'Nofication.request_id' => $rq['Request']['id']
+            ));
+        }
+        return;
+    }
+
     public function request(){
         $this->layout = false;
         $this->autoRender = false;
@@ -380,6 +454,7 @@ class EbooksController extends AppController
                     'name' => $data['Ebook']['file']
                 )
             );
+            $this->downloading(base64_decode($id));
             return $this->response;
         }
         else {

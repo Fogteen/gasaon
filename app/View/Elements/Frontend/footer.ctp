@@ -31,10 +31,10 @@
         <div class="pusherChatBox">
                 <span class="state">
                     <span class="pencil">
-                        <?php echo $this->Html->image('../img/pencil.gif')?>
+                        <?php echo $this->Html->image('../img/pencil.gif') ?>
                     </span>
                     <span class="quote">
-                        <?php echo $this->Html->image('../img/quote.gif')?>
+                        <?php echo $this->Html->image('../img/quote.gif') ?>
                     </span>
                 </span>
 
@@ -71,8 +71,8 @@
 <script>
     $(document).foundation();
     $(document).ready(function () {
-        $('#nofi').on('click',function () {
-            if ($('div.form').val() != '') $('div.form').html('');
+        $('#nofi').on('click', function () {
+            if ($('div.form').html() != '') $('div.form').html('');
             $.ajax({
                 url: '<?php echo BASE_PATH?>users/nofi',
                 type: 'POST',
@@ -81,7 +81,7 @@
                     console.log(data);
                     $.each(data, function (key, value) {
                         $('div.form').append('<p class=' + key + '>' + value.Nofication.content + '<br></p>');
-                        $('p.' + key).append('<button class=yes' + key + '>Có</button><button class=no' + key + '>Không</button><hr>');
+                        $('p.' + key).append('<button class=yes' + key + '>Đồng ý</button><button class=no' + key + '>Bỏ qua</button><hr>');
                         $('button.yes' + key).click(function () {
                             $.ajax({
                                 url: '<?php echo BASE_PATH?>users/nofiup',
@@ -95,7 +95,24 @@
                                 },
                                 success: function () {
                                     $('p.' + key).remove();
-                                    if ($('div.form').val() != '') $("#nofication").modal().hide();
+                                    if ($('div.form').html() == '') $("#nofication").foundation('reveal', 'close');
+                                },
+                                error: function () {
+                                    alert('Có lỗi xảy ra');
+                                }
+                            });
+                        });
+                        $('button.no' + key).click(function () {
+                            $.ajax({
+                                url: '<?php echo BASE_PATH?>users/nofidel',
+                                type: 'POST',
+                                cache: false,
+                                data: {
+                                    id: value.Nofication.id,
+                                },
+                                success: function () {
+                                    $('p.' + key).remove();
+                                    if ($('div.form').html() == '') $("#nofication").foundation('reveal', 'close');
                                 },
                                 error: function () {
                                     alert('Có lỗi xảy ra');
@@ -103,7 +120,7 @@
                             });
                         });
                     });
-                    if ($('div.form').val() == '') $('div.form').html('<h5>Không có thông báo mới!</h5>');
+                    if ($('div.form').html() == '') $('div.form').html('<h5>Không có thông báo mới!</h5>');
                 },
                 error: function () {
                     alert('Có lỗi xảy ra');
@@ -142,7 +159,8 @@
             'pusherKey': 'ea2f5e5013baa43a541f',  // required : open an account on http://pusher.com/ to get one
             'authPath': '<?php echo BASE_PATH?>users/chatauth', // required : path to authentication scripts more info at http://pusher.com/docs/authenticating_users
             'friendsList': '<?php echo BASE_PATH?>users/frlist', // required : path to friends list json
-            'serverPath': '<?php echo BASE_PATH?>users/chat' // required : path to server
+            'serverPath': '<?php echo BASE_PATH?>users/chat', // required : path to server
+            'getMess': '<?php echo BASE_PATH?>users/getmess'
         });
 
     });
