@@ -10,4 +10,14 @@ App::uses('AppModel', 'Model');
 
 class Downloader extends AppModel {
 
+
+    public $belongsTo = array(
+        'Ebook' => array(
+            'className' => 'Ebook',
+            'foreignKey' => 'book',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
+    );
 }

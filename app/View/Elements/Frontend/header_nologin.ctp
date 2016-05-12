@@ -17,8 +17,14 @@
     ?>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <meta property="og:url" content="<?php echo('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);?>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="Your Website Title"/>
+    <meta property="og:description" content="Your description"/>
+    <meta property="og:image" content="http://www.your-domain.com/path/image.jpg"/>
 </head>
 <body>
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
 <div id="container">
     <div id="header">
         <div class="contain-to-grid sticky">

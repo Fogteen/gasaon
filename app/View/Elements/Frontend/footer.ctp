@@ -74,7 +74,7 @@
         $('#nofi').on('click', function () {
             if ($('div.form').html() != '') $('div.form').html('');
             $.ajax({
-                url: '<?php echo BASE_PATH?>users/nofi',
+                url: '<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'nofi')) ?>',
                 type: 'POST',
                 cache: false,
                 success: function (data) {
@@ -84,7 +84,7 @@
                         $('p.' + key).append('<button class=yes' + key + '>Đồng ý</button><button class=no' + key + '>Bỏ qua</button><hr>');
                         $('button.yes' + key).click(function () {
                             $.ajax({
-                                url: '<?php echo BASE_PATH?>users/nofiup',
+                                url: '<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'nofiup')) ?>',
                                 type: 'POST',
                                 cache: false,
                                 data: {
@@ -104,11 +104,11 @@
                         });
                         $('button.no' + key).click(function () {
                             $.ajax({
-                                url: '<?php echo BASE_PATH?>users/nofidel',
+                                url: '<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'nofidel')) ?>',
                                 type: 'POST',
                                 cache: false,
                                 data: {
-                                    id: value.Nofication.id,
+                                    id: value.Nofication.id
                                 },
                                 success: function () {
                                     $('p.' + key).remove();
@@ -157,10 +157,22 @@
 
         $.fn.pusherChat({
             'pusherKey': 'ea2f5e5013baa43a541f',  // required : open an account on http://pusher.com/ to get one
-            'authPath': '<?php echo BASE_PATH?>users/chatauth', // required : path to authentication scripts more info at http://pusher.com/docs/authenticating_users
-            'friendsList': '<?php echo BASE_PATH?>users/frlist', // required : path to friends list json
-            'serverPath': '<?php echo BASE_PATH?>users/chat', // required : path to server
-            'getMess': '<?php echo BASE_PATH?>users/getmess'
+            'authPath': '<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'chatauth')) ?>', // required : path to authentication scripts more info at http://pusher.com/docs/authenticating_users
+            'friendsList': '<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'frlist')) ?>', // required : path to friends list json
+            'serverPath': '<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'chat')) ?>', // required : path to server
+            'getMess': '<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'getmess')) ?>'
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#scroll').fadeIn();
+            } else {
+                $('#scroll').fadeOut();
+            }
+        });
+        $('#scroll').click(function () {
+            $("html, body").animate({scrollTop: 0}, 600);
+            return false;
         });
 
     });

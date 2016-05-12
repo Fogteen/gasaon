@@ -5,7 +5,7 @@
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=1044940168912905";
+            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1044940168912905";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     });
@@ -70,9 +70,41 @@
     </div>
 
 </div>
-<div class="row comment">
+<div class="row sameuser" style=" margin-top: 40px;border-radius:10px;border: 2px solid #69708C;">
+    <div class="large-12 columns">
+        <div>
+            <h4 style="float:left;margin-bottom: 20px;padding-top:20px;color:grey">CÙNG NGƯỜI TẢI LÊN</h4>
+        </div>
+        <ul class="ebview small-block-grid-2 medium-block-grid-3 large-block-grid-5">
+            <?php foreach ($sameuser as $ebook) { ?>
+                <li>
+                    <?php $image = $this->Html->image('../files/' . $ebook['Ebook']['user_id'] . '/' . $ebook['Ebook']['picture'],array('class'=>'card'));
+                    echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['Ebook']['id']), array('escape' => false)) ?>
+                    <br>
+                    <?php echo $ebook['Ebook']['title'] ?>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+    <div class="large-12 columns">
+        <div>
+            <h4 style="float:left;margin-bottom: 20px;padding-top:20px;color:grey">CÓ THỂ BẠN MUỐN XEM</h4>
+        </div>
+        <ul class="ebview small-block-grid-2 medium-block-grid-3 large-block-grid-5">
+            <?php foreach ($relate as $ebook) { ?>
+                <li>
+                    <?php $image = $this->Html->image('../files/' . $ebook['Ebook']['user_id'] . '/' . $ebook['Ebook']['picture'],array('class'=>'card'));
+                    echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['Ebook']['id']), array('escape' => false)) ?>
+                    <br>
+                    <?php echo $ebook['Ebook']['title'] ?>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+</div>
+<div class="row comment" style="margin-top: 40px;border-radius: 5px;background-color: lightcyan">
     <h3>Bình luận</h3>
-    <div class="fb-comments" data-href="http://localhost/gasaon/ebooks/view/<?php echo $ebook['Ebook']['id']?>" data-width="700" data-numposts="5"></div>
+    <div class="fb-comments" data-href="<?php echo('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);?>" data-width="700" data-numposts="5"></div>
 </div>
 <script>
     $(document).ready(function () {

@@ -10,19 +10,19 @@
 
     echo $this->Html->css(array('normalize','cake','foundation.min','foundation-icons/foundation-icons', 'custom', 'dropzone', 'rateit', 'chat-style'));
 
-    echo $this->Html->script(array('vendor/jquery', 'jquery.pusherchat', 'jquery.playSound', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.dropdown', 'foundation/foundation.tab', 'app', 'dropzone', 'pusher.min', 'rateit.min'));
+    echo $this->Html->script(array('vendor/jquery', 'jquery.pusherchat', 'jquery.playSound', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.dropdown', 'foundation/foundation.tab', 'plugins/jquery.validate.min','app', 'dropzone', 'pusher.min', 'rateit.min'));
 
     ?>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <meta property="og:url" content="http://localhost/gasaon/ebooks/view/"/>
+    <meta property="og:url" content="http://localhost<?php echo('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);?>"/>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="Your Website Title"/>
     <meta property="og:description" content="Your description"/>
     <meta property="og:image" content="http://www.your-domain.com/path/image.jpg"/>
-    <meta property="fb:admins" content="{787320918045296}"/>
 </head>
 <body>
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
 <div id="container">
     <div id="header">
         <div class="contain-to-grid sticky">
@@ -91,10 +91,13 @@
             </nav>
         </div>
         <ul class="breadcrumbs">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Features</a></li>
-            <li class="unavailable"><a href="#">Gene Splicing</a></li>
-            <li class="current"><a href="#">Cloning</a></li>
+            <li><?php echo $this->Html->link('Trang chủ', array('controller'=>'homes')) ?></li>
+            <?php if ($this->params['controller'] != 'homes') {?>
+            <li class="unavailable"><?php echo $this->Html->link($this->params['controller'], array('controller'=>$this->params['controller'])) ?></li>
+            <?php } ?>
+            <?php if ($this->action != 'index') {?>
+            <li class="current"><?php echo $this->Html->link($this->action, array('controller'=>$this->params['controller']))?> </li>
+            <?php } ?>
         </ul>
         <div id="nofication" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true"
              role="dialog">

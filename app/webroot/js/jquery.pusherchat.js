@@ -135,7 +135,7 @@ $(document).ready(function () {
                     }
                 });
                 var img = $('#id_' + data.from).find('h2').find('.imgFriend').attr('src');
-                $('#id_' + data.from + ' .msgTxt').append('<img src="' + img + '" class="nick"> ' + data.message + '<hr>');
+                $('#id_' + data.from + ' .msgTxt').append('<p style="float:left"><img src="' + img + '" class="nick"> ' + data.message + '</p><hr>');
                 $('#id_' + data.from).addClass('recive').removeClass('writing');
                 $('#id_' + data.from + ' .logMsg').scrollTop($('#id_' + data.from + ' .logMsg')[0].scrollHeight);
                 if ($('title').text().search('New message - ') == -1)

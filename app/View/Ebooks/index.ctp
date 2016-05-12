@@ -4,7 +4,7 @@
     </div>
     <div class="large-6 columns">
         <div class="row">
-            <?php echo $this->Form->create('', array('url' => array('action' => 'search'))) ?>
+            <?php echo $this->Form->create('Ebook', array('url' => array('controller'=>'ebooks','action' => 'search'))) ?>
             <div class="small-12 large-8 columns">
                 <?php echo $this->Form->text('ebsearch'); ?>
             </div>

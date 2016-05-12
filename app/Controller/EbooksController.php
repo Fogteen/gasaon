@@ -95,6 +95,18 @@ class EbooksController extends AppController
                 'Rating.ebook_id' => $id
             )
         ));
+        $sameuser = $this->Ebook->find('all', array(
+            'conditions' => array(
+                'Ebook.user_id' => $ebook['User']['id']
+            ),
+            'limit' => 5
+        ));
+        $relate = $this->Ebook->find('all', array(
+            'conditions' => array(
+                'Ebook.categories_id' => $ebook['Ebook']['categories_id']
+            ),
+            'limit' => 5
+        ));
         if (empty($ebook)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
             return $this->redirect(array('action' => 'index'));
@@ -105,6 +117,8 @@ class EbooksController extends AppController
             $this->set('allrate', $allrate);
             $this->set('view', $view);
             $this->set('down', $down);
+            $this->set('sameuser', $sameuser);
+            $this->set('relate', $relate);
         }
     }
 
@@ -227,11 +241,10 @@ class EbooksController extends AppController
             $this->Ebook->id = $id;
             $olddata = $this->Ebook->read(null,$id);
 
-            if($this->request->data['Ebook']['picture']['name']!== "")
+            if($this->request->data['Ebook']['picture']['name']!= "")
             $this->request->data['Ebook']['picture']['name'] = 'thumb_'.$this->request->data['Ebook']['picture']['name'];
-
             if ($this->Ebook->save($this->request->data)) {
-                if(file_exists(WWW_ROOT."files/".$olddata['Ebook']['user_id']."/".$olddata['Ebook']['picture']) && $this->request->data['Ebook']['picture']['name']!== "")
+                if(file_exists(WWW_ROOT."files/".$olddata['Ebook']['user_id']."/".$olddata['Ebook']['picture']) && $this->request->data['Ebook']['picture']['name']!= "")
                 unlink(WWW_ROOT."files/".$olddata['Ebook']['user_id']."/".$olddata['Ebook']['picture']);
                 $folder = new Folder(WWW_ROOT."files/ebook/picture/".$id);
                 $file = new File(WWW_ROOT."files/ebook/picture/".$id."/thumb_".$this->request->data['Ebook']['picture']['name']);

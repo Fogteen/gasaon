@@ -55,7 +55,7 @@ class User extends AppModel {
         'username' => array(
             'required' => array(
                 'rule' => 'notBlank',
-                'message' => 'Firstname không đưuọc trống!'
+                'message' => 'Tên tài khoản không đưuọc trống!'
             )
         ),
         'email' => array(

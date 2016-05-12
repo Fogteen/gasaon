@@ -87,7 +87,7 @@ class UsersController extends AppController
         Facebook\FacebookSession::setDefaultApplication(FACEBOOK_APP_ID, FACEBOOK_APP_SECRET);
         $helper = new Facebook\FacebookRedirectLoginHelper(FACEBOOK_REDIRECT_URI);
         $session = $helper->getSessionFromRedirect(); //Lấy thông tin session
-        if (isset($_SESSION['token'])){
+        if (isset($_SESSION['token'])) {
             $session = new Facebook\FacebookSession($_SESSION['token']); //nếu đã có token trong session thì sử dụng nó
             try {
                 $session->validate(FACEBOOK_APP_ID, FACEBOOK_APP_SECRET);
@@ -160,7 +160,7 @@ class UsersController extends AppController
             return $this->redirect(array('action' => 'index'));
         } else {
             $this->set('user', $user);
-            $this->set('friend', $this->User->Friend1->find('all',array(
+            $this->set('friend', $this->User->Friend1->find('all', array(
                 'conditions' => array(
                     'OR' => array(
                         array('Friend1.user_one_id' => $id),
@@ -169,7 +169,7 @@ class UsersController extends AppController
                     'Friend1.status' => 1
                 )
             )));
-            $this->set('status', $this->User->Friend1->find('first',array(
+            $this->set('status', $this->User->Friend1->find('first', array(
                 'conditions' => array(
                     'OR' => array(
                         array('Friend1.user_one_id' => $id, 'Friend1.user_two_id' => $this->Auth->user('id')),
@@ -199,15 +199,18 @@ class UsersController extends AppController
         $user = $this->User->findById($id);
         if (empty($user)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
-            return $this->redirect(array('action' => 'index'));
-        }
-        elseif ($this->request->is('post') || $this->request->is('put')) {
+            return $this->redirect(array('action' => 'view'),$id);
+        } elseif ($this->request->is('post') || $this->request->is('put')) {
             $this->User->id = $id;
             if ($this->User->save($this->request->data)) {
-                unlink(WWW_ROOT.'files/user/picture/'.$user['User']['picture_dir'].'/'.$user['User']['picture']);
-                unlink(WWW_ROOT.'files/user/picture/'.$user['User']['picture_dir'].'/thumb_'.$user['User']['picture']);
+                if (!empty($this->request->data['User']['picture']) && $this->request->data['User']['picture']['name'] != '' && $this->request->data['User']['picture']['name'] != $user['User']['picture']) {
+                    if (file_exists(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/' . $user['User']['picture']))
+                        unlink(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/' . $user['User']['picture']);
+                    if (file_exists(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/thumb_' . $user['User']['picture']))
+                        unlink(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/thumb_' . $user['User']['picture']);
+                }
                 $this->Flash->success(__('Cập nhật thành công'));
-                return $this->redirect(array('action' => 'listuser'));
+                return $this->redirect(array('action' => 'view',$id));
             }
             $this->Flash->error(
                 __('Đã xảy ra lỗi')
@@ -254,7 +257,8 @@ class UsersController extends AppController
         return parent::isAuthorized($user);
     }
 
-    public function nofi() {
+    public function nofi()
+    {
         $this->autoRender = false;
         $this->layout = false;
         $data = $this->User->Nofication->find('all', array(
@@ -266,10 +270,11 @@ class UsersController extends AppController
                 )
             )
         ));
-        return new CakeResponse(array('body' => json_encode($data),'type'=>'json'));
+        return new CakeResponse(array('body' => json_encode($data), 'type' => 'json'));
     }
 
-    public function nofidel() {
+    public function nofidel()
+    {
         $this->autoRender = false;
         $this->layout = false;
         $id = $this->request->data['id'];
@@ -278,7 +283,8 @@ class UsersController extends AppController
         return;
     }
 
-    public function nofiup() {
+    public function nofiup()
+    {
         $this->autoRender = false;
         $this->layout = false;
         $id = $this->request->data['id'];
@@ -289,7 +295,7 @@ class UsersController extends AppController
             array('Nofication.status' => $status),
             array('Nofication.id' => $id)
         );
-        if(empty($ebook_id)) {
+        if (empty($ebook_id)) {
             $this->User->Friend1->updateAll(
                 array('Friend1.status' => 1),
                 array('Friend1.id' => $request_id)
@@ -316,8 +322,7 @@ class UsersController extends AppController
                 );
                 $pusher->trigger('request_channel', 'rei_friend_event', $data);
             }
-        }
-        else {
+        } else {
             $this->User->Request->updateAll(
                 array('Request.status' => 3),
                 array('Request.id' => $request_id)
@@ -349,12 +354,13 @@ class UsersController extends AppController
         return;
     }
 
-    public function addfriend(){
+    public function addfriend()
+    {
         $this->layout = false;
         $this->autoRender = false;
         $user_one_id = $this->request->data['user_one_id'];
         $user_two_id = $this->request->data['user_two_id'];
-        $user = $this->User->read(null,$user_one_id);
+        $user = $this->User->read(null, $user_one_id);
         $this->User->Friend1->create();
         $this->User->Friend1->save(array(
             'user_one_id' => $this->Auth->user('id'),
@@ -367,7 +373,7 @@ class UsersController extends AppController
             'user_id' => $user_two_id,
             'ebook_id' => '',
             'request_id' => $this->User->Friend1->id,
-            'content' => 'Bạn nhận được một yêu cầu kết bạn từ '. $user['User']['username']
+            'content' => 'Bạn nhận được một yêu cầu kết bạn từ ' . $user['User']['username']
         ));
         $pusher = new Pusher('ea2f5e5013baa43a541f', 'bd3a393da392412204cf', '197077');
 
@@ -380,19 +386,21 @@ class UsersController extends AppController
         $pusher->trigger('request_channel', 'send_friend_event', $data);
     }
 
-    public function unfriend(){
+    public function unfriend()
+    {
         $this->layout = false;
         $this->autoRender = false;
         $id = $this->request->data['id'];
         if ($id != 0)
-        $this->User->Friend1->delete($id);
+            $this->User->Friend1->delete($id);
         return;
     }
 
-    public function frlist() {
+    public function frlist()
+    {
         $this->layout = false;
         $this->autoRender = false;
-        $friend = $this->User->Friend1->find('all',array(
+        $friend = $this->User->Friend1->find('all', array(
             'conditions' => array(
                 'OR' => array(
                     array('Friend1.user_one_id' => $this->Auth->user('id')),
@@ -401,20 +409,20 @@ class UsersController extends AppController
                 'Friend1.status' => 1
             )
         ));
-        $i =0;
+        $i = 0;
         foreach ($friend as $fr) {
             if ($fr['Friend1']['user_one_id'] == $this->Auth->user('id')) {
                 $user = $this->User->read(null, $fr['Friend1']['user_two_id']);
-            }
-            else {
+            } else {
                 $user = $this->User->read(null, $fr['Friend1']['user_one_id']);
             }
-            $data[$user['User']['id']] = array($user['User']['id'] => array($user['User']['username'],'thumb_'.$user['User']['picture'],''));
+            $data[$user['User']['id']] = array($user['User']['id'] => array($user['User']['username'], 'thumb_' . $user['User']['picture'], ''));
         }
-        return new CakeResponse(array('body' => json_encode($data),'type'=>'json'));
+        return new CakeResponse(array('body' => json_encode($data), 'type' => 'json'));
     }
 
-    public function chatauth() {
+    public function chatauth()
+    {
         $this->layout = false;
         $this->autoRender = false;
         $name = $this->Auth->user('username'); // chose the way to get this get,post session ...etc
@@ -428,26 +436,27 @@ class UsersController extends AppController
         echo $pusher->presence_auth($channel_name, $socket_id, $user_id, $presence_data);
     }
 
-    public function chat() {
+    public function chat()
+    {
         $this->layout = false;
         $this->autoRender = false;
         $pusher = new Pusher(APP_KEY, APP_SECRET, APP_ID);
-        if ($_POST['typing'] == "false" && $_POST['msg'] != ''){
-            $pusher->trigger('presence-mychanel', 'send-event', array('message' => htmlspecialchars ( $_POST['msg']), 'from' => $_POST['from'], 'to' => str_replace('#', '', $_POST['to'])));
+        if ($_POST['typing'] == "false" && $_POST['msg'] != '') {
+            $pusher->trigger('presence-mychanel', 'send-event', array('message' => htmlspecialchars($_POST['msg']), 'from' => $_POST['from'], 'to' => str_replace('#', '', $_POST['to'])));
             $this->Message->create();
             $mess['to'] = str_replace('#', '', $_POST['to']);
             $mess['from'] = $_POST['from'];
-            $mess['message'] = htmlspecialchars ( $_POST['msg']);
+            $mess['message'] = htmlspecialchars($_POST['msg']);
             $this->Message->save($mess);
-        }
-        else if ($_POST['typing'] == "true")
+        } else if ($_POST['typing'] == "true")
             $pusher->trigger('presence-mychanel', 'typing-event', array('message' => $_POST['typing'], 'from' => $_POST['from'], 'to' => str_replace('#', '', $_POST['to'])));
-        else{
+        else {
             $pusher->trigger('presence-mychanel', 'typing-event', array('message' => 'null', 'from' => $_POST['from'], 'to' => str_replace('#', '', $_POST['to'])));
         }
     }
 
-    public function getmess() {
+    public function getmess()
+    {
         $this->layout = false;
         $this->autoRender = false;
         $from = $this->request->data['from'];
@@ -464,7 +473,7 @@ class UsersController extends AppController
                 )
             )
         ));
-        return new CakeResponse(array('body' => json_encode($data),'type'=>'json'));
+        return new CakeResponse(array('body' => json_encode($data), 'type' => 'json'));
     }
 
 }

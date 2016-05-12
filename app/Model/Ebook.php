@@ -30,6 +30,14 @@ class Ebook extends AppModel {
         'Nofication' => array(
             'className' => 'Nofication',
             'foreignKey' => 'ebook_id'
+        ),
+        'Viewer' => array(
+            'className' => 'Viewer',
+            'foreignKey' => 'book'
+        ),
+        'Downloader' => array(
+            'className' => 'Downloader',
+            'foreignKey' => 'book'
         )
     );
 
@@ -48,19 +56,31 @@ class Ebook extends AppModel {
         'title' => array(
             'required' => array(
                 'rule' => 'notBlank',
-                'message' => 'Title không đưuọc trống!'
+                'message' => 'Tiêu đề không đưuọc trống!'
             )
         ),
         'des' => array(
             'required' => array(
                 'rule' => 'notBlank',
-                'message' => 'Title không đưuọc trống!'
+                'message' => 'Mô tả không đưuọc trống!'
             )
         ),
         'author' => array(
             'required' => array(
                 'rule' => 'notBlank',
-                'message' => 'Title không đưuọc trống!'
+                'message' => 'Tác giả không đưuọc trống!'
+            )
+        ),
+        'categories_id' => array(
+            'required' => array(
+                'rule' => 'notBlank',
+                'message' => 'Hãy chọn danh mục!'
+            )
+        ),
+        'publish' => array(
+            'required' => array(
+                'rule' => 'notBlank',
+                'message' => 'Hãy chọn chế độ chia sẻ'
             )
         )
     );

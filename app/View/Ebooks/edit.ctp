@@ -21,9 +21,8 @@
                 <section>
                     <div class="column">
                         <?php echo $this->Form->input('Ebook.author',array('label'=>'Tác giả')) ?>
-                        <?php echo $this->Form->input('Ebook.categories_id', array('label'=>'Danh mục','type' => 'select', 'options' => $categories)) ?>
-                        <?php echo $this->Form->label('Chia sẻ') ?>
-                        <?php echo $this->Form->radio('Ebook.publish', array(1 => 'Có', 0 => 'Không'), array('legend' => false)) ?>
+                        <?php echo $this->Form->input('Ebook.categories_id', array('label'=>'Danh mục','type' => 'select', 'options' => $categories, 'empty'=>'Chọn danh mục')) ?>
+                        <?php echo $this->Form->input('Ebook.publish', array('label'=>'Chia sẻ','type' => 'select', 'options' => array(1=>'Có', 0=>'Không'),'empty'=>'Chọn chế độ')) ?>
                     </div>
                 </section>
             </div>
