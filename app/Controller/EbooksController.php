@@ -432,8 +432,8 @@ class EbooksController extends AppController
         ));
         $book = $this->Ebook->read(null,$ebook_id);
         $user = $this->Ebook->User->read(null,$user_id);
-        $this->Ebook->User->Nofication->create();
-        $this->Ebook->User->Nofication->save(array(
+        $this->Ebook->Nofication->create();
+        $this->Ebook->Nofication->save(array(
             'user_id' => $book['Ebook']['user_id'],
             'ebook_id' => $ebook_id,
             'request_id' => $this->Ebook->Request->id,

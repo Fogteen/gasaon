@@ -348,18 +348,18 @@ class HtmlHelperTest extends CakeTestCase {
 		);
 		$this->assertTags($result, $expected);
 
-		$result = $this->Html->link($this->Html->image('../favicon.ico'), '#', array('escape' => false));
+		$result = $this->Html->link($this->Html->image('../bookicon.ico'), '#', array('escape' => false));
 		$expected = array(
 			'a' => array('href' => '#'),
-			'img' => array('src' => 'img/../favicon.ico', 'alt' => ''),
+			'img' => array('src' => 'img/../bookicon.ico', 'alt' => ''),
 			'/a'
 		);
 		$this->assertTags($result, $expected);
 
-		$result = $this->Html->image('../favicon.ico', array('url' => '#'));
+		$result = $this->Html->image('../bookicon.ico', array('url' => '#'));
 		$expected = array(
 			'a' => array('href' => '#'),
-			'img' => array('src' => 'img/../favicon.ico', 'alt' => ''),
+			'img' => array('src' => 'img/../bookicon.ico', 'alt' => ''),
 			'/a'
 		);
 		$this->assertTags($result, $expected);
@@ -1746,7 +1746,7 @@ class HtmlHelperTest extends CakeTestCase {
 		$result = $this->Html->meta('atom', array('controller' => 'posts', 'ext' => 'xml'), array('link' => '/articles.rss'));
 		$this->assertTags($result, array('link' => array('href' => 'preg:/.*\/articles\.rss/', 'type' => 'application/atom+xml', 'title' => 'atom')));
 
-		$result = $this->Html->meta(array('link' => 'favicon.ico', 'rel' => 'icon'));
+		$result = $this->Html->meta(array('link' => 'bookicon.ico', 'rel' => 'icon'));
 		$expected = array(
 			'link' => array('href' => 'preg:/.*favicon\.ico/', 'rel' => 'icon'),
 			array('link' => array('href' => 'preg:/.*favicon\.ico/', 'rel' => 'shortcut icon'))
@@ -1769,7 +1769,7 @@ class HtmlHelperTest extends CakeTestCase {
  * @return void
  */
 	public function testMetaIcon() {
-		$result = $this->Html->meta('icon', 'favicon.ico');
+		$result = $this->Html->meta('icon', 'bookicon.ico');
 		$expected = array(
 			'link' => array('href' => 'preg:/.*favicon\.ico/', 'type' => 'image/x-icon', 'rel' => 'icon'),
 			array('link' => array('href' => 'preg:/.*favicon\.ico/', 'type' => 'image/x-icon', 'rel' => 'shortcut icon'))
@@ -1804,8 +1804,8 @@ class HtmlHelperTest extends CakeTestCase {
 		$this->Html->request->webroot = '/testing/';
 		$result = $this->Html->meta('icon');
 		$expected = array(
-			'link' => array('href' => '/testing/favicon.ico', 'type' => 'image/x-icon', 'rel' => 'icon'),
-			array('link' => array('href' => '/testing/favicon.ico', 'type' => 'image/x-icon', 'rel' => 'shortcut icon'))
+			'link' => array('href' => '/testing/bookicon.ico', 'type' => 'image/x-icon', 'rel' => 'icon'),
+			array('link' => array('href' => '/testing/bookicon.ico', 'type' => 'image/x-icon', 'rel' => 'shortcut icon'))
 		);
 		$this->assertTags($result, $expected);
 	}
@@ -1822,12 +1822,12 @@ class HtmlHelperTest extends CakeTestCase {
 
 		$this->View->expects($this->at(1))
 			->method('append')
-			->with('metaTags', $this->stringContains('favicon.ico'));
+			->with('metaTags', $this->stringContains('bookicon.ico'));
 
 		$result = $this->Html->meta(array('name' => 'ROBOTS', 'content' => 'ALL'), null, array('inline' => false));
 		$this->assertNull($result);
 
-		$result = $this->Html->meta('icon', 'favicon.ico', array('block' => 'metaTags'));
+		$result = $this->Html->meta('icon', 'bookicon.ico', array('block' => 'metaTags'));
 		$this->assertNull($result);
 	}
 

@@ -121,7 +121,7 @@ $(document).ready(function () {
                                 $('#id_' + data.Message.from + ' .logMsg').scrollTop($('#id_' + data.Message.from + ' .logMsg')[0].scrollHeight);
                                 if ($('title').text().search('New message - ') == -1)
                                     $('title').prepend('New message - ');
-                                $.playSound('/gasaon/img/../sounds/new');
+                                $.playSound('/img/../sounds/new');
                             }
                             if (presenceChannel.members.me.id == data.Message.from) {
                                 var myimg = $('li.account img').attr('src');
@@ -140,7 +140,7 @@ $(document).ready(function () {
                 $('#id_' + data.from + ' .logMsg').scrollTop($('#id_' + data.from + ' .logMsg')[0].scrollHeight);
                 if ($('title').text().search('New message - ') == -1)
                     $('title').prepend('New message - ');
-                $.playSound('/gasaon/img/../sounds/new');
+                $.playSound('/img/../sounds/new');
             }
             if (presenceChannel.members.me.id == data.from) {
                 var myimg = $('li.account img').attr('src');
@@ -219,7 +219,7 @@ $(document).ready(function () {
                             $('#id_' + data.Message.from + ' .logMsg').scrollTop($('#id_' + data.Message.from + ' .logMsg')[0].scrollHeight);
                             if ($('title').text().search('New message - ') == -1)
                                 $('title').prepend('New message - ');
-                            $.playSound('/gasaon/img/../sounds/new');
+                            $.playSound('/img/../sounds/new');
                         }
                         if (presenceChannel.members.me.id == data.Message.from) {
                             var myimg = $('li.account img').attr('src');
@@ -265,11 +265,11 @@ $(document).ready(function () {
                         if (user_id != presenceChannel.members.me.id) {
                             user = presenceChannel.members.get(user_id);
                             if (user) {
-                                onlineUser += '<a href="#' + user_id + '" class="nick on" ><img src="/gasaon/img/../files/user/picture/' + user_id + '/' + val[user_id][1] + '"/> <span>' + val[user_id][0] + '</span></a>';
+                                onlineUser += '<a href="#' + user_id + '" class="nick on" ><img src="/img/../files/user/picture/' + user_id + '/' + val[user_id][1] + '"/> <span>' + val[user_id][0] + '</span></a>';
                                 chatBoxOnline = 'on';
                                 countusser++;
                             } else {
-                                offlineUser += '<a href="#' + user_id + '" class="nick off"><img src="/gasaon/img/../files/user/picture/' + user_id + '/' + val[user_id][1] + '"/> <span>' + val[user_id][0] + '</span></a>';
+                                offlineUser += '<a href="#' + user_id + '" class="nick off"><img src="/img/../files/user/picture/' + user_id + '/' + val[user_id][1] + '"/> <span>' + val[user_id][0] + '</span></a>';
                                 chatBoxOnline = 'off';
                             }
                         }

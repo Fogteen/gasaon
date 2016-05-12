@@ -11,5 +11,22 @@
     ?>
 </ul>
 <style>
-    .pagination {margin: 0 0;float:right;left:-50%;text-align:left;}
+    .pagination {
+        margin: 0 0;
+        float:right;
+        left:-50%;
+        text-align:left;
+    }
+    ul.pagination {
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+
+    ul.pagination li {
+        margin: 0;
+    }
+
+    ul.pagination li a {
+        border-radius: 0px;
+    }
 </style>

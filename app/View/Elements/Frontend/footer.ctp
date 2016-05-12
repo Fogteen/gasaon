@@ -63,8 +63,8 @@
     <!-- chat box template end -->
     <div class="chatBoxWrap">
         <div class="chatBoxslide"></div>
-        <span id="slideLeft"> <img src="/gasaon/img/../img/quote.gif"/>&#x25C0;</span>
-        <span id="slideRight">&#x25B6; <img src="/gasaon/img/../img/quote.gif"/></span>
+        <span id="slideLeft"> <img src="/img/../img/quote.gif"/>&#x25C0;</span>
+        <span id="slideRight">&#x25B6; <img src="/img/../img/quote.gif"/></span>
     </div>
 </div>
 </div>
@@ -81,7 +81,10 @@
                     console.log(data);
                     $.each(data, function (key, value) {
                         $('div.form').append('<p class=' + key + '>' + value.Nofication.content + '<br></p>');
-                        $('p.' + key).append('<button class=yes' + key + '>Đồng ý</button><button class=no' + key + '>Bỏ qua</button><hr>');
+                        if (value.Nofication.status == 0)
+                            $('p.' + key).append('<button class=yes' + key + '>Đồng ý</button><button class=no' + key + '>Từ chối</button><hr>');
+                        else
+                            $('p.' + key).append('<button class=yes' + key + '>OK</button><button class=no' + key + '>Bỏ qua</button><hr>');
                         $('button.yes' + key).click(function () {
                             $.ajax({
                                 url: '<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'nofiup')) ?>',

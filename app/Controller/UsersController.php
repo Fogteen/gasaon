@@ -52,8 +52,7 @@ class UsersController extends AppController
     public function beforeFilter()
     {
         parent::beforeFilter();
-        $this->Auth->allow('add', 'logout');
-        $this->Auth->allow('fblogin', 'fb_login');
+        $this->Auth->allow('add','login','fblogin', 'fb_login');
         if (!$this->Auth->loggedIn()) {
             $this->Auth->authError = false;
         }
@@ -157,7 +156,7 @@ class UsersController extends AppController
         $user = $this->User->findById($id);
         if (empty($user)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('controller' => 'homes'));
         } else {
             $this->set('user', $user);
             $this->set('friend', $this->User->Friend1->find('all', array(
@@ -185,7 +184,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
-                $this->Flash->success(__('Thêm tài khoản thành công'));
+                $this->Flash->success(__('Đăng ký tài khoản thành công'));
                 return $this->redirect(array('action' => 'index'));
             }
             $this->Flash->error(
@@ -199,7 +198,7 @@ class UsersController extends AppController
         $user = $this->User->findById($id);
         if (empty($user)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
-            return $this->redirect(array('action' => 'view'),$id);
+            return $this->redirect(array('controller' => 'homes'));
         } elseif ($this->request->is('post') || $this->request->is('put')) {
             $this->User->id = $id;
             if ($this->User->save($this->request->data)) {
@@ -218,7 +217,7 @@ class UsersController extends AppController
         } else {
             $this->request->data = $user;
             unset($this->request->data['User']['password']);
-            $this->set('user', $this->request->data);
+            //$this->set('user', $this->request->data);
         }
     }
 
@@ -228,12 +227,16 @@ class UsersController extends AppController
         // $this->request->onlyAllow('post');
 
         $this->request->allowMethod('post');
-
+        if ($this->Auth->user('id') != $id) {
+            $this->Flash->error(__('Bạn không có quyền thực hiện'));
+            return $this->redirect(array('action' => 'index'));
+        }
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
         if ($this->User->delete()) {
+            if (file_exists(WWW_ROOT.'files/'.$id)) rmdir(WWW_ROOT.'files/'.$id);
             $this->Flash->success(__('Xóa thành công'));
             return $this->redirect(array('action' => 'index'));
         }

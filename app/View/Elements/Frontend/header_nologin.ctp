@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php echo $this->Html->charset(); ?>
+    <?php echo $this->Html->charset('utf-8'); ?>
     <title>
         <?php echo $this->fetch('title'); ?>
     </title>
+    <link href="/bookicon.ico" type="image/x-icon" rel="icon"/>
+    <link href="/bookicon.ico" type="image/x-icon" rel="shortcut icon"/>
     <?php
-    echo $this->Html->meta('icon');
-
     echo $this->Html->css(array('normalize', 'foundation.min', 'custom', 'form','rateit'));
     echo $this->Html->script(array('vendor/jquery.min', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal','rateit.min','app'));
 
@@ -24,7 +24,7 @@
     <meta property="og:image" content="http://www.your-domain.com/path/image.jpg"/>
 </head>
 <body>
-<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;"><span></span></a>
 <div id="container">
     <div id="header">
         <div class="contain-to-grid sticky">

@@ -5111,7 +5111,7 @@ Exception Attributes: array (
   'class' => 'ImgController',
   'plugin' => NULL,
 )
-Request URL: /gasaon/img/thumb_36-90-1-PB.jpg
+Request URL: /img/thumb_36-90-1-PB.jpg
 Stack Trace:
 #0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
@@ -20762,3 +20762,204 @@ Request URL: /gasaon/files/user/picture/2/thumb_avatar.jpg
 Stack Trace:
 #0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2016-05-12 09:13:55 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/users/frlist
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:14:36 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /img/quote.gif
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:14:37 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/users/frlist
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:14:38 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/user/picture/6/thumb_alone_boy.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:14:38 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/user/picture/7/thumb_danang.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:14:48 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/users/frlist
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:14:48 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /img/quote.gif
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:14:50 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/users/frlist
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:14:50 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/user/picture/6/thumb_alone_boy.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:14:50 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/files/user/picture/7/thumb_danang.jpg
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:20:51 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/users/frlist
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:20:51 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/users/frlist
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:20:59 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/users/frlist
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:21:01 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/users/frlist
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:22:07 Error: [MissingControllerException] Controller class GasaonController could not be found.
+Exception Attributes: array (
+  'class' => 'GasaonController',
+  'plugin' => NULL,
+)
+Request URL: /gasaon/users/edit/6
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:27:16 Error: [MissingControllerException] Controller class NewsController could not be found.
+Exception Attributes: array (
+  'class' => 'NewsController',
+  'plugin' => NULL,
+)
+Request URL: /news/admin/Users/view/24
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:44:02 Error: [MissingControllerException] Controller class NewsController could not be found.
+Exception Attributes: array (
+  'class' => 'NewsController',
+  'plugin' => NULL,
+)
+Request URL: /News/add
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 09:44:11 Error: [MissingControllerException] Controller class NewsController could not be found.
+Exception Attributes: array (
+  'class' => 'NewsController',
+  'plugin' => NULL,
+)
+Request URL: /News/add
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 12:20:56 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-12 12:31:54 Error: [MethodNotAllowedException] Method Not Allowed
+Request URL: /users/delete/5
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\Controller\UsersController.php(229): CakeRequest->allowMethod('post')
+#1 [internal function]: UsersController->delete('5')
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(491): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#5 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2016-05-12 12:32:19 Error: [MethodNotAllowedException] Method Not Allowed
+Request URL: /users/delete/8
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\Controller\UsersController.php(229): CakeRequest->allowMethod('post')
+#1 [internal function]: UsersController->delete('8')
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(491): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#5 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2016-05-12 12:32:33 Error: [MethodNotAllowedException] Method Not Allowed
+Request URL: /users/delete
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\Controller\UsersController.php(229): CakeRequest->allowMethod('post')
+#1 [internal function]: UsersController->delete()
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(491): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#5 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}

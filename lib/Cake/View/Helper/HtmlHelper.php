@@ -214,7 +214,7 @@ class HtmlHelper extends AppHelper {
  *
  * Create a meta tag that is output inline:
  *
- * `$this->Html->meta('icon', 'favicon.ico');
+ * `$this->Html->meta('icon', 'bookicon.ico');
  *
  * Append the meta tag to `$scripts_for_layout`:
  *
@@ -255,7 +255,7 @@ class HtmlHelper extends AppHelper {
 			);
 
 			if ($type === 'icon' && $url === null) {
-				$types['icon']['link'] = 'favicon.ico';
+				$types['icon']['link'] = 'bookicon.ico';
 			}
 
 			if (isset($types[$type])) {

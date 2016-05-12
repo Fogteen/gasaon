@@ -24,10 +24,10 @@
 							<section>
 								<div class="column">
 									<?php
-									if (strpos($user['User']['picture'],"graph.facebook.com") !== false)
-										echo $this->Html->image('https://'.$user['User']['picture']);
+									if (strpos($this->request->data['User']['picture'],"graph.facebook.com") !== false)
+										echo $this->Html->image('https://'.$this->request->data['User']['picture']);
 									else
-										echo $this->Html->image('../files/user/picture/' . $user['User']['picture_dir'] . '/thumb_' . $user['User']['picture'])
+										echo $this->Html->image('../files/user/picture/' . $this->request->data['User']['picture_dir'] . '/thumb_' . $this->request->data['User']['picture'])
 									?>
 									<?= $this->Form->input('picture',array('type' => 'file', 'label'=>'Hình đại diện'))?>
 									<?= $this->Form->input('picture_dir',array('type' => 'hidden'))?>
