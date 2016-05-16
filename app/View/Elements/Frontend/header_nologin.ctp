@@ -9,7 +9,7 @@
     <link href="/bookicon.ico" type="image/x-icon" rel="shortcut icon"/>
     <?php
     echo $this->Html->css(array('normalize', 'foundation.min', 'custom', 'form','rateit'));
-    echo $this->Html->script(array('vendor/jquery.min', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal','rateit.min','app'));
+    echo $this->Html->script(array('vendor/jquery.min', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.orbit','rateit.min','app'));
 
     echo $this->fetch('meta');
     echo $this->fetch('css');
@@ -31,7 +31,7 @@
             <nav class="top-bar" data-topbar role="navigation">
                 <ul class="title-area">
                     <li class="name">
-                        <h1><a href="#">GaSaOn</a></h1>
+                        <h1><a href="<?php echo $this->Html->url(array('controller'=>'homes')) ?>">GaSaOn</a></h1>
                     </li>
                     <li class="toggle-topbar menu-icon">
                         <a href="#"><span></span></a>
@@ -42,17 +42,9 @@
                         <li class="has-dropdown">
                             <a href="#">THỂ LOẠI</a>
                             <ul class="dropdown">
-                                <li><a href="#">Khoa Học</a></li>
-                                <li class=""><a href="#">Công Nghệ Thông Tin</a></li>
-                                <li><a href="#">Kinh Tế</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-dropdown">
-                            <a href="#">THỂ LOẠI</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Khoa Học</a></li>
-                                <li class=""><a href="#">Công Nghệ Thông Tin</a></li>
-                                <li><a href="#">Kinh Tế</a></li>
+                                <?php foreach ($category as $id => $cat) { ?>
+                                    <li><a href="<?php echo $this->Html->url(array('controller'=>'homes','action'=>'views',$id)) ?>"><?php echo $cat ?></a></li>
+                                <?php } ?>
                             </ul>
                         </li>
                         <li class="has-form">
@@ -122,8 +114,9 @@
                                 </div>
                                 <button type="submit" class="button button-block"/>
                                 Đăng ký</button>
-
                                 <?php echo $this->Form->end() ?>
+                                <h1>hoặc</h1>
+                                <?php echo $this->Html->link('', array('controller'=>'users', 'action'=>'fblogin'), array('class'=>'button','style'=> 'background-image:url(/img/../img/fblogin.png);background-size:cover;width:100%;height:110px')) ?>
 
                             </div>
 
@@ -136,11 +129,5 @@
                 </div>
             </nav>
         </div>
-        <ul class="breadcrumbs">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Features</a></li>
-            <li class="unavailable"><a href="#">Gene Splicing</a></li>
-            <li class="current"><a href="#">Cloning</a></li>
-        </ul>
     </div>
     <div id="content">

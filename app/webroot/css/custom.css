@@ -21,13 +21,13 @@ div#content {
 div.des{
     text-align: center;
     width: 100%;
-    background-color: #a0d3e8;
+    background-color: #f3f3f3;
     margin-top: 80px;
 }
 
 div.add {
     width: 100%;
-    background-color: #a0d3e8;
+    background-color: #f3f3f3;
     margin-top: 80px;
     margin-bottom: 40px;
 }
@@ -160,7 +160,7 @@ ul, ol, dl {
 }
 
 div.row.view {
-    background-color: lightblue;
+    background-color: #f3f3f3;
     margin-top: 80px;
 }
 
@@ -214,11 +214,10 @@ ul.f-dropdown li {
 .header {
     text-align: center;
     margin-top: 40px;
-    background: url("https://static.pexels.com/photos/6894/summer-photographer-pier-adventure-large.jpg") no-repeat center center;
-    background-size: cover;
-    padding: 4rem; }
+    background: #f3f3f3;
+}
 .header .main-header {
-    color: #666; }
+    color: #000; }
 
 .header-subnav {
     float: none;
@@ -367,7 +366,8 @@ img.card {
     border-radius: 10%;
     border: 1px solid #69708C;
     width: 150px;
-    height: 150px;
+    height: 200px;
+    margin: 0px auto;
 }
 
 .profile-card .button-group {
@@ -465,7 +465,7 @@ div.row.item img {
 }
 
 div.row.item:hover {
-    background-color: lightblue;
+    background-color: #f3f3f3;
 }
 
 button.friend {
@@ -505,4 +505,9 @@ ul.breadcrumbs {
     background-color:#e74c3c;
     opacity:1;filter:"alpha(opacity=100)";
     -ms-filter:"alpha(opacity=100)";
+}
+
+.orbit-container .orbit-prev, .orbit-container .orbit-next {
+    margin-top: -45px;
+    background-color: lightblue;
 }

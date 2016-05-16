@@ -32,18 +32,11 @@
                         echo $this->Html->image('../files/user/picture/' . $account['User']['picture_dir'] . '/thumb_' . $account['User']['picture'],array('alt'=>'user name','class'=>'img-circle avatar', 'data-toggle'=>'dropdown'))
                     ?>
                     <ul class="dropdown-menu user-dropdown">
-                        <li><a href="#"><span class="fa fa-user"></span> Thông tin cá nhân</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('action'=>'profile',$account['User']['id'])) ?>"><span class="fa fa-user"></span> Thông tin cá nhân</a></li>
                         <li role="separator" class="divider"></li>
-                        <li class="more">
-                            <ul>
-                                <li><a href=""><span class="fa fa-cogs"></span></a></li>
-                                <li><a href=""><span class="fa fa-lock"></span></a></li>
-                                <li><a href=""><span class="fa fa-power-off "></span></a></li>
-                            </ul>
-                        </li>
+                        <li><a href="<?php echo $this->Html->url(array('action'=>'logout')) ?>"><span class="fa fa-power-off"></span> Đăng xuất</a></li>
                     </ul>
                 </li>
-                <li ><a href="#" class="opener-right-menu"><span class="fa fa-coffee"></span></a></li>
             </ul>
         </div>
     </div>
@@ -91,8 +84,9 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="chartjs.html">Thêm quản trị viên</a></li>
-                        <li><a href="morris.html">Danh sách thành viên</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('action'=>'thongke','xem')) ?>">Sách xem nhiều nhất</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('action'=>'thongke','tai')) ?>">Sách tải nhiều nhất</a></li>
+                        <li><a href="<?php echo $this->Html->url(array('action'=>'thongke','tv')) ?>">Top thành viên</a></li>
                     </ul>
                 </li>
 

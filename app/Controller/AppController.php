@@ -52,6 +52,7 @@ class AppController extends Controller {
         else if (empty($this->Auth->user('id'))) $this->layout='nologin';
         else $this->layout='login';
         $this->set('account',$this->User->findById($this->Auth->user('id')));
+        $this->set('category',$this->Ebook->Category->find('list'));
         $this->set('nofi',$this->User->Nofication->find('all',array(
             'conditions' => array(
                 'Nofication.user_id' => $this->Auth->user('id'),

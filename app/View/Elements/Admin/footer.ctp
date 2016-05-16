@@ -1,5 +1,5 @@
 <?php
-echo $this->Html->script(array('jquery.min','jquery.ui.min','bootstrap.min','plugins/moment.min','plugins/icheck.min','plugins/jquery.nicescroll','plugins/chart.min','plugins/jquery.validate.min','plugins/jquery.datatables.min','plugins/datatables.bootstrap.min','dropzone','main' ));
+echo $this->Html->script(array('jquery.min', 'jquery.ui.min', 'bootstrap.min', 'plugins/moment.min', 'plugins/icheck.min', 'plugins/jquery.nicescroll', 'plugins/chart.min', 'plugins/jquery.validate.min', 'plugins/jquery.datatables.min', 'plugins/datatables.bootstrap.min', 'dropzone', 'main'));
 ?>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!-- start: Javascript -->
@@ -49,89 +49,90 @@ echo $this->Html->script(array('jquery.min','jquery.ui.min','bootstrap.min','plu
         var randomScalingFactor = function () {
             return Math.round(Math.random() * 100);
         };
-        var lineChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [{
-                label: "My First dataset",
-                fillColor: "rgba(21,186,103,0.4)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(66,69,67,0.3)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [18, 9, 5, 7, 4.5, 4, 5, 4.5, 6, 5.6, 7.5]
-            }]
-        };
 
-
-        var doughnutData2 = [
-            {
-                value: 100,
-                color: "#129352",
-                highlight: "#15BA67",
-                label: "Alfa"
-            },
-            {
-                value: 250,
-                color: "#FF6656",
-                highlight: "#FF6656",
-                label: "Beta"
-            },
-            {
-                value: 100,
-                color: "#FDB45C",
-                highlight: "#15BA67",
-                label: "Gamma"
-            },
-            {
-                value: 40,
-                color: "#FD786A",
-                highlight: "#15BA67",
-                label: "Peta"
-            },
-            {
-                value: 120,
-                color: "#15A65D",
-                highlight: "#15BA67",
-                label: "X"
-            }
-
-        ];
-
-        var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(21,113,186,0.5)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(21,113,186,0.2)",
-                    highlightStroke: "rgba(21,113,186,0.2)",
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                }
-            ]
-        };
 
         window.onload = function () {
-            var ctx2 = $(".line-chart")[0].getContext("2d");
-            window.myLine = new Chart(ctx2).Line(lineChartData, {
-                responsive: true,
-                showTooltips: true,
-                multiTooltipTemplate: "<%= value %>",
-                maintainAspectRatio: false
-            });
+            user = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            book = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            $.ajax({
+                async: true,
+                url: '<?php echo $this->Html->url(array('controller' => 'admins', 'action' => 'tkuser')) ?>',
+                type: 'GET',
+                cache: false,
+                success: function (data) {
+                    $.each(data, function (key, value) {
+                        console.log(value);
+                        user[value[0].th - 1] = value[0].sl;
+                        renderUser(user);
+                    });
 
-            var ctx3 = $(".bar-chart")[0].getContext("2d");
-            window.myLine = new Chart(ctx3).Bar(barChartData, {
-                responsive: true,
-                showTooltips: true
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra');
+                }
             });
+            $.ajax({
+                async: true,
+                url: '<?php echo $this->Html->url(array('controller' => 'admins', 'action' => 'tkbook')) ?>',
+                type: 'GET',
+                cache: false,
+                success: function (data) {
+                    $.each(data, function (key, value) {
+                        book[value[0].th - 1] = value[0].sl;
+                        renderBook(book);
+                    });
 
-            var ctx4 = $(".doughnut-chart2")[0].getContext("2d");
-            window.myDoughnut2 = new Chart(ctx4).Doughnut(doughnutData2, {
-                responsive: true,
-                showTooltips: true
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra');
+                }
             });
+            var renderUser = function(user) {
+                var lineChartData = {
+                    labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+                    datasets: [{
+                        label: "My First dataset",
+                        fillColor: "rgba(21,186,103,0.4)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(66,69,67,0.3)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: user
+                    }]
+                };
+                var ctx2 = $(".line-chart")[0].getContext("2d");
+                window.myLine = new Chart(ctx2).Line(lineChartData, {
+                    responsive: true,
+                    showTooltips: true,
+                    multiTooltipTemplate: "<%= value %>",
+                    maintainAspectRatio: false
+                });
+            };
+
+            var renderBook = function(book) {
+                var barChartData = {
+                    labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+                    datasets: [
+                        {
+                            label: "My Second dataset",
+                            fillColor: "rgba(21,113,186,0.5)",
+                            strokeColor: "rgba(151,187,205,0.8)",
+                            highlightFill: "rgba(21,113,186,0.2)",
+                            highlightStroke: "rgba(21,113,186,0.2)",
+                            data: book
+                        }
+                    ]
+                };
+                var ctx3 = $(".bar-chart")[0].getContext("2d");
+                window.myLine = new Chart(ctx3).Bar(barChartData, {
+                    responsive: true,
+                    showTooltips: true
+                });
+            }
+
+
+
 
         };
 
@@ -191,7 +192,7 @@ echo $this->Html->script(array('jquery.min','jquery.ui.min','bootstrap.min','plu
                     minlength: "Mật khẩu phải có ít nhất 6 kí tự",
                     equalTo: "Hãy nhập mật khẩu giống ở trên"
                 },
-                'data[User][email]':{
+                'data[User][email]': {
                     required: "Hãy nhập địa chỉ email",
                     email: "Địa chỉ email không hợp lệ"
                 }
@@ -200,7 +201,7 @@ echo $this->Html->script(array('jquery.min','jquery.ui.min','bootstrap.min','plu
 
     });
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_flat-aero',
             radioClass: 'iradio_flat-aero'
@@ -209,7 +210,7 @@ echo $this->Html->script(array('jquery.min','jquery.ui.min','bootstrap.min','plu
     <?php } ?>
 
     <?php  if ($this->action == 'listuser' || $this->action == 'listbook'){?>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#datatables-example').DataTable();
     });
     <?php } ?>

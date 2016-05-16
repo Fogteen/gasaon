@@ -21,23 +21,28 @@ class Ebook extends AppModel {
     public $hasMany = array(
         'Request' => array(
             'className' => 'Request',
-            'foreignKey' => 'ebook_id'
+            'foreignKey' => 'ebook_id',
+            'dependent' => true
         ),
         'Rating' => array(
             'className' => 'Rating',
-            'foreignKey' => 'ebook_id'
+            'foreignKey' => 'ebook_id',
+            'dependent' => true
         ),
         'Nofication' => array(
             'className' => 'Nofication',
-            'foreignKey' => 'ebook_id'
+            'foreignKey' => 'ebook_id',
+            'dependent' => true
         ),
         'Viewer' => array(
             'className' => 'Viewer',
-            'foreignKey' => 'book'
+            'foreignKey' => 'book',
+            'dependent' => true
         ),
         'Downloader' => array(
             'className' => 'Downloader',
-            'foreignKey' => 'book'
+            'foreignKey' => 'book',
+            'dependent' => true
         )
     );
 

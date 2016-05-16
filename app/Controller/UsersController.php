@@ -43,7 +43,8 @@ class UsersController extends AppController
                 'controller' => 'users',
                 'action' => 'login',
             )
-        )
+        ),
+        'Session'
     );
 
     /*
@@ -74,6 +75,7 @@ class UsersController extends AppController
      */
     public function fblogin()
     {
+        session_start();
         $this->autoRender = false; //Không dùng view
         Facebook\FacebookSession::setDefaultApplication(FACEBOOK_APP_ID, FACEBOOK_APP_SECRET); //Cung cấp facebook id và secret
         $helper = new Facebook\FacebookRedirectLoginHelper(FACEBOOK_REDIRECT_URI); //Kết nối
@@ -98,7 +100,7 @@ class UsersController extends AppController
         $fb_data = array();
         if (isset($session)) {
             $_SESSION['token'] = $session->getToken(); //lấy token nếu chưa có
-            $request = new Facebook\FacebookRequest($session, 'GET', '/me?fields=username,last_name,email');
+            $request = new Facebook\FacebookRequest($session, 'GET', '/me?fields=first_name,last_name,email');
             $response = $request->execute();
             $graph = $response->getGraphObject(Facebook\GraphUser::className());
             $fb_data = $graph->asArray();
@@ -114,11 +116,9 @@ class UsersController extends AppController
                     }
                 } else { // Nếu chưa thì lấy thông tin lưu vào CSDL và đăng nhập
                     $data['email'] = $fb_data['email'];
-                    $data['username'] = $fb_data['username'];
-                    $data['last_name'] = $fb_data['last_name'];
+                    $data['username'] = $fb_data['first_name'].$fb_data['last_name'];
                     $data['social_id'] = $fb_data['id'];
                     $data['picture'] = 'graph.facebook.com/' . $id . '/picture?width=100';
-                    $this->User->save($data);
                     if ($this->User->save($data)) {
                         if ($this->Auth->login($data)) {
                             $this->Session->write('user', $this->Auth->user('email'));

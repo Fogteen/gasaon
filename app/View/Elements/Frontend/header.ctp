@@ -10,7 +10,7 @@
 
     echo $this->Html->css(array('normalize','cake','foundation.min','foundation-icons/foundation-icons', 'custom', 'dropzone', 'rateit', 'chat-style'));
 
-    echo $this->Html->script(array('vendor/jquery', 'jquery.pusherchat', 'jquery.playSound', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.dropdown', 'foundation/foundation.tab', 'plugins/jquery.validate.min','app', 'dropzone', 'pusher.min', 'rateit.min'));
+    echo $this->Html->script(array('vendor/jquery', 'jquery.pusherchat', 'jquery.playSound', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.dropdown', 'foundation/foundation.tab', 'foundation/foundation.orbit', 'plugins/jquery.validate.min','app', 'dropzone', 'pusher.min', 'rateit.min'));
 
     ?>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
@@ -29,7 +29,7 @@
             <nav class="top-bar" data-topbar role="navigation">
                 <ul class="title-area">
                     <li class="name">
-                        <h1><a href="#">GaSaOn</a></h1>
+                        <h1><a href="<?php echo $this->Html->url(array('controller'=>'homes')) ?>">GaSaOn</a></h1>
                     </li>
                     <li class="toggle-topbar menu-icon">
                         <a href="#"><span></span></a>
@@ -40,17 +40,9 @@
                         <li class="has-dropdown">
                             <a href="#">THỂ LOẠI</a>
                             <ul class="dropdown">
-                                <li><a href="#">Khoa Học</a></li>
-                                <li class=""><a href="#">Công Nghệ Thông Tin</a></li>
-                                <li><a href="#">Kinh Tế</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-dropdown">
-                            <a href="#">THỂ LOẠI</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Khoa Học</a></li>
-                                <li class=""><a href="#">Công Nghệ Thông Tin</a></li>
-                                <li><a href="#">Kinh Tế</a></li>
+                                <?php foreach ($category as $id => $cat) { ?>
+                                <li><a href="<?php echo $this->Html->url(array('controller'=>'homes','action'=>'views',$id)) ?>"><?php echo $cat ?></a></li>
+                                <?php } ?>
                             </ul>
                         </li>
                         <li class="has-form">
@@ -71,7 +63,7 @@
                         <li class="account"><a data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">
                                 <?php
                                 if (strpos($account['User']['picture'], "graph.facebook.com") !== false)
-                                    echo $this->Html->image('https://' . $account['User']['picture']);
+                                    echo $this->Html->image('https://' . $account['User']['picture'],array('style'=>'width:50px;height:50px'));
                                 else
                                     echo $this->Html->image('../files/user/picture/' . $account['User']['picture_dir'] . '/thumb_' . $account['User']['picture'])
                                 ?>
@@ -90,15 +82,6 @@
                 </section>
             </nav>
         </div>
-        <ul class="breadcrumbs">
-            <li><?php echo $this->Html->link('Trang chủ', array('controller'=>'homes')) ?></li>
-            <?php if ($this->params['controller'] != 'homes') {?>
-            <li class="unavailable"><?php echo $this->Html->link($this->params['controller'], array('controller'=>$this->params['controller'])) ?></li>
-            <?php } ?>
-            <?php if ($this->action != 'index') {?>
-            <li class="current"><?php echo $this->Html->link($this->action, array('controller'=>$this->params['controller']))?> </li>
-            <?php } ?>
-        </ul>
         <div id="nofication" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true"
              role="dialog">
             <div class="form">

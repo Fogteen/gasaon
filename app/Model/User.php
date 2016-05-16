@@ -14,27 +14,43 @@ class User extends AppModel {
     public $hasMany = array(
         'Ebook' => array(
             'className' => 'Ebook',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'dependent' => true
         ),
         'Request' => array(
             'className' => 'Request',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'dependent' => true
         ),
         'Nofication' => array(
             'className' => 'Nofication',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'dependent' => true
         ),
         'Rating' => array(
             'className' => 'Rating',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'dependent' => true
         ),
         'Friend1' => array(
             'className' => 'Friend',
-            'foreignKey' => 'user_one_id'
+            'foreignKey' => 'user_one_id',
+            'dependent' => true
         ),
         'Friend2' => array(
             'className' => 'Friend',
-            'foreignKey' => 'user_two_id'
+            'foreignKey' => 'user_two_id',
+            'dependent' => true
+        ),
+        'Message1' => array(
+            'className' => 'Message',
+            'foreignKey' => 'from',
+            'dependent' => true
+        ),
+        'Message2' => array(
+            'className' => 'Message',
+            'foreignKey' => 'to',
+            'dependent' => true
         )
     );
 

@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
 
 class AdminsController extends AppController {
 
-    public $uses = array('User','Ebook','Category');
+    public $uses = array('User','Ebook','Category','Viewer', 'Downloader');
 
     public $components = array(
         'Auth' => array(
@@ -34,10 +34,15 @@ class AdminsController extends AppController {
         parent::beforeFilter();
     }
 
-    public function index()
+    public function profile($id = null)
     {
-        $this->paginate = array('limit' => 1); //Phân trang với 5 item
-        $this->set('admins', $this->paginate('User'));
+        $user = $this->User->findById($id);
+        if (empty($user)) {
+            $this->Flash->error(__("Có lỗi xảy ra"));
+            return $this->redirect(array('action' => 'home'));
+        } else {
+            $this->set('profile', $user);
+        }
     }
 
     public function login()
@@ -55,8 +60,16 @@ class AdminsController extends AppController {
         }
     }
 
-    public  function home() {
-        //$this->Session->write('account', $this->Auth->user());
+    public function logout() {
+        $this->Session->destroy();//Hủy tất cả session
+        return $this->redirect(array('controller' => 'admins', 'action'=>'login'));
+    }
+
+    public function home() {
+        $usersum = $this->User->find('count');
+        $booksum = $this->Ebook->find('count');
+        $this->set('usersum', $usersum);
+        $this->set('booksum', $booksum);
     }
 
     public function adduser()
@@ -121,6 +134,42 @@ class AdminsController extends AppController {
             unset($this->request->data['User']['password']);
             $this->set('user', $this->request->data);
         }
+    }
+
+    public function editbook($id = null) {
+        if (empty($this->Ebook->findById($id))) {
+            $this->Flash->error(__("Không tìm thấy dữ liệu"));
+            return $this->redirect(array('action' => 'index'));
+        }
+        elseif ($this->request->is(array('post', 'put'))) {
+            $this->Ebook->id = $id;
+            $olddata = $this->Ebook->read(null,$id);
+
+            if($this->request->data['Ebook']['picture']['name']!= "")
+                $this->request->data['Ebook']['picture']['name'] = 'thumb_'.$this->request->data['Ebook']['picture']['name'];
+            if ($this->Ebook->save($this->request->data)) {
+                if(file_exists(WWW_ROOT."files/".$olddata['Ebook']['user_id']."/".$olddata['Ebook']['picture']) && $this->request->data['Ebook']['picture']['name']!= "")
+                    unlink(WWW_ROOT."files/".$olddata['Ebook']['user_id']."/".$olddata['Ebook']['picture']);
+                $folder = new Folder(WWW_ROOT."files/ebook/picture/".$id);
+                $file = new File(WWW_ROOT."files/ebook/picture/".$id."/thumb_".$this->request->data['Ebook']['picture']['name']);
+                if ($file->exists()) {
+                    $dir = new Folder(WWW_ROOT.'files/'.$olddata['Ebook']['user_id'], true);
+                    $file->copy($dir->path . DS .$this->request->data['Ebook']['picture']['name'] );
+                }
+                $folder->delete();
+                $this->Flash->success(__('Chỉnh sửa thành công'));
+                return $this->redirect(array('action' => 'listbook'));
+            } else {
+                $this->Flash->error(__('Có lỗi xảy ra'));
+            }
+        } else {
+            $options = array('conditions' => array('Ebook.' . $this->Ebook->primaryKey => $id));
+            $this->request->data = $this->Ebook->find('first', $options);
+            $this->set('ebook',$this->request->data);
+        }
+        $users = $this->Ebook->User->find('list');
+        $categories = $this->Ebook->Category->find('list');
+        $this->set(compact('users', 'categories'));
     }
 
     public function deleteuser($id = null)
@@ -367,5 +416,53 @@ class AdminsController extends AppController {
             }
         }
         return new CakeResponse(array('body' => json_encode($result),'type'=>'json'));
+    }
+
+    public function tkuser() {
+        $this->layout = false;
+        $this->autoRender = false;
+        $tk = $this->User->find('all',array(
+            'fields' => array('count(User.created) as sl','Month(User.created) as th'),
+            'order' => 'Month(User.created)',
+            'group' => 'Month(User.created)'
+        ));
+        return new CakeResponse(array('body' => json_encode($tk),'type'=>'json'));
+    }
+
+    public function tkbook() {
+        $this->layout = false;
+        $this->autoRender = false;
+        $tk = $this->Ebook->find('all',array(
+            'fields' => array('count(Ebook.created) as sl','Month(Ebook.created) as th'),
+            'order' => 'Month(Ebook.created)',
+            'group' => 'Month(Ebook.created)'
+        ));
+        return new CakeResponse(array('body' => json_encode($tk),'type'=>'json'));
+    }
+
+    public function thongke($type=null) {
+        if ($type == null)
+            return $this->redirect(array('controller'=>'admins','action' => 'home'));
+        elseif ($type == 'xem') {
+            $xem = $this->Viewer->find('all', array(
+                'order' => 'count(Viewer.book) DESC',
+                'group' => 'Viewer.book',
+            ));
+            $this->set('xem', $xem);
+        }
+        elseif ($type == 'tai') {
+            $tai = $this->Downloader->find('all', array(
+                'order' => 'count(Downloader.book) DESC',
+                'group' => 'Downloader.book',
+            ));
+            $this->set('tai', $tai);
+        }
+        elseif ($type == 'tv') {
+            $tv = $this->Ebook->find('all', array(
+                'order' => 'count(Ebook.user_id) DESC',
+                'group' => 'Ebook.user_id',
+            ));
+            $this->set('tv', $tv);
+        }
     }
 }

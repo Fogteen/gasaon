@@ -105,7 +105,7 @@ class EbooksController extends AppController
             'conditions' => array(
                 'Ebook.categories_id' => $ebook['Ebook']['categories_id']
             ),
-            'limit' => 5
+            'limit' => 10
         ));
         if (empty($ebook)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
