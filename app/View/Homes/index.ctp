@@ -12,22 +12,11 @@
             </div>
         </section>
     </div>
-<?php } else { ?>
-    <div class="row">
-        <ul class="example-orbit" data-orbit data-options="animation:slide;
-                  pause_on_hover:true;
-                  slide_number: false;
-                  navigation_arrows:false;
-                  ">
-            <li><img src="../img/bg1.jpg"> </li>
-            <li><img src="../img/bg2.jpg"></li>
-        </ul>
-    </div>
-<?php } ?>
-<div class="row">
+<?php }  ?>
+<div class="row home">
     <div class="large-12 columns">
         <div>
-            <h4 style="float:left;margin-bottom: 20px;padding-top:20px;color:grey">XEM NHIỀU NHẤT</h4>
+            <h4 style="text-align:center;margin-bottom: 30px;color:grey">XEM NHIỀU NHẤT</h4>
         </div>
         <ul class="example-orbit" data-orbit data-options="animation:slide;
                   pause_on_hover:true;
@@ -67,7 +56,7 @@
     </div>
     <div class="large-12 columns">
         <div>
-            <h4 style="float:left;margin-bottom: 20px;padding-top:20px;color:grey">TẢI XUỐNG NHIỀU NHẤT</h4>
+            <h4 style="text-align:center;margin-bottom: 30px;color:grey">TẢI XUỐNG NHIỀU NHẤT</h4>
         </div>
         <ul class="example-orbit" data-orbit data-options="animation:slide;
                   pause_on_hover:true;
@@ -105,4 +94,46 @@
             <?php } ?>
         </ul>
     </div>
+    <?php foreach ($cate as $key => $cat) { ?>
+        <div class="large-12 columns">
+            <div>
+                <h4 style="text-transform: uppercase;text-align:center;margin-bottom: 30px;color:grey"><?php echo $cat['Category']['name'] ?></h4>
+            </div>
+            <ul class="example-orbit" data-orbit data-options="animation:slide;
+                  pause_on_hover:true;
+                  slide_number: false;
+                  navigation_arrows:true;
+                  bullets:false;
+                  timer:false">
+                <?php foreach ($cat['Ebook'] as $key1 => $ebook) {
+                    if ($key1 % 4 == 0) { ?>
+                        <li>
+                        <ul class="ebview small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+                        <li>
+                            <?php $image = $this->Html->image('../files/' . $ebook['user_id'] . '/' . $ebook['picture'], array('class' => 'card'));
+                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['id']), array('escape' => false)) ?>
+                            <br>
+                            <?php echo $ebook['title'] ?>
+                        </li>
+                    <?php } elseif ($key1 % 4 != 3) { ?>
+                        <li>
+                            <?php $image = $this->Html->image('../files/' . $ebook['user_id'] . '/' . $ebook['picture'], array('class' => 'card'));
+                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['id']), array('escape' => false)) ?>
+                            <br>
+                            <?php echo $ebook['title'] ?>
+                        </li>
+                    <?php } else { ?>
+                        <li>
+                            <?php $image = $this->Html->image('../files/' . $ebook['user_id'] . '/' . $ebook['picture'], array('class' => 'card'));
+                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['id']), array('escape' => false)) ?>
+                            <br>
+                            <?php echo $ebook['title'] ?>
+                        </li>
+                        </ul>
+                    <?php } ?>
+                    </li>
+                <?php } ?>
+            </ul>
+        </div>
+    <?php } ?>
 </div>

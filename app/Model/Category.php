@@ -9,7 +9,7 @@
 class Category extends AppModel {
 
     public $hasMany = array(
-        'Book' => array(
+        'Ebook' => array(
             'className' => 'Ebook',
             'foreignKey' => 'categories_id',
             'dependent' => true

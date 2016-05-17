@@ -67,6 +67,10 @@ class EbooksController extends AppController
     public function view($id = null)
     {
         $ebook = $this->Ebook->findById($id);
+        if (empty($ebook)) {
+            $this->Flash->error(__("Không tìm thấy dữ liệu"));
+            return $this->redirect(array('action' => 'index'));
+        } else {
         $this->viewing($id);
         $view = $this->Viewer->find('count', array(
             'conditions' => array(
@@ -107,10 +111,7 @@ class EbooksController extends AppController
             ),
             'limit' => 10
         ));
-        if (empty($ebook)) {
-            $this->Flash->error(__("Không tìm thấy dữ liệu"));
-            return $this->redirect(array('action' => 'index'));
-        } else {
+
             $this->set('ebook', $ebook);
             $this->set('request', $request);
             $this->set('rate', $rate);
@@ -330,7 +331,7 @@ class EbooksController extends AppController
         if ($this->request->is('post')) {
             $this->Session->write('search', $this->request->data['Ebook']['ebsearch']);
         }
-        $this->paginate = array('limit' => 2);//phân trang 10 item
+        $this->paginate = array('limit' => 5);//phân trang 10 item
         $this->set('ebooks', $this->paginate('Ebook',array('Ebook.title LIKE' =>'%'.$this->Session->read('search').'%' )));
     }
 

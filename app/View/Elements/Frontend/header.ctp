@@ -8,14 +8,15 @@
     <?php
     echo $this->Html->meta('icon');
 
-    echo $this->Html->css(array('normalize','cake','foundation.min','foundation-icons/foundation-icons', 'custom', 'dropzone', 'rateit', 'chat-style'));
+    echo $this->Html->css(array('normalize', 'cake', 'foundation.min', 'foundation-icons/foundation-icons', 'custom', 'dropzone', 'rateit', 'chat-style'));
 
-    echo $this->Html->script(array('vendor/jquery', 'jquery.pusherchat', 'jquery.playSound', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.dropdown', 'foundation/foundation.tab', 'foundation/foundation.orbit', 'plugins/jquery.validate.min','app', 'dropzone', 'pusher.min', 'rateit.min'));
+    echo $this->Html->script(array('vendor/jquery', 'jquery.pusherchat', 'jquery.playSound', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.dropdown', 'foundation/foundation.tab', 'foundation/foundation.orbit', 'plugins/jquery.validate.min', 'app', 'dropzone', 'pusher.min', 'rateit.min'));
 
     ?>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <meta property="og:url" content="http://localhost<?php echo('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);?>"/>
+    <meta property="og:url"
+          content="http://localhost<?php echo('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>"/>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="Your Website Title"/>
     <meta property="og:description" content="Your description"/>
@@ -29,7 +30,9 @@
             <nav class="top-bar" data-topbar role="navigation">
                 <ul class="title-area">
                     <li class="name">
-                        <h1><a href="<?php echo $this->Html->url(array('controller'=>'homes')) ?>">GaSaOn</a></h1>
+                        <h1>
+                            <a href="<?php echo $this->Html->url(array('controller' => 'homes', 'action' => 'index')) ?>">GaSaOn</a>
+                        </h1>
                     </li>
                     <li class="toggle-topbar menu-icon">
                         <a href="#"><span></span></a>
@@ -41,29 +44,31 @@
                             <a href="#">THỂ LOẠI</a>
                             <ul class="dropdown">
                                 <?php foreach ($category as $id => $cat) { ?>
-                                <li><a href="<?php echo $this->Html->url(array('controller'=>'homes','action'=>'views',$id)) ?>"><?php echo $cat ?></a></li>
+                                    <li>
+                                        <a href="<?php echo $this->Html->url(array('controller' => 'homes', 'action' => 'view', $id)) ?>"><?php echo $cat ?></a>
+                                    </li>
                                 <?php } ?>
                             </ul>
                         </li>
                         <li class="has-form">
-                            <form>
-                                <div class="row collapse">
-                                    <div class="small-9 columns">
-                                        <input type="text" style="height: 32px">
-                                    </div>
-                                    <div class="small-3 columns">
-                                        <a href="#" class="alert button fi-magnifying-glass"></a>
-                                    </div>
+                            <?php echo $this->Form->create('Ebook', array('url' => array('controller' => 'homes', 'action' => 'search'))) ?>
+                            <div class="row collapse">
+                                <div class="small-8 columns">
+                                    <?php echo $this->Form->text('ebsearch'); ?>
                                 </div>
-                            </form>
+                                <div class="small-4 columns">
+                                    <?php echo $this->Form->button('', array('class' => 'alert button fi-magnifying-glass', 'type' => 'submit')) ?>
+                                </div>
+                            </div>
+                            <?php echo $this->Form->end() ?>
                         </li>
                     </ul>
                     <ul class="right">
-                        <li><?= $this->Html->link(__(' Tải lên'), array('controller' => 'ebooks', 'action' => 'upload'),array('class' => 'upload button success fi-upload')) ?></li>
+                        <li><?= $this->Html->link(__(' Tải lên'), array('controller' => 'ebooks', 'action' => 'upload'), array('class' => 'upload button success fi-upload')) ?></li>
                         <li class="account"><a data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">
                                 <?php
                                 if (strpos($account['User']['picture'], "graph.facebook.com") !== false)
-                                    echo $this->Html->image('https://' . $account['User']['picture'],array('style'=>'width:50px;height:50px'));
+                                    echo $this->Html->image('https://' . $account['User']['picture'], array('style' => 'width:50px;height:50px'));
                                 else
                                     echo $this->Html->image('../files/user/picture/' . $account['User']['picture_dir'] . '/thumb_' . $account['User']['picture'])
                                 ?>

@@ -172,6 +172,15 @@ div.row.results {
     margin-top: 40px;
 }
 
+div.row.home {
+    margin-top: 80px;
+}
+
+div.row.detail {
+    background: #f3f3f3;
+    margin-top: 80px;
+}
+
 .footer {
     background-color: #292c2f;
     text-align: center;
