@@ -5,7 +5,6 @@ body {
     width: 100%;
     background-image: url(../img/bgfull1.jpg);
     background-size: cover;
-
 }
 
 div#container {
@@ -173,7 +172,7 @@ div.row.results {
 }
 
 div.row.home {
-    margin-top: 80px;
+    margin-top: 20px;
 }
 
 div.row.detail {
@@ -519,4 +518,36 @@ ul.breadcrumbs {
 .orbit-container .orbit-prev, .orbit-container .orbit-next {
     margin-top: -45px;
     background-color: lightblue;
+}
+
+.wrap{
+    margin:0 auto;
+    width:1000px;
+}
+.logo{
+    text-align:center;
+    margin-top:100px;
+}
+.logo img{
+    width:350px;
+}
+.logo p{
+    color:#272727;
+    font-size:40px;
+    margin-top:1px;
+}
+.logo p span{
+    color:lightgreen;
+}
+.sub a{
+    color:#fff;
+    background:#272727;
+    text-decoration:none;
+    padding:10px 20px;
+    font-size:13px;
+    font-family: arial, serif;
+    font-weight:bold;
+    -webkit-border-radius:.5em;
+    -moz-border-radius:.5em;
+    -border-radius:.5em;
 }

@@ -20,7 +20,11 @@ class AdminsController extends AppController {
                     'userModel' => 'User'
                 )
             ),
-            'authorize' => array('Controller')
+            'authorize' => array('Controller'),
+            'loginAction' => array(
+                'controller' => 'admins',
+                'action' => 'login',
+            )
         )
     );
 
@@ -78,7 +82,7 @@ class AdminsController extends AppController {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Flash->success(__('Thêm tài khoản thành công'));
-                return $this->redirect(array('action' => 'login'));
+                return $this->redirect(array('action' => 'listuser'));
             }
             $this->Flash->error(
                 __('Xảy ra lỗi')
@@ -111,18 +115,32 @@ class AdminsController extends AppController {
         }
     }
 
+    public function viewbook($id = null)
+    {
+        $ebook = $this->Ebook->findById($id);
+        if (empty($ebook)) {
+            $this->Flash->error(__("Không tìm thấy dữ liệu"));
+            return $this->redirect(array('action' => 'listbook'));
+        } else {
+            $this->set('ebook', $ebook);
+        }
+    }
+
     public function edit($id = null)
     {
         $user = $this->User->findById($id);
         if (empty($user)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
-            return $this->redirect(array('action' => 'index'));
-        }
-        elseif ($this->request->is('post') || $this->request->is('put')) {
+            return $this->redirect(array('controller' => 'listuser'));
+        } elseif ($this->request->is('post') || $this->request->is('put')) {
             $this->User->id = $id;
             if ($this->User->save($this->request->data)) {
-                unlink(WWW_ROOT.'files/user/picture/'.$user['User']['picture_dir'].'/'.$user['User']['picture']);
-                unlink(WWW_ROOT.'files/user/picture/'.$user['User']['picture_dir'].'/thumb_'.$user['User']['picture']);
+                if (!empty($this->request->data['User']['picture']) && $this->request->data['User']['picture']['name'] != '' && $this->request->data['User']['picture']['name'] != $user['User']['picture']) {
+                    if (file_exists(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/' . $user['User']['picture']))
+                        unlink(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/' . $user['User']['picture']);
+                    if (file_exists(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/thumb_' . $user['User']['picture']))
+                        unlink(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/thumb_' . $user['User']['picture']);
+                }
                 $this->Flash->success(__('Cập nhật thành công'));
                 return $this->redirect(array('action' => 'listuser'));
             }
@@ -172,7 +190,7 @@ class AdminsController extends AppController {
         $this->set(compact('users', 'categories'));
     }
 
-    public function deleteuser($id = null)
+    public function delete($id = null)
     {
         // Prior to 2.5 use
         // $this->request->onlyAllow('post');
@@ -464,5 +482,93 @@ class AdminsController extends AppController {
             ));
             $this->set('tv', $tv);
         }
+    }
+
+    /**
+     * index method
+     *
+     * @return void
+     */
+    public function listcat() {
+        $list_cat = $this->Category->find('all');
+        $this->set('ls',$list_cat);
+    }
+
+    /**
+     * view method
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function viewcat($id = null) {
+        if (!$this->Category->exists($id)) {
+            throw new NotFoundException(__('Invalid category'));
+        }
+        $options = array('conditions' => array('Category.' . $this->Category->primaryKey => $id));
+        $this->set('category', $this->Category->find('first', $options));
+    }
+
+    /**
+     * add method
+     *
+     * @return void
+     */
+    public function addcat() {
+        if ($this->request->is('post')) {
+            $this->Category->create();
+            if ($this->Category->save($this->request->data)) {
+                $this->Flash->success(__('The category has been saved.'));
+                return $this->redirect(array('action' => 'listcat'));
+            } else {
+                $this->Flash->error(__('The category could not be saved. Please, try again.'));
+            }
+        }
+    }
+
+    /**
+     * edit method
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function editcat($id = null) {
+        if (!$this->Category->exists($id)) {
+            throw new NotFoundException(__('Invalid category'));
+        }
+        if ($this->request->is(array('post', 'put'))) {
+            $this->Category->id = $id;
+            if ($this->Category->save($this->request->data)) {
+                $this->Flash->success(__('Chỉnh sửa danh mục thành công.'));
+                return $this->redirect(array('action' => 'listcat'));
+            } else {
+                $this->Flash->error(__('Có lỗi. Hãy thử lại'));
+            }
+        } else {
+            $options = array('conditions' => array('Category.' . $this->Category->primaryKey => $id));
+            $this->request->data = $this->Category->find('first', $options);
+        }
+    }
+
+    /**
+     * delete method
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function deletecat($id = null) {
+        $this->Category->id = $id;
+        if (!$this->Category->exists()) {
+            throw new NotFoundException(__('Invalid category'));
+        }
+        $this->request->allowMethod('post', 'delete');
+        if ($this->Category->delete()) {
+            $this->Flash->success(__('The category has been deleted.'));
+        } else {
+            $this->Flash->error(__('The category could not be deleted. Please, try again.'));
+        }
+        return $this->redirect(array('action' => 'index'));
     }
 }

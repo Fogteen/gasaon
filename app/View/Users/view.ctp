@@ -39,14 +39,15 @@
             <h4>TẤT CẢ SÁCH</h4>
         </div>
         <ul class="ebview small-block-grid-2 medium-block-grid-3 large-block-grid-5">
-            <?php foreach ($user['Ebook'] as $ebook) { ?>
+            <?php foreach ($user['Ebook'] as $ebook) {
+                if ($ebook['publish'] == 1) {?>
                 <li>
                     <?php $image = $this->Html->image('../files/' . $ebook['user_id'] . '/' . $ebook['picture'],array('class'=>'card'));
                     echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['id']), array('escape' => false)) ?>
                     <br>
                     <?php echo $ebook['title'] ?>
                 </li>
-            <?php } ?>
+            <?php }} ?>
         </ul>
     </div>
 

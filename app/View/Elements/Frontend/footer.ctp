@@ -3,13 +3,11 @@
     <footer class="footer">
         <div class="row">
             <div class="small-12 columns">
-                <p class="slogan">Gác Sách</p>
+                <p class="slogan">Gác Sách Online</p>
                 <p class="links">
-                    <a href="#">Home</a>
-                    <a href="#">Ebook</a>
-                    <a href="#">User</a>
-                    <a href="#">About</a>
-                    <a href="#">Contact</a>
+                    <a href="#">Trang chủ</a>
+                    <a href="#">Thông tin</a>
+                    <a href="#">Liên hệ</a>
                 </p>
                 <p class="copywrite">Copywrite © 2016</p>
             </div>

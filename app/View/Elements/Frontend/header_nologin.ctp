@@ -91,7 +91,6 @@
                                     <?php echo $this->Form->input('password', array('label' => 'Mật khẩu')) ?>
                                 </div>
 
-                                <p class="forgot"><a href="#">Quên mật khẩu?</a></p>
 
                                 <button class="button button-block"/>
                                 Đăng nhập</button>

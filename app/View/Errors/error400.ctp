@@ -1,29 +1,62 @@
-<?php
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.View.Errors
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
-?>
-<h2><?php echo $message; ?></h2>
-<p class="error">
-	<strong><?php echo __d('cake', 'Error'); ?>: </strong>
-	<?php printf(
-		__d('cake', 'The requested address %s was not found on this server.'),
-		"<strong>'{$url}'</strong>"
-	); ?>
-</p>
-<?php
-if (Configure::read('debug') > 0):
-	echo $this->element('exception_stack_trace');
-endif;
-?>
+<?php $this->layout = false?>
+<head>
+	<style type="text/css">
+		body{
+			font-family: 'Love Ya Like A Sister', cursive;
+		}
+		body{
+			background:#eaeaea;
+		}
+		.wrap{
+			margin:0 auto;
+			width:1000px;
+		}
+		.logo{
+			text-align:center;
+			margin-top:200px;
+		}
+		.logo img{
+			width:350px;
+		}
+		.logo p{
+			color:#272727;
+			font-size:40px;
+			margin-top:1px;
+		}
+		.logo p span{
+			color:lightgreen;
+		}
+		.sub {
+			margin: 20px;
+		}
+		.sub a{
+			color:#fff;
+			background:#272727;
+			text-decoration:none;
+			padding:10px 20px;
+			font-size:13px;
+			font-family: arial, serif;
+			font-weight:bold;
+			-webkit-border-radius:.5em;
+			-moz-border-radius:.5em;
+			-border-radius:.5em;
+		}
+	</style>
+</head>
+
+
+<body>
+<div class="wrap">
+	<div class="logo">
+		<p>YÊU CẦU KHÔNG ĐƯỢC HỒI ĐÁP</p>
+<!--		<img src="/img/../img/404.png"/>-->
+		<div class="sub">
+			<?php if ($this->params['controller'] != 'admins') {?>
+				<a href="<?php echo $this->Html->url(array('controller'=>'homes', 'action'=>'index'))?>">Trang chủ </a>
+			<?php } else ?>
+			<a href="<?php echo $this->Html->url(array('controller'=>'admins', 'action'=>'home'))?>">Trang chủ </a>
+		</div>
+	</div>
+</div>
+
+</body>

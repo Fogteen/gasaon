@@ -1,6 +1,6 @@
 <div class="row results">
     <div class="large-6 columns">
-        <h3>Kho sách (<?php echo count($ebooks) ?>)</h3>
+        <h3>Kho sách</h3>
     </div>
     <div class="large-6 columns">
         <div class="row">
@@ -69,6 +69,6 @@
             </div>
             <hr>
         <?php } ?>
-        <?php echo $this->element('Frontend/paginate') ?>
+        <?php if (count($ebooks) < count($account['Ebook']))echo $this->element('Frontend/paginate') ?>
     </div>
 </div>

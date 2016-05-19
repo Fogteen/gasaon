@@ -24,9 +24,6 @@
                     <span class="bar"></span>
                     <label>Mật khẩu</label>
                 </div>
-                <label class="pull-left">
-                    <input type="checkbox" class="icheck pull-left" name="checkbox1"/> Ghi nhớ đăng nhập
-                </label>
                 <?php
                 $options = array(
                     'label' => 'Đăng nhập',
@@ -34,11 +31,6 @@
                     'class' => 'btn col-md-12'
                 );
                 echo $this->Form->end($options);
-                ?>
-            </div>
-            <div class="text-center" style="padding:5px;">
-                <?php
-                echo $this->Html->link("Quên mật khẩu",array('action'=>'lostpass'));
                 ?>
             </div>
         </div>

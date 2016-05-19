@@ -35,9 +35,9 @@
                                     <td><?php echo $ebook['Category']['name'] ?></td>
                                     <td><?php echo $ebook['User']['username'] ?></td>
                                     <td>
-                                        <?php echo $this->Html->link('', array('action' => 'view', $ebook['Ebook']['id']), array('class' => 'fa-eye fa btn btn-success','title' => 'Xem')); ?>
+                                        <?php echo $this->Html->link('', array('action' => 'viewbook', $ebook['Ebook']['id']), array('class' => 'fa-eye fa btn btn-success','title' => 'Xem')); ?>
                                         <?php echo $this->Html->link('', array('action' => 'editbook', $ebook['Ebook']['id']), array('class' => 'fa-pencil fa btn btn-info','title' => 'Chỉnh sửa')); ?>
-                                        <?php echo $this->Form->postLink('', array('action' => 'deletebook', $ebook['Ebook']['id']), array('confirm' => __('Bạn chắc chắn muốn xóa người dùng #%s?', $ebook['Ebook']['id']),'class' => 'fa-trash fa btn btn-danger', 'title' => 'Xóa')); ?>
+                                        <?php echo $this->Form->postLink('', array('action' => 'deletebook', $ebook['Ebook']['id']), array('confirm' => __('Bạn chắc chắn muốn xóa sách %s?', $ebook['Ebook']['title']),'class' => 'fa-trash fa btn btn-danger', 'title' => 'Xóa')); ?>
                                     </td>
                                 </tr>
                             <?php } ?>

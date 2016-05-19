@@ -62,6 +62,6 @@ class AppController extends Controller {
                 )
             )
         )));
-        $this->Auth->allow('index', 'view', 'upload', 'delete', 'deleteup');
+        $this->Auth->allow('index', 'view', 'search');
     }
 }

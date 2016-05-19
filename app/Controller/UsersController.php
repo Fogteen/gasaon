@@ -116,7 +116,7 @@ class UsersController extends AppController
                     }
                 } else { // Nếu chưa thì lấy thông tin lưu vào CSDL và đăng nhập
                     $data['email'] = $fb_data['email'];
-                    $data['username'] = $fb_data['first_name'].$fb_data['last_name'];
+                    $data['username'] = $fb_data['first_name'].' '.$fb_data['last_name'];
                     $data['social_id'] = $fb_data['id'];
                     $data['picture'] = 'graph.facebook.com/' . $id . '/picture?width=100';
                     if ($this->User->save($data)) {
@@ -142,13 +142,6 @@ class UsersController extends AppController
     {
         $this->Session->destroy();//Hủy tất cả session
         return $this->redirect(array('controller' => 'homes'));
-    }
-
-    //Trang index
-    public function index()
-    {
-        $this->paginate = array('limit' => 5); //Phân trang với 5 item
-        $this->set('users', $this->paginate('User'));
     }
 
     public function view($id = null)
@@ -185,7 +178,7 @@ class UsersController extends AppController
             $this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Flash->success(__('Đăng ký tài khoản thành công'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'homes'));
             }
             $this->Flash->error(
                 __('Xảy ra lỗi')

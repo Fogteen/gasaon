@@ -58,7 +58,9 @@ class EbooksController extends AppController
     //trang index
     public function index()
     {
-        $this->paginate = array('limit' => 2);//phân trang 10 item
+        $this->paginate = array(
+            'order' => 'Ebook.created DESC',
+            'limit' => 5);//phân trang 5 item
         $this->set('ebooks', $this->paginate('Ebook', array(
                 'Ebook.user_id' => $this->Auth->user('id')
             )));
@@ -69,7 +71,7 @@ class EbooksController extends AppController
         $ebook = $this->Ebook->findById($id);
         if (empty($ebook)) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'homes'));
         } else {
         $this->viewing($id);
         $view = $this->Viewer->find('count', array(
@@ -168,7 +170,6 @@ class EbooksController extends AppController
             'o'=>'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ|Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
             'u'=>'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự|Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
             'y'=>'ý|ỳ|ỷ|ỹ|ỵ|Ý|Ỳ|Ỷ|Ỹ|Ỵ',
-            '-'=>' '
         );
         foreach($utf8 as $ascii=>$uni) $str = preg_replace("/($uni)/i",$ascii,$str);
         return $str;
@@ -331,8 +332,11 @@ class EbooksController extends AppController
         if ($this->request->is('post')) {
             $this->Session->write('search', $this->request->data['Ebook']['ebsearch']);
         }
-        $this->paginate = array('limit' => 5);//phân trang 10 item
-        $this->set('ebooks', $this->paginate('Ebook',array('Ebook.title LIKE' =>'%'.$this->Session->read('search').'%' )));
+        $this->paginate = array('limit' => 5);//phân trang 5 item
+        $this->set('ebooks', $this->paginate('Ebook',array(
+            'Ebook.title LIKE' =>'%'.$this->Session->read('search').'%',
+            'Ebook.user_id' => $this->Auth->user('id')
+            )));
     }
 
     function ParseHeader($header='')

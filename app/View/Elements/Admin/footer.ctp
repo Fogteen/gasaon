@@ -143,7 +143,7 @@ echo $this->Html->script(array('jquery.min', 'jquery.ui.min', 'bootstrap.min', '
 
     <?php } ?>
 
-    <?php  if ($this->action == 'add'){?>
+    <?php  if ($this->action == 'adduser' || $this->action == 'edit'){?>
     $(document).ready(function () {
 
         $("#signupForm").validate({
@@ -209,7 +209,7 @@ echo $this->Html->script(array('jquery.min', 'jquery.ui.min', 'bootstrap.min', '
     });
     <?php } ?>
 
-    <?php  if ($this->action == 'listuser' || $this->action == 'listbook'){?>
+    <?php  if ($this->action == 'listuser' || $this->action == 'listbook' || $this->action == 'listcat'){?>
     $(document).ready(function () {
         $('#datatables-example').DataTable();
     });

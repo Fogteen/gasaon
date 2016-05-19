@@ -80,6 +80,16 @@
                 </li>
                 <li class="ripple">
                     <a class="tree-toggle nav-header">
+                        <span class="fa-file-text fa"></span> Quản lý danh mục
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                    <ul class="nav nav-list tree">
+                        <li><?php echo $this->Html->link('Thêm danh mục', array('action'=>'addcat')) ?></li>
+                        <li><?php echo $this->Html->link('Danh sách danh mục', array('action'=>'listcat')) ?></li>
+                    </ul>
+                </li>
+                <li class="ripple">
+                    <a class="tree-toggle nav-header">
                         <span class="fa-pie-chart fa"></span> Thống kê
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
