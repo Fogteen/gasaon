@@ -65,6 +65,8 @@
                                 <?php
                                 echo $this->Form->input('Ebook.publish',array('type'=>'select','id'=>'validate_confirm_password','class'=>'form-text','label'=>false,'div'=>false, 'required' => true, 'options' => array(0=>'Riêng tư',1=>'Mọi người'),'empty'=>'Chọn chế độ chia sẻ'));
                                 ?>
+                                <span class="bar"></span>
+                                <label>Chia sẻ</label>
                             </div>
 
 

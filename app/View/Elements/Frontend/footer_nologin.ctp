@@ -34,6 +34,52 @@
             $("html, body").animate({scrollTop: 0}, 600);
             return false;
         });
+
+        $('#UserEmail2').on('blur',function(){
+            $.ajax({
+                url: '<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'checkemail')) ?>',
+                type: 'POST',
+                cache: false,
+                data: {
+                    email: $('#UserEmail2').val()
+                },
+                success: function (data) {
+                    if (data == false) {
+                        toastr.error('Email đã được sử dụng. Hãy dùng email khác');
+                        $("#UserPassword2").attr("disabled", true);
+                        $("#btnsi").attr("disabled", true);
+                    }
+                    else {
+                        $("#btnsi").removeAttr("disabled");
+                        $("#UserPassword2").removeAttr("disabled");
+                    }
+                }
+            });
+        });
+
+        $('#UserUsername').on('blur',function(){
+            $.ajax({
+                url: '<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'checkuser')) ?>',
+                type: 'POST',
+                cache: false,
+                data: {
+                    username: $('#UserUsername').val()
+                },
+                success: function (data) {
+                    if (data == false) {
+                        toastr.error('Tên tài khoản đã được sử dụng. Hãy chọn tên khác');
+                        $("#UserEmail2").attr("disabled", true);
+                        $("#UserPassword2").attr("disabled", true);
+                        $("#btnsi").attr("disabled", true);
+                    }
+                    else {
+                        $("#btnsi").removeAttr("disabled");
+                        $("#UserEmail2").removeAttr("disabled");
+                        $("#UserPassword2").removeAttr("disabled");
+                    }
+                }
+            });
+        });
     });
 </script>
 </body>

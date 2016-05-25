@@ -15,10 +15,11 @@ class EbooksController extends AppController
 
 
     //thêm lượt xem
-    function viewing($id = null) {
+    function viewing($id = null)
+    {
         $online_session_id = $this->Session->id();
 
-        if (empty($online_session_id)) return ;
+        if (empty($online_session_id)) return;
 
         $viewer = $this->Viewer->find('first', array(
             'conditions' => array(
@@ -35,10 +36,11 @@ class EbooksController extends AppController
     }
 
     //thêm lượt tải
-    function downloading($id = null) {
+    function downloading($id = null)
+    {
         $dl_session_id = $this->Session->id();
 
-        if (empty($dl_session_id)) return ;
+        if (empty($dl_session_id)) return;
 
         $downloader = $this->Downloader->find('first', array(
             'conditions' => array(
@@ -55,6 +57,7 @@ class EbooksController extends AppController
             $this->Downloader->save($downloader_new);
         }
     }
+
     //trang index
     public function index()
     {
@@ -62,8 +65,8 @@ class EbooksController extends AppController
             'order' => 'Ebook.created DESC',
             'limit' => 5);//phân trang 5 item
         $this->set('ebooks', $this->paginate('Ebook', array(
-                'Ebook.user_id' => $this->Auth->user('id')
-            )));
+            'Ebook.user_id' => $this->Auth->user('id')
+        )));
     }
 
     public function view($id = null)
@@ -73,46 +76,51 @@ class EbooksController extends AppController
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
             return $this->redirect(array('action' => 'homes'));
         } else {
-        $this->viewing($id);
-        $view = $this->Viewer->find('count', array(
-            'conditions' => array(
-                'Viewer.book' => $id
-            )
-        ));
-        $down = $this->Downloader->find('count', array(
-            'conditions' => array(
-                'Downloader.book' => $id
-            )
-        ));
-        $request = $this->Ebook->Request->find('first',array(
-            'conditions' => array(
-                'Request.user_id' => $this->Auth->user('id'),
-                'Request.ebook_id' => $id
-            )
-        ));
-        $rate = $this->Ebook->Rating->find('first', array(
-            'conditions' => array(
-                'Rating.user_id' => $this->Auth->user('id'),
-                'Rating.ebook_id' => $id
-            )
-        ));
-        $allrate = $this->Ebook->Rating->find('all', array(
-            'conditions' => array(
-                'Rating.ebook_id' => $id
-            )
-        ));
-        $sameuser = $this->Ebook->find('all', array(
-            'conditions' => array(
-                'Ebook.user_id' => $ebook['User']['id']
-            ),
-            'limit' => 5
-        ));
-        $relate = $this->Ebook->find('all', array(
-            'conditions' => array(
-                'Ebook.categories_id' => $ebook['Ebook']['categories_id']
-            ),
-            'limit' => 10
-        ));
+            $this->viewing($id);
+            //lấy số lượt xem
+            $view = $this->Viewer->find('count', array(
+                'conditions' => array(
+                    'Viewer.book' => $id
+                )
+            ));
+            //lấy số lượt tải
+            $down = $this->Downloader->find('count', array(
+                'conditions' => array(
+                    'Downloader.book' => $id
+                )
+            ));
+            //kiểm tra quyền xem
+            $request = $this->Ebook->Request->find('first', array(
+                'conditions' => array(
+                    'Request.user_id' => $this->Auth->user('id'),
+                    'Request.ebook_id' => $id
+                )
+            ));
+            //thông tin đáng giá
+            $rate = $this->Ebook->Rating->find('first', array(
+                'conditions' => array(
+                    'Rating.user_id' => $this->Auth->user('id'),
+                    'Rating.ebook_id' => $id
+                )
+            ));
+            $allrate = $this->Ebook->Rating->find('all', array(
+                'conditions' => array(
+                    'Rating.ebook_id' => $id
+                )
+            ));
+            //thông tin tài liệu khác
+            $sameuser = $this->Ebook->find('all', array(
+                'conditions' => array(
+                    'Ebook.user_id' => $ebook['User']['id']
+                ),
+                'limit' => 5
+            ));
+            $relate = $this->Ebook->find('all', array(
+                'conditions' => array(
+                    'Ebook.categories_id' => $ebook['Ebook']['categories_id']
+                ),
+                'limit' => 10
+            ));
 
             $this->set('ebook', $ebook);
             $this->set('request', $request);
@@ -138,20 +146,19 @@ class EbooksController extends AppController
             }
             if ($this->Ebook->saveMany($this->request->data['Ebook'])) {//Lưu nhiều dữ liệu
                 $folder = new Folder($data[1]['path']);
-                $newPath = WWW_ROOT.'files/'.$this->Auth->user('id');
+                $newPath = WWW_ROOT . 'files/' . $this->Auth->user('id');
                 if (!file_exists($newPath)) mkdir($newPath);
                 $folder->move($newPath);
                 $this->Session->delete('data');//Nếu lưu thành công, xóa session
                 $this->Flash->success(__('Thêm thành công'));
                 return $this->redirect(array('action' => 'index'));
-            }
-            else {
+            } else {
                 $this->Flash->error(
                     __('Xảy ra lỗi')
                 );
-                for ($i=1;$i<$count;$i++){ //xảy ra lỗi, xáo các file đã upload
-                    unlink($data[$i]['path'].'/'.$data[$i]['name']);
-                    unlink($data[$i]['path'].'/'.$data[$i]['pic']);
+                for ($i = 1; $i < $count; $i++) { //xảy ra lỗi, xáo các file đã upload
+                    unlink($data[$i]['path'] . '/' . $data[$i]['name']);
+                    unlink($data[$i]['path'] . '/' . $data[$i]['pic']);
                 }
                 $this->Session->delete('data');
             }
@@ -160,30 +167,32 @@ class EbooksController extends AppController
     }
 
     //Chuyển chuỗi có dấu sang không dấu
-    public function utf8convert($str) {
-        if(!$str) return false;
+    public function utf8convert($str)
+    {
+        if (!$str) return false;
         $utf8 = array(
-            'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ|Á|À|Ả|Ã|Ạ|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
-            'd'=>'đ|Đ',
-            'e'=>'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ|É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
-            'i'=>'í|ì|ỉ|ĩ|ị|Í|Ì|Ỉ|Ĩ|Ị',
-            'o'=>'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ|Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
-            'u'=>'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự|Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
-            'y'=>'ý|ỳ|ỷ|ỹ|ỵ|Ý|Ỳ|Ỷ|Ỹ|Ỵ',
+            'a' => 'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ|Á|À|Ả|Ã|Ạ|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
+            'd' => 'đ|Đ',
+            'e' => 'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ|É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
+            'i' => 'í|ì|ỉ|ĩ|ị|Í|Ì|Ỉ|Ĩ|Ị',
+            'o' => 'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ|Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
+            'u' => 'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự|Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
+            'y' => 'ý|ỳ|ỷ|ỹ|ỵ|Ý|Ỳ|Ỷ|Ỹ|Ỵ',
         );
-        foreach($utf8 as $ascii=>$uni) $str = preg_replace("/($uni)/i",$ascii,$str);
+        foreach ($utf8 as $ascii => $uni) $str = preg_replace("/($uni)/i", $ascii, $str);
         return $str;
     }
 
     //Upload file lên thư mục tạm
-    public function upload() {
+    public function upload()
+    {
         $ds = DIRECTORY_SEPARATOR;  //1
-        $storeFolder = 'Ebook/'.$this->Auth->user('id');   //2
-        if (!file_exists($storeFolder)) mkdir(WWW_ROOT.$storeFolder);
+        $storeFolder = 'Ebook/' . $this->Auth->user('id');   //2
+        if (!file_exists($storeFolder)) mkdir(WWW_ROOT . $storeFolder);
         if ($this->Session->check('data')) {
             $folder = new Folder($storeFolder);
             $folder->delete();
-            mkdir(WWW_ROOT.$storeFolder);
+            mkdir(WWW_ROOT . $storeFolder);
             $this->Session->delete('data');
         }
         //Kiểm tra người dùng đã chọn file
@@ -194,65 +203,63 @@ class EbooksController extends AppController
 
             $filename = $this->utf8convert($_FILES['file']['name']);
 
-            $targetFile = $targetPath .$filename;  //5
+            $targetFile = $targetPath . $filename;  //5
 
             move_uploaded_file($tempFile, $targetFile); //6
-        }
-        //Kiểm tra khi nhấn Submit
+        } //Kiểm tra khi nhấn Submit
         elseif ($this->request->is('post')) {
             $files = scandir($storeFolder);
             $count = count($files);
-            if ($count<=2){
+            if ($count <= 2) {
                 $this->Flash->error("Hãy chọn file trước khi Submit");
                 return $this->redirect(array('action' => 'upload'));
             }
-            for ($i=2; $i < $count; $i++) {
-                $pdf = WWW_ROOT.$storeFolder.$ds.$files[$i];
+            for ($i = 2; $i < $count; $i++) {
+                $pdf = WWW_ROOT . $storeFolder . $ds . $files[$i];
                 $file_name = pathinfo($pdf, PATHINFO_FILENAME);
                 //Nếu định dạng file không phải pdf thì convert
-                if (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('doc','docx'))) {
-                    $this->callapi($pdf,$storeFolder,$message,"Word2Pdf");
-                    $pdf = WWW_ROOT.$storeFolder.$ds.$file_name.'.pdf';
-                }
-                elseif (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('ppt','pptx'))) {
-                    $this->callapi($pdf,$storeFolder,$message,"PowerPoint2Pdf");
-                    $pdf = WWW_ROOT.$storeFolder.$ds.$file_name.'.pdf';
+                if (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('doc', 'docx'))) {
+                    $this->callapi($pdf, $storeFolder, $message, "Word2Pdf");
+                    $pdf = WWW_ROOT . $storeFolder . $ds . $file_name . '.pdf';
+                } elseif (in_array(pathinfo($pdf, PATHINFO_EXTENSION), array('ppt', 'pptx'))) {
+                    $this->callapi($pdf, $storeFolder, $message, "PowerPoint2Pdf");
+                    $pdf = WWW_ROOT . $storeFolder . $ds . $file_name . '.pdf';
                 }
                 //tạo file xem trước với dữ liệu 5 trang
-                exec("pdftk $pdf cat 1-5 output ".WWW_ROOT.$storeFolder.$ds.'pre_'.$file_name.'.pdf'."");
-                $pdf = $pdf.'[0]';
+                exec("pdftk $pdf cat 1-5 output " . WWW_ROOT . $storeFolder . $ds . 'pre_' . $file_name . '.pdf' . "");
+                $pdf = $pdf . '[0]';
                 //tạo hình ảnh xem trước cho file
-                exec("convert $pdf -background white -alpha off -resize 200 " .WWW_ROOT.$storeFolder.$ds.'thumb_'."$file_name.jpg");
-                $data[$i-1]['name'] = iconv("cp1258", "utf-8", $files[$i]);
-                $data[$i-1]['path'] = WWW_ROOT.$storeFolder.$ds;
-                $data[$i-1]['pic'] = 'thumb_'.pathinfo($data[$i-1]['name'],PATHINFO_FILENAME).'.jpg';
-                $data[$i-1]['id'] = $this->Auth->user('id');
-                $data[$i-1]['list'] = $this->Ebook->Category->find('list');
+                exec("convert $pdf -background white -alpha off -resize 200 " . WWW_ROOT . $storeFolder . $ds . 'thumb_' . "$file_name.jpg");
+                $data[$i - 1]['name'] = iconv("cp1258", "utf-8", $files[$i]);
+                $data[$i - 1]['path'] = WWW_ROOT . $storeFolder . $ds;
+                $data[$i - 1]['pic'] = 'thumb_' . pathinfo($data[$i - 1]['name'], PATHINFO_FILENAME) . '.jpg';
+                $data[$i - 1]['id'] = $this->Auth->user('id');
+                $data[$i - 1]['list'] = $this->Ebook->Category->find('list');
             }
-            $this->Session->write('data',$data);
-            return $this->redirect(array('controller'=>'ebooks','action' => 'add'));
+            $this->Session->write('data', $data);
+            return $this->redirect(array('controller' => 'ebooks', 'action' => 'add'));
         }
     }
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (empty($this->Ebook->findById($id))) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
             return $this->redirect(array('action' => 'index'));
-        }
-        elseif ($this->request->is(array('post', 'put'))) {
+        } elseif ($this->request->is(array('post', 'put'))) {
             $this->Ebook->id = $id;
-            $olddata = $this->Ebook->read(null,$id);
+            $olddata = $this->Ebook->read(null, $id);
 
-            if($this->request->data['Ebook']['picture']['name']!= "")
-            $this->request->data['Ebook']['picture']['name'] = 'thumb_'.$this->request->data['Ebook']['picture']['name'];
+            if ($this->request->data['Ebook']['picture']['name'] != "")
+                $this->request->data['Ebook']['picture']['name'] = 'thumb_' . $this->request->data['Ebook']['picture']['name'];
             if ($this->Ebook->save($this->request->data)) {
-                if(file_exists(WWW_ROOT."files/".$olddata['Ebook']['user_id']."/".$olddata['Ebook']['picture']) && $this->request->data['Ebook']['picture']['name']!= "")
-                unlink(WWW_ROOT."files/".$olddata['Ebook']['user_id']."/".$olddata['Ebook']['picture']);
-                $folder = new Folder(WWW_ROOT."files/ebook/picture/".$id);
-                $file = new File(WWW_ROOT."files/ebook/picture/".$id."/thumb_".$this->request->data['Ebook']['picture']['name']);
+                if (file_exists(WWW_ROOT . "files/" . $olddata['Ebook']['user_id'] . "/" . $olddata['Ebook']['picture']) && $this->request->data['Ebook']['picture']['name'] != "")
+                    unlink(WWW_ROOT . "files/" . $olddata['Ebook']['user_id'] . "/" . $olddata['Ebook']['picture']);
+                $folder = new Folder(WWW_ROOT . "files/ebook/picture/" . $id);
+                $file = new File(WWW_ROOT . "files/ebook/picture/" . $id . "/thumb_" . $this->request->data['Ebook']['picture']['name']);
                 if ($file->exists()) {
-                    $dir = new Folder(WWW_ROOT.'files/'.$olddata['Ebook']['user_id'], true);
-                    $file->copy($dir->path . DS .$this->request->data['Ebook']['picture']['name'] );
+                    $dir = new Folder(WWW_ROOT . 'files/' . $olddata['Ebook']['user_id'], true);
+                    $file->copy($dir->path . DS . $this->request->data['Ebook']['picture']['name']);
                 }
                 $folder->delete();
                 $this->Flash->success(__('Chỉnh sửa thành công'));
@@ -263,7 +270,7 @@ class EbooksController extends AppController
         } else {
             $options = array('conditions' => array('Ebook.' . $this->Ebook->primaryKey => $id));
             $this->request->data = $this->Ebook->find('first', $options);
-            $this->set('ebook',$this->request->data);
+            $this->set('ebook', $this->request->data);
         }
         $users = $this->Ebook->User->find('list');
         $categories = $this->Ebook->Category->find('list');
@@ -280,8 +287,7 @@ class EbooksController extends AppController
         if (empty($this->Ebook->findById($id))) {
             $this->Flash->error(__("Không tìm thấy dữ liệu"));
             return $this->redirect(array('action' => 'index'));
-        }
-        elseif ($this->Ebook->delete()) {
+        } elseif ($this->Ebook->delete()) {
             if (file_exists(WWW_ROOT . 'files/' . $data['Ebook']['user_id'] . '/' . $data['Ebook']['file'])) {
                 unlink(WWW_ROOT . 'files/' . $data['Ebook']['user_id'] . '/' . $data['Ebook']['file']);
                 if (pathinfo($data['Ebook']['file'], PATHINFO_EXTENSION) != 'pdf') {
@@ -301,7 +307,7 @@ class EbooksController extends AppController
     public function deleteup()
     {
         $this->autoRender = false;
-        unlink(WWW_ROOT.'Ebook/'.$this->Auth->user('id').'/'.$this->utf8convert($this->data['name']));
+        unlink(WWW_ROOT . 'Ebook/' . $this->Auth->user('id') . '/' . $this->utf8convert($this->data['name']));
     }
 
     //Kiểm tra thư mục tạm có file hay không
@@ -312,40 +318,41 @@ class EbooksController extends AppController
         $ds = DIRECTORY_SEPARATOR;  //1
         $storeFolder = 'Ebook/' . $this->Auth->user('id');   //2
         if (!file_exists($storeFolder)) mkdir(WWW_ROOT . $storeFolder);
-        $result  = array();
+        $result = array();
 
         $files = scandir($storeFolder);                 //1
-        if ( false!==$files ) {
-            foreach ( $files as $file ) {
-                if ( '.'!=$file && '..'!=$file) {       //2
+        if (false !== $files) {
+            foreach ($files as $file) {
+                if ('.' != $file && '..' != $file) {       //2
                     $obj['name'] = $file;
-                    $obj['size'] = filesize($storeFolder.$ds.$file);
+                    $obj['size'] = filesize($storeFolder . $ds . $file);
                     $obj['id'] = $this->Auth->user('id');
                     $result[] = $obj;
                 }
             }
         }
-        return new CakeResponse(array('body' => json_encode($result),'type'=>'json'));
+        return new CakeResponse(array('body' => json_encode($result), 'type' => 'json'));
     }
 
-    public function search(){
+    public function search()
+    {
         if ($this->request->is('post')) {
             $this->Session->write('search', $this->request->data['Ebook']['ebsearch']);
         }
         $this->paginate = array('limit' => 5);//phân trang 5 item
-        $this->set('ebooks', $this->paginate('Ebook',array(
-            'Ebook.title LIKE' =>'%'.$this->Session->read('search').'%',
+        $this->set('ebooks', $this->paginate('Ebook', array(
+            'Ebook.title LIKE' => '%' . $this->Session->read('search') . '%',
             'Ebook.user_id' => $this->Auth->user('id')
-            )));
+        )));
     }
 
-    function ParseHeader($header='')
+    function ParseHeader($header = '')
     {
         $resArr = array();
-        $headerArr = explode("\n",$header);
+        $headerArr = explode("\n", $header);
         foreach ($headerArr as $key => $value) {
-            $tmpArr=explode(": ",$value);
-            if (count($tmpArr)<1) continue;
+            $tmpArr = explode(": ", $value);
+            if (count($tmpArr) < 1) continue;
             $resArr = array_merge($resArr, array($tmpArr[0] => count($tmpArr) < 2 ? "" : $tmpArr[1]));
         }
         return $resArr;
@@ -353,11 +360,10 @@ class EbooksController extends AppController
 
     function callapi($fileToConvert, $pathToSaveOutputFile, &$message, $type)
     {
-        try
-        {
-            $fileName =pathinfo($fileToConvert, PATHINFO_FILENAME);
-            $postdata =  array('OutputFileName' => $fileName.'.pdf', 'ApiKey' => '115863787', 'File' => "@".$fileToConvert);
-            $ch = curl_init("http://do.convertapi.com/".$type);
+        try {
+            $fileName = pathinfo($fileToConvert, PATHINFO_FILENAME);
+            $postdata = array('OutputFileName' => $fileName . '.pdf', 'ApiKey' => '115863787', 'File' => "@" . $fileToConvert);
+            $ch = curl_init("http://do.convertapi.com/" . $type);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
@@ -366,51 +372,45 @@ class EbooksController extends AppController
             $result = curl_exec($ch);
             $headers = curl_getinfo($ch);
 
-            $header=$this->ParseHeader(substr($result,0,$headers["header_size"]));
-            $body=substr($result, $headers["header_size"]);
+            $header = $this->ParseHeader(substr($result, 0, $headers["header_size"]));
+            $body = substr($result, $headers["header_size"]);
 
             curl_close($ch);
-            if ( 0 < $headers['http_code'] && $headers['http_code'] < 400 )
-            {
+            if (0 < $headers['http_code'] && $headers['http_code'] < 400) {
                 // Check for Result = true
 
-                if (in_array('Result',array_keys($header)) ?  !$header['Result']=="True" : true)
-                {
+                if (in_array('Result', array_keys($header)) ? !$header['Result'] == "True" : true) {
                     $message = "Something went wrong with request, did not reach ConvertApi service.<br />";
                     return false;
                 }
                 // Check content type
-                if ($headers['content_type']<>"application/pdf")
-                {
+                if ($headers['content_type'] <> "application/pdf") {
                     $message = "Exception Message : returned content is not PDF file.<br />";
                     return false;
                 }
-                $fp = fopen($pathToSaveOutputFile.'/'.$fileName.'.pdf', "wbx");
+                $fp = fopen($pathToSaveOutputFile . '/' . $fileName . '.pdf', "wbx");
 
                 fwrite($fp, $body);
 
                 $message = "The conversion was successful! The word file $fileToConvert converted to PDF and saved at $pathToSaveOutputFile$fileName";
                 return true;
-            }
-            else
-            {
-                $message = "Exception Message : ".$result .".<br />Status Code :".$headers['http_code'].".<br />";
+            } else {
+                $message = "Exception Message : " . $result . ".<br />Status Code :" . $headers['http_code'] . ".<br />";
                 return false;
             }
-        }
-        catch (Exception $e)
-        {
-            $message = "Exception Message :".$e.Message."</br>";
+        } catch (Exception $e) {
+            $message = "Exception Message :" . $e . Message . "</br>";
             return false;
         }
     }
 
-    public function requestdel(){
+    public function requestdel()
+    {
         $this->layout = false;
         $this->autoRender = false;
         $user_id = $this->request->data['user_id'];
         $ebook_id = $this->request->data['ebook_id'];
-        $rq = $this->Ebook->Request->find('first',array(
+        $rq = $this->Ebook->Request->find('first', array(
             'conditions' => array(
                 'Request.user_id' => $user_id,
                 'Request.ebook_id' => $ebook_id
@@ -425,7 +425,8 @@ class EbooksController extends AppController
         return;
     }
 
-    public function request(){
+    public function request()
+    {
         $this->layout = false;
         $this->autoRender = false;
         $ebook_id = $this->request->data['ebook_id'];
@@ -435,14 +436,14 @@ class EbooksController extends AppController
             'ebook_id' => $ebook_id,
             'user_id' => $user_id
         ));
-        $book = $this->Ebook->read(null,$ebook_id);
-        $user = $this->Ebook->User->read(null,$user_id);
+        $book = $this->Ebook->read(null, $ebook_id);
+        $user = $this->Ebook->User->read(null, $user_id);
         $this->Ebook->Nofication->create();
         $this->Ebook->Nofication->save(array(
             'user_id' => $book['Ebook']['user_id'],
             'ebook_id' => $ebook_id,
             'request_id' => $this->Ebook->Request->id,
-            'content' => 'Bạn nhận được một yêu cầu từ '. $user['User']['username'] . ' về cuốn sách ' . $book['Ebook']['title'] . ' của bạn.'
+            'content' => 'Bạn nhận được một yêu cầu từ ' . $user['User']['username'] . ' về cuốn sách ' . $book['Ebook']['title'] . ' của bạn.'
         ));
         $pusher = new Pusher('ea2f5e5013baa43a541f', 'bd3a393da392412204cf', '197077');
 
@@ -451,17 +452,18 @@ class EbooksController extends AppController
         $data = array(
             'user_id' => $book['Ebook']['user_id'],
             'title' => $book['Ebook']['title'],
-            'user_send' =>  $user['User']['username']
+            'user_send' => $user['User']['username']
         );
         $pusher->trigger('request_channel', 'send_event', $data);
     }
 
-    public function download($id = null){
+    public function download($id = null)
+    {
         $this->layout = false;
         $this->autoRender = false;
-        $data = $this->Ebook->find('first',array(
+        $data = $this->Ebook->find('first', array(
             'conditions' => array(
-            'Ebook.id' => base64_decode($id)
+                'Ebook.id' => base64_decode($id)
             )
         ));
         if (!empty($data)) {
@@ -474,14 +476,14 @@ class EbooksController extends AppController
             );
             $this->downloading(base64_decode($id));
             return $this->response;
-        }
-        else {
+        } else {
             $this->Flash->error("Xảy ra lỗi");
-            return $this->redirect(array('action'=>'view',$id));
+            return $this->redirect(array('action' => 'view', $id));
         }
     }
 
-    public function rate(){
+    public function rate()
+    {
         $this->layout = false;
         $this->autoRender = false;
         $ebook_id = $this->request->data['ebook_id'];
@@ -490,9 +492,9 @@ class EbooksController extends AppController
         $rating = $this->request->data['rating'];
         $this->Ebook->Rating->create();
         $this->Ebook->Rating->save(array(
-                'user_id' => $user_id,
-                'ebook_id' => $ebook_id,
-                'value' => $rate
+            'user_id' => $user_id,
+            'ebook_id' => $ebook_id,
+            'value' => $rate
         ));
         $this->Ebook->updateAll(
             array('Ebook.rating' => $rating),

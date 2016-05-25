@@ -8,7 +8,7 @@
     <link href="/bookicon.ico" type="image/x-icon" rel="icon"/>
     <link href="/bookicon.ico" type="image/x-icon" rel="shortcut icon"/>
     <?php
-    echo $this->Html->css(array('normalize', 'foundation.min', 'custom', 'form', 'rateit', 'dropzone'));
+    echo $this->Html->css(array('normalize', 'foundation.min', 'foundation-icons/foundation-icons', 'custom', 'form', 'rateit', 'dropzone'));
     echo $this->Html->script(array('vendor/jquery.min', 'foundation/foundation', 'foundation/foundation.topbar', 'foundation/foundation.reveal', 'foundation/foundation.orbit', 'rateit.min', 'dropzone', 'app'));
 
     echo $this->fetch('meta');
@@ -55,7 +55,7 @@
                             <?php echo $this->Form->create('Ebook', array('url' => array('controller' => 'homes', 'action' => 'search'))) ?>
                             <div class="row collapse">
                                 <div class="small-8 columns">
-                                    <?php echo $this->Form->text('ebsearch'); ?>
+                                    <?php echo $this->Form->text('ebsearch', array('style'=>'height:32px')); ?>
                                 </div>
                                 <div class="small-4 columns">
                                     <?php echo $this->Form->button('', array('class' => 'alert button fi-magnifying-glass', 'type' => 'submit')) ?>
@@ -109,13 +109,13 @@
                                 </div>
 
                                 <div class="field-wrap">
-                                    <?php echo $this->Form->input('email') ?>
+                                    <?php echo $this->Form->input('email', array('id'=>'UserEmail2')) ?>
                                 </div>
 
                                 <div class="field-wrap">
-                                    <?php echo $this->Form->input('password', array('label' => 'Mật khẩu')) ?>
+                                    <?php echo $this->Form->input('password', array('id'=>'UserPassword2','label' => 'Mật khẩu')) ?>
                                 </div>
-                                <button type="submit" class="button button-block"/>
+                                <button type="submit" class="button button-block" id="btnsi"/>
                                 Đăng ký</button>
                                 <?php echo $this->Form->end() ?>
                                 <h1>hoặc</h1>

@@ -21892,3 +21892,247 @@ Stack Trace:
 #1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest))
 #2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2016-05-24 04:22:12 Error: [MissingActionException] Action UsersController::homes() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'homes',
+)
+Request URL: /users/homes
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-24 04:22:13 Error: [MissingControllerException] Controller class Favicon.icoController could not be found.
+Exception Attributes: array (
+  'class' => 'Favicon.icoController',
+  'plugin' => NULL,
+)
+Request URL: /favicon.ico
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 04:23:29 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 04:23:37 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 04:29:24 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 04:48:23 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 04:52:37 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/6/thumb_avatar2.png
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 04:53:44 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/6/thumb_avatar2.png
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 04:53:45 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/6/thumb_avatar2.png
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 04:54:16 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/6/thumb_avatar2.png
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 04:59:01 Error: [MissingControllerException] Controller class UserController could not be found.
+Exception Attributes: array (
+  'class' => 'UserController',
+  'plugin' => NULL,
+)
+Request URL: /user/edit/8
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 04:59:20 Error: [MissingActionException] Action UsersController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'index',
+)
+Request URL: /users
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-24 05:00:29 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_avatar2.png
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 05:00:50 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 05:02:20 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 05:02:49 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 05:05:40 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 05:10:40 Error: [MissingControllerException] Controller class FilesController could not be found.
+Exception Attributes: array (
+  'class' => 'FilesController',
+  'plugin' => NULL,
+)
+Request URL: /files/user/picture/thumb_
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-05-24 05:17:38 Error: [MissingViewException] View file "Users\add.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Users\\add.ctp',
+)
+Request URL: /users/add
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(470): View->_getViewFileName(NULL)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2016-05-24 05:25:27 Error: [MissingViewException] View file "Users\add.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Users\\add.ctp',
+)
+Request URL: /users/add
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(470): View->_getViewFileName(NULL)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2016-05-24 05:34:25 Error: Fatal Error (1): Allowed memory size of 134217728 bytes exhausted (tried to allocate 11323403 bytes) in [D:\xampp\htdocs\gasaon\lib\Cake\Utility\Debugger.php, line 555]
+2016-05-24 05:34:25 Error: [FatalErrorException] Allowed memory size of 134217728 bytes exhausted (tried to allocate 11323403 bytes)
+Request URL: /users/edit/12
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Error\ErrorHandler.php(213): ErrorHandler::handleFatalError(1, 'Allowed memory ...', 'D:\\xampp\\htdocs...', 555)
+#1 [internal function]: ErrorHandler::handleError(1, 'Allowed memory ...', 'D:\\xampp\\htdocs...', 555, Array)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Core\App.php(970): call_user_func('ErrorHandler::h...', 1, 'Allowed memory ...', 'D:\\xampp\\htdocs...', 555, Array)
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Core\App.php(943): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2016-05-24 05:45:20 Error: [MissingViewException] View file "Users\add.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Users\\add.ctp',
+)
+Request URL: /users/add
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(470): View->_getViewFileName(NULL)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2016-05-24 05:52:53 Error: [MissingViewException] View file "Users\add.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Users\\add.ctp',
+)
+Request URL: /users/add
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\View\View.php(470): View->_getViewFileName(NULL)
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Controller\Controller.php(963): View->render(NULL, NULL)
+#2 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#3 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2016-05-24 06:56:39 Error: [MissingActionException] Action UsersController::checkemail() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'checkemail',
+)
+Request URL: /users/checkemail
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\gasaon\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#2 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-05-25 04:03:39 Error: [MissingControllerException] Controller class Favicon.icoController could not be found.
+Exception Attributes: array (
+  'class' => 'Favicon.icoController',
+  'plugin' => NULL,
+)
+Request URL: /favicon.ico
+Stack Trace:
+#0 D:\xampp\htdocs\gasaon\app\webroot\index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

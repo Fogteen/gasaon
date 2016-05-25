@@ -53,7 +53,7 @@ class UsersController extends AppController
     public function beforeFilter()
     {
         parent::beforeFilter();
-        $this->Auth->allow('add','login','fblogin', 'fb_login');
+        $this->Auth->allow('add', 'login', 'fblogin', 'fb_login', 'checkuser', 'checkemail');
         if (!$this->Auth->loggedIn()) {
             $this->Auth->authError = false;
         }
@@ -116,7 +116,7 @@ class UsersController extends AppController
                     }
                 } else { // Nếu chưa thì lấy thông tin lưu vào CSDL và đăng nhập
                     $data['email'] = $fb_data['email'];
-                    $data['username'] = $fb_data['first_name'].' '.$fb_data['last_name'];
+                    $data['username'] = $fb_data['first_name'] . ' ' . $fb_data['last_name'];
                     $data['social_id'] = $fb_data['id'];
                     $data['picture'] = 'graph.facebook.com/' . $id . '/picture?width=100';
                     if ($this->User->save($data)) {
@@ -177,8 +177,9 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
+                $this->Auth->login();
                 $this->Flash->success(__('Đăng ký tài khoản thành công'));
-                return $this->redirect(array('action' => 'homes'));
+                return $this->redirect(array('controller' => 'users', 'action' => 'edit', $this->User->id));
             }
             $this->Flash->error(
                 __('Xảy ra lỗi')
@@ -195,14 +196,15 @@ class UsersController extends AppController
         } elseif ($this->request->is('post') || $this->request->is('put')) {
             $this->User->id = $id;
             if ($this->User->save($this->request->data)) {
-                if (!empty($this->request->data['User']['picture']) && $this->request->data['User']['picture']['name'] != '' && $this->request->data['User']['picture']['name'] != $user['User']['picture']) {
+                //xóa ảnh đại diện cũ
+                if (!empty($this->request->data['User']['picture']) && $this->request->data['User']['picture']['name'] != '' && $this->request->data['User']['picture']['name'] != $user['User']['picture'] && !empty($user['User']['picture_dir'])) {
                     if (file_exists(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/' . $user['User']['picture']))
                         unlink(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/' . $user['User']['picture']);
                     if (file_exists(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/thumb_' . $user['User']['picture']))
                         unlink(WWW_ROOT . 'files/user/picture/' . $user['User']['picture_dir'] . '/thumb_' . $user['User']['picture']);
                 }
                 $this->Flash->success(__('Cập nhật thành công'));
-                return $this->redirect(array('action' => 'view',$id));
+                return $this->redirect(array('action' => 'view', $id));
             }
             $this->Flash->error(
                 __('Đã xảy ra lỗi')
@@ -229,7 +231,7 @@ class UsersController extends AppController
             throw new NotFoundException(__('Invalid user'));
         }
         if ($this->User->delete()) {
-            if (file_exists(WWW_ROOT.'files/'.$id)) rmdir(WWW_ROOT.'files/'.$id);
+            if (file_exists(WWW_ROOT . 'files/' . $id)) rmdir(WWW_ROOT . 'files/' . $id);
             $this->Flash->success(__('Xóa thành công'));
             return $this->redirect(array('action' => 'index'));
         }
@@ -469,6 +471,24 @@ class UsersController extends AppController
                 )
             )
         ));
+        return new CakeResponse(array('body' => json_encode($data), 'type' => 'json'));
+    }
+
+    public function checkuser()
+    {
+        $this->layout = false;
+        $this->autoRender = false;
+        $username = $this->request->data['username'];
+        $data = $this->User->find('count', array('conditions' => array('User.username' => $username))) == 0;
+        return new CakeResponse(array('body' => json_encode($data), 'type' => 'json'));
+    }
+
+    public function checkemail()
+    {
+        $this->layout = false;
+        $this->autoRender = false;
+        $email = $this->request->data['email'];
+        $data = $this->User->find('count', array('conditions' => array('User.email' => $email))) == 0;
         return new CakeResponse(array('body' => json_encode($data), 'type' => 'json'));
     }
 

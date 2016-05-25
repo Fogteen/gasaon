@@ -15,6 +15,7 @@
 							<section>
 								<div class="column">
 									<?= $this->Form->create('User',array('type' => 'file'))?>
+									<?= $this->Form->input('id', array('type'=>'hidden'))?>
 									<?= $this->Form->input('username',array('label'=>'Tên tài khoản'))?>
 									<?= $this->Form->input('email')?>
 								</div>

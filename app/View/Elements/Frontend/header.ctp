@@ -54,7 +54,7 @@
                             <?php echo $this->Form->create('Ebook', array('url' => array('controller' => 'homes', 'action' => 'search'))) ?>
                             <div class="row collapse">
                                 <div class="small-8 columns">
-                                    <?php echo $this->Form->text('ebsearch'); ?>
+                                    <?php echo $this->Form->text('ebsearch', array('style'=>'height:32px')); ?>
                                 </div>
                                 <div class="small-4 columns">
                                     <?php echo $this->Form->button('', array('class' => 'alert button fi-magnifying-glass', 'type' => 'submit')) ?>

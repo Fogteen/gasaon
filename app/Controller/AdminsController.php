@@ -202,11 +202,12 @@ class AdminsController extends AppController {
             throw new NotFoundException(__('Invalid user'));
         }
         if ($this->User->delete()) {
+            if (file_exists(WWW_ROOT.'files/user/picture/'.$id)) rmdir(WWW_ROOT.'files/user/picture/'.$id);
             $this->Flash->success(__('Xóa thành công'));
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'listuser'));
         }
         $this->Flash->error(__('Xảy ra lỗi'));
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(array('action' => 'listuser'));
     }
 
     public function deletebook($id = null)
@@ -254,7 +255,7 @@ class AdminsController extends AppController {
                 $folder->move($newPath);
                 $this->Session->delete('data');//Nếu lưu thành công, xóa session
                 $this->Flash->success(__('Thêm thành công'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'listbook'));
             }
             else {
                 $this->Flash->error(
