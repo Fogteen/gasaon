@@ -90,7 +90,7 @@ class EbooksController extends AppController
                 )
             ));
             //kiểm tra quyền xem
-            $request = $this->Ebook->Request->find('first', array(
+            $request = $this->Ebook->Request->find('first',array(
                 'conditions' => array(
                     'Request.user_id' => $this->Auth->user('id'),
                     'Request.ebook_id' => $id
@@ -144,6 +144,7 @@ class EbooksController extends AppController
                 $this->request->data['Ebook'][$i]['picture'] = $data[$i]['pic'];
                 $this->request->data['Ebook'][$i]['file'] = $data[$i]['name'];
             }
+            $this->Ebook->create();
             if ($this->Ebook->saveMany($this->request->data['Ebook'])) {//Lưu nhiều dữ liệu
                 $folder = new Folder($data[1]['path']);
                 $newPath = WWW_ROOT . 'files/' . $this->Auth->user('id');
@@ -178,6 +179,7 @@ class EbooksController extends AppController
             'o' => 'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ|Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
             'u' => 'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự|Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
             'y' => 'ý|ỳ|ỷ|ỹ|ỵ|Ý|Ỳ|Ỷ|Ỹ|Ỵ',
+            '-' => ' '
         );
         foreach ($utf8 as $ascii => $uni) $str = preg_replace("/($uni)/i", $ascii, $str);
         return $str;

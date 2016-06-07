@@ -9,7 +9,7 @@
                     <a href="#">Thông tin</a>
                     <a href="#">Liên hệ</a>
                 </p>
-                <p class="copywrite">Copywrite © 2016</p>
+                <p class="copywrite">Copyright © 2016</p>
             </div>
         </div>
     </footer>

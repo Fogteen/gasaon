@@ -31,7 +31,7 @@ $(document).ready(function () {
             'pusherKey': null,   // required : open an account on http://pusher.com/ to get one
             'authPath': null, // required : path to authentication scripts more info at http://pusher.com/docs/authenticating_users
             'friendsList': null, // required : path to friends list json
-            'getMess':null,
+            'getMess': null,
             // json ex :
             /*
              {
@@ -102,38 +102,38 @@ $(document).ready(function () {
             if (presenceChannel.members.me.id == data.to && data.from != presenceChannel.members.me.id) {
                 var obj = $('a[href=#' + data.from + ']');
                 createChatBox(obj);
-                $.ajax({
-                    url: settings.getMess,
-                    type: 'POST',
-                    cache: false,
-                    data: {
-                        from: presenceChannel.members.me.id,
-                        to:obj.attr('href').replace('#', '')
-                    },
-                    success: function (data1) {
-                        $('.msgTxt').html('');
-                        $.each(data1, function(key, data){
-                            console.log(data);
-                            if (presenceChannel.members.me.id == data.Message.to && data.Message.from != presenceChannel.members.me.id) {
-                                var img = $('#id_' + data.Message.from).find('h2').find('.imgFriend').attr('src');
-                                $('#id_' + data.Message.from + ' .msgTxt').append('<p style="float:left"><img src="' + img + '" class="nick"> ' + data.Message.message + '</p><hr>');
-                                $('#id_' + data.Message.from).addClass('recive').removeClass('writing');
-                                $('#id_' + data.Message.from + ' .logMsg').scrollTop($('#id_' + data.Message.from + ' .logMsg')[0].scrollHeight);
-                                if ($('title').text().search('New message - ') == -1)
-                                    $('title').prepend('New message - ');
-                                $.playSound('/img/../sounds/new');
-                            }
-                            if (presenceChannel.members.me.id == data.Message.from) {
-                                var myimg = $('li.account img').attr('src');
-                                $('#id_' + data.Message.to + ' .msgTxt').append('<p class="you">' + data.Message.message + '  <img src="' + myimg + '" class="nick"></p><hr>');
-                                $('#id_' + data.Message.to + ' .logMsg').scrollTop($('#id_' + data.Message.to + ' .logMsg')[0].scrollHeight);
-                            }
-                        })
-                    },
-                    error: function () {
-                        alert('Có lỗi xảy ra');
-                    }
-                });
+                //$.ajax({
+                //    url: settings.getMess,
+                //    type: 'POST',
+                //    cache: false,
+                //    data: {
+                //        from: presenceChannel.members.me.id,
+                //        to: obj.attr('href').replace('#', '')
+                //    },
+                //    success: function (data1) {
+                //        $('.msgTxt').html('');
+                //        $.each(data1, function (key, data) {
+                //            console.log(data);
+                //            if (presenceChannel.members.me.id == data.Message.to && data.Message.from != presenceChannel.members.me.id) {
+                //                var img = $('#id_' + data.Message.from).find('h2').find('.imgFriend').attr('src');
+                //                $('#id_' + data.Message.from + ' .msgTxt').append('<p style="float:left"><img src="' + img + '" class="nick"> ' + data.Message.message + '</p><hr>');
+                //                $('#id_' + data.Message.from).addClass('recive').removeClass('writing');
+                //                $('#id_' + data.Message.from + ' .logMsg').scrollTop($('#id_' + data.Message.from + ' .logMsg')[0].scrollHeight);
+                //                if ($('title').text().search('New message - ') == -1)
+                //                    $('title').prepend('New message - ');
+                //                $.playSound('/img/../sounds/new');
+                //            }
+                //            if (presenceChannel.members.me.id == data.Message.from) {
+                //                var myimg = $('li.account img').attr('src');
+                //                $('#id_' + data.Message.to + ' .msgTxt').append('<p class="you">' + data.Message.message + '  <img src="' + myimg + '" class="nick"></p><hr>');
+                //                $('#id_' + data.Message.to + ' .logMsg').scrollTop($('#id_' + data.Message.to + ' .logMsg')[0].scrollHeight);
+                //            }
+                //        })
+                //    },
+                //    error: function () {
+                //        alert('Có lỗi xảy ra');
+                //    }
+                //});
                 var img = $('#id_' + data.from).find('h2').find('.imgFriend').attr('src');
                 $('#id_' + data.from + ' .msgTxt').append('<p style="float:left"><img src="' + img + '" class="nick"> ' + data.message + '</p><hr>');
                 $('#id_' + data.from).addClass('recive').removeClass('writing');
@@ -206,11 +206,11 @@ $(document).ready(function () {
                 cache: false,
                 data: {
                     from: presenceChannel.members.me.id,
-                    to:obj.attr('href').replace('#', '')
+                    to: obj.attr('href').replace('#', '')
                 },
                 success: function (data1) {
                     $('.msgTxt').html('');
-                    $.each(data1, function(key, data){
+                    $.each(data1, function (key, data) {
                         console.log(data);
                         if (presenceChannel.members.me.id == data.Message.to && data.Message.from != presenceChannel.members.me.id) {
                             var img = $('#id_' + data.Message.from).find('h2').find('.imgFriend').attr('src');
@@ -255,7 +255,7 @@ $(document).ready(function () {
         function memberUpdate() {
             var offlineUser = onlineUser = '';
             var chatBoxOnline;
-            var countusser =0;
+            var countusser = 0;
             $.ajax({
                 url: settings.friendsList,
                 type: 'POST',

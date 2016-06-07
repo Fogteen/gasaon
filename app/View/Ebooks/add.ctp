@@ -28,7 +28,7 @@
                         <div class="column">
                             <?php echo $this->Form->input('Ebook.' . $i . '.author') ?>
                             <?php echo $this->Form->input('Ebook.' . $i . '.categories_id', array('type' => 'select', 'options' => $ebook[$i]['list'])) ?>
-                            <?php echo $this->Form->input('Ebook.publish', array('label'=>'Chia sẻ','type' => 'select', 'options' => array(1=>'Có', 0=>'Không'),'empty'=>'Chọn chế độ')) ?>
+                            <?php echo $this->Form->input('Ebook.' . $i . '.publish', array('label'=>'Chia sẻ','type' => 'select', 'options' => array(1=>'Có', 0=>'Không'),'empty'=>'Chọn chế độ')) ?>
                         </div>
                     </section>
                 </div>

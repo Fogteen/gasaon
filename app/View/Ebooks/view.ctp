@@ -19,7 +19,7 @@
                 echo $this->webroot . 'files/' . $ebook['Ebook']['user_id'] . '/pre_' . pathinfo($ebook['Ebook']['file'], PATHINFO_FILENAME) . '.pdf';
             else
                 echo $this->webroot . 'files/' . $ebook['Ebook']['user_id'] . '/' . pathinfo($ebook['Ebook']['file'], PATHINFO_FILENAME) . '.pdf' ?>"
-            type="application/pdf" width="100%" height="500px">
+            type="application/pdf" width="100%" height="550px">
 
             <p>Trình duyệt của bạn không hỗ trợ xem tập tin PDF.</p>
 
@@ -80,29 +80,29 @@
                   navigation_arrows:true;
                   bullets:false;
                   timer:false">
-                <?php foreach ($sameuser as $key => $ebook) {
+                <?php foreach ($sameuser as $key => $book) {
                     if ($key % 4 == 0) { ?>
                         <li>
                         <ul class="ebview small-block-grid-2 medium-block-grid-3 large-block-grid-4">
                         <li>
-                            <?php $image = $this->Html->image('../files/' . $ebook['Ebook']['user_id'] . '/' . $ebook['Ebook']['picture'], array('class' => 'card'));
-                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['Ebook']['id']), array('escape' => false)) ?>
+                            <?php $image = $this->Html->image('../files/' . $book['Ebook']['user_id'] . '/' . $book['Ebook']['picture'], array('class' => 'card'));
+                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $book['Ebook']['id']), array('escape' => false)) ?>
                             <br>
-                            <?php echo $ebook['Ebook']['title'] ?>
+                            <?php echo $book['Ebook']['title'] ?>
                         </li>
                     <?php } elseif ($key % 4 != 3) { ?>
                         <li>
-                            <?php $image = $this->Html->image('../files/' . $ebook['Ebook']['user_id'] . '/' . $ebook['Ebook']['picture'], array('class' => 'card'));
-                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['Ebook']['id']), array('escape' => false)) ?>
+                            <?php $image = $this->Html->image('../files/' . $book['Ebook']['user_id'] . '/' . $book['Ebook']['picture'], array('class' => 'card'));
+                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $book['Ebook']['id']), array('escape' => false)) ?>
                             <br>
-                            <?php echo $ebook['Ebook']['title'] ?>
+                            <?php echo $book['Ebook']['title'] ?>
                         </li>
                     <?php } else { ?>
                         <li>
-                            <?php $image = $this->Html->image('../files/' . $ebook['Ebook']['user_id'] . '/' . $ebook['Ebook']['picture'], array('class' => 'card'));
-                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['Ebook']['id']), array('escape' => false)) ?>
+                            <?php $image = $this->Html->image('../files/' . $book['Ebook']['user_id'] . '/' . $book['Ebook']['picture'], array('class' => 'card'));
+                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $book['Ebook']['id']), array('escape' => false)) ?>
                             <br>
-                            <?php echo $ebook['Ebook']['title'] ?>
+                            <?php echo $book['Ebook']['title'] ?>
                         </li>
                         </ul>
                     <?php } ?>
@@ -120,29 +120,29 @@
                   navigation_arrows:true;
                   bullets:false;
                   timer:false">
-                <?php foreach ($relate as $key => $ebook) {
+                <?php foreach ($relate as $key => $book) {
                     if ($key % 4 == 0) { ?>
                         <li>
                         <ul class="ebview small-block-grid-2 medium-block-grid-3 large-block-grid-4">
                         <li>
-                            <?php $image = $this->Html->image('../files/' . $ebook['Ebook']['user_id'] . '/' . $ebook['Ebook']['picture'], array('class' => 'card'));
-                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['Ebook']['id']), array('escape' => false)) ?>
+                            <?php $image = $this->Html->image('../files/' . $book['Ebook']['user_id'] . '/' . $book['Ebook']['picture'], array('class' => 'card'));
+                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $book['Ebook']['id']), array('escape' => false)) ?>
                             <br>
-                            <?php echo $ebook['Ebook']['title'] ?>
+                            <?php echo $book['Ebook']['title'] ?>
                         </li>
                     <?php } elseif ($key % 4 != 3) { ?>
                         <li>
-                            <?php $image = $this->Html->image('../files/' . $ebook['Ebook']['user_id'] . '/' . $ebook['Ebook']['picture'], array('class' => 'card'));
-                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['Ebook']['id']), array('escape' => false)) ?>
+                            <?php $image = $this->Html->image('../files/' . $book['Ebook']['user_id'] . '/' . $book['Ebook']['picture'], array('class' => 'card'));
+                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $book['Ebook']['id']), array('escape' => false)) ?>
                             <br>
-                            <?php echo $ebook['Ebook']['title'] ?>
+                            <?php echo $book['Ebook']['title'] ?>
                         </li>
                     <?php } else { ?>
                         <li>
-                            <?php $image = $this->Html->image('../files/' . $ebook['Ebook']['user_id'] . '/' . $ebook['Ebook']['picture'], array('class' => 'card'));
-                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $ebook['Ebook']['id']), array('escape' => false)) ?>
+                            <?php $image = $this->Html->image('../files/' . $book['Ebook']['user_id'] . '/' . $book['Ebook']['picture'], array('class' => 'card'));
+                            echo $this->Html->link($image, array('controller' => 'ebooks', 'action' => 'view', $book['Ebook']['id']), array('escape' => false)) ?>
                             <br>
-                            <?php echo $ebook['Ebook']['title'] ?>
+                            <?php echo $book['Ebook']['title'] ?>
                         </li>
                         </ul>
                     <?php } ?>
