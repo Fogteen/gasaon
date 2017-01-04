@@ -69,10 +69,10 @@ class DATABASE_CONFIG {
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
-        'host' => 'localhost',
-        'login' => 'root',
-        'password' => '',
-        'database' => 'gasaon',
+        'host' => 'us-cdbr-iron-east-04.cleardb.net',
+        'login' => 'b275bfb3c767f6',
+        'password' => '01c3ab45',
+        'database' => 'heroku_e91c4ad6321bb9d',
         'prefix' => '',
         'encoding' => 'utf8',
     );
